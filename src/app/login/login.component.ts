@@ -31,6 +31,7 @@ export class LoginComponent {
             localStorage.setItem('currentUser', JSON.stringify(foundUser));
             
             this.navigateToMain();
+            
         } else {
             alert("User not found or incorrect credentials.");
         }

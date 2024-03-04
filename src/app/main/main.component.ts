@@ -26,11 +26,6 @@ export class MainComponent {
   }
 
   async getPicture() {
-    let lastRandomIndex1: number | null = null;
-    let lastRandomIndex2: number | null = null;
-    let lastRandomData1: any;
-    let lastRandomData2: any;
-    let lastRandomTime: number | null = null;
 
     const url = 'http://localhost:3000/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
@@ -67,32 +62,29 @@ export class MainComponent {
 
         localStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
       }
-      if (p_id === this.Picture[0].pictrue_id) {
-        const body = {
+      
+      if (this.Picture[0].pictrue_id) {
+        const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point1: this.Picture[0].pictrue_p,
-          vote_point2: this.Picture[1].pictrue_p,
-          pt_id1: this.Picture[0].pictrue_id,
-          pt_id2: this.Picture[1].pictrue_id,
+          vote_point: this.Picture[0].pictrue_p,
+          pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url = 'http://localhost:3000/vote/vote';
-        this.http.post(url, body).subscribe((response) => {
+        const url1 = 'http://localhost:3000/vote/vote';
+        this.http.post(url1, body1).subscribe((response) => {
           console.log(response);
         });
         console.log('1');
         this.getPicture();
-      } else {
-        const body = {
+
+        const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point1: this.Picture[1].pictrue_p,
-          vote_point2: this.Picture[0].pictrue_p,
-          pt_id1: this.Picture[1].pictrue_id,
-          pt_id2: this.Picture[0].pictrue_id,
+          vote_point: this.Picture[1].pictrue_p,
+          pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url = 'http://localhost:3000/vote/vote';
-        this.http.post(url, body).subscribe((response) => {
+        const url2 = 'http://localhost:3000/vote/vote';
+        this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
         });
 
