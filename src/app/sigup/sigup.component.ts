@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sigup',
   standalone: true,
@@ -23,14 +24,14 @@ export class SigupComponent {
   img: any;
   type : number = 0;
   pefer : any;
- 
+  constructor(private http: HttpClient,private rout: Router) {}
 
   genders: Gender[] = [
     { value: 1, name: 'female' },
     { value: 2, name: 'Male' }
   ];
 
-  constructor(private http: HttpClient) {}
+
  
 addNew() {
     const body = {
@@ -47,7 +48,11 @@ addNew() {
     const url = 'http://localhost:3000/user';
     this.http.post(url, body).subscribe((response) => {
       console.log(response);
+      this.navigateToLogin();
     });
+  }
+  navigateToLogin() {
+    this.rout.navigate(["/login"]);
   }
 }
 
