@@ -1,3 +1,42 @@
+.containernav{
+    color: azure;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content:space-between;
+          margin-left: 63%;
+          padding: 0 20px;
+  }
+  .logonav img {
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 50px;
+    margin-right: 10px; 
+  }
+  .logo1 img {
+    vertical-align: middle; 
+    border-radius: 50%;
+    width: 50px;
+    margin-right: 10px;
+  }
+  
+  .toolbar-text {
+    color: azure;
+      cursor: pointer;
+      font-size: 15px;
+      font-family: "DM Serif Display", serif;
+    }
+    .toolbar-text1 {
+      color: azure;
+      font-size: 32px;
+      font-weight: bold;
+      font-family: "DM Serif Display", serif;
+    }
+    .toolbar-text:hover {
+      background-color: #eb96c2;
+      border-radius: 5px; /* ปรับขนาดของมุม */
+      font-family: "DM Serif Display", serif;
+    }
 body {
     background-image: url("https://i.pinimg.com/564x/1d/2a/b9/1d2ab9368334c350d841e10b81c588fd.jpg");
     display: flex;

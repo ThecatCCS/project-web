@@ -16,19 +16,26 @@ import { UserGetResponse } from '../model/user_get';
   imports: [NavComponent, Navtop10Component, CommonModule, MatToolbarModule],
 })
 export class MainComponent {
+  currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
-  constructor(protected shared: UserService, private http: HttpClient) {}
+  
+  constructor(protected shared: UserService, private http: HttpClient) {
+
+  }
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
-      const currentUser = JSON.parse(currentUserString);
-      console.log(currentUser);
-      const userEmail = currentUser.user_email;
-      const userRole = currentUser.user_age;
-
-      console.log(userEmail);
-      console.log(userRole);
-    } else {
+      this.currentUser = JSON.parse(currentUserString);
+      console.log(this.currentUser);
+      if (this.currentUser !== undefined) {
+        const userEmail = this.currentUser.user_email;
+        const userRole = this.currentUser.user_pass;
+        console.log(userEmail);
+        console.log(userRole);
+        
+} 
+else {
+}
     }
     this.getPicture();
     console.log('Init State');
