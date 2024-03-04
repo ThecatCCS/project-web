@@ -18,6 +18,7 @@ import { UserGetResponse } from '../model/user_get';
 export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
+  
   constructor(protected shared: UserService, private http: HttpClient) {
 
   }
@@ -31,7 +32,9 @@ export class MainComponent {
         const userRole = this.currentUser.user_pass;
         console.log(userEmail);
         console.log(userRole);
-} else {
+        
+} 
+else {
 }
     }
     this.getPicture();
