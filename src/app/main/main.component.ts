@@ -42,7 +42,6 @@ else {
   }
 
   async getPicture() {
-
     const url = 'http://localhost:3000/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
     this.Picture = data as PictureGetResponse[];
@@ -78,7 +77,43 @@ else {
 
         localStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
       }
-      
+     let playerRating: number = 0;
+let opponentRating: number = 0;
+let playerIndex: number;
+let opponentIndex: number;
+
+// เช็คว่ามีรูปที่โหวตหรือไม่
+if (this.Picture[0].pictrue_id) {
+    playerRating = this.Picture[0].pictrue_p;
+    opponentRating = this.Picture[1].pictrue_p;
+    playerIndex = 0;
+    opponentIndex = 1;
+} else {
+    playerRating = this.Picture[1].pictrue_p;
+    opponentRating = this.Picture[2].pictrue_p;
+    playerIndex = 1;
+    opponentIndex = 2;
+}
+
+const result: number = 1;
+
+const kFactor: number = 32;
+
+const expectedScore: number = 1 / (1 + Math.pow(10, (opponentRating - playerRating) / 400));
+
+const newRating: number = playerRating + kFactor * (result - expectedScore);
+const ratingChange: number = newRating - playerRating;
+
+if (ratingChange > 0) {
+    console.log(`รูปที่ ${playerIndex + 1} ได้รับคะแนนเพิ่มขึ้น ${ratingChange} คะแนน Elo`);
+} else if (ratingChange < 0) {
+    console.log(`รูปที่ ${playerIndex + 1} ได้รับคะแนนลดลง ${Math.abs(ratingChange)} คะแนน Elo`);
+} else {
+    console.log(`คะแนน Elo ของรูปที่ ${playerIndex + 1} ไม่เปลี่ยนแปลง`);
+}
+const unratedPictureRating: number = this.Picture[opponentIndex].pictrue_p;
+console.log(`รูปที่ ${opponentIndex + 1} ได้รับคะแนนลดลง ${kFactor} คะแนน Elo`);
+
       if (this.Picture[0].pictrue_id) {
         const body1 = {
           vote_timestamp: voteTimestamp,
@@ -92,7 +127,8 @@ else {
         });
         console.log('1');
         this.getPicture();
-
+      }
+      else{
         const body2 = {
           vote_timestamp: voteTimestamp,
           vote_point: this.Picture[1].pictrue_p,
@@ -103,7 +139,6 @@ else {
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
         });
-      
 
         console.log('2');
         this.getPicture();
