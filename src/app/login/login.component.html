@@ -12,7 +12,7 @@
         
         <mat-form-field class="inp" appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput #user_pass/>
+            <input matInput  type="password" #user_pass/>
         </mat-form-field>
 
         <button (click)="login(user_email.value,user_pass.value)">Login</button>
