@@ -28,7 +28,7 @@ export class LoginComponent {
 
         if (foundUser) {
             console.log("User found:", foundUser);
-            localStorage.setItem('currentUser', JSON.stringify(foundUser));
+            sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
             
             this.navigateToMain();
             

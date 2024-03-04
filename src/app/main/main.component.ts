@@ -17,10 +17,23 @@ import { UserGetResponse } from '../model/user_get';
 })
 export class MainComponent {
   Picture: PictureGetResponse[] | undefined;
-  lastRandomData1: any;
-  lastRandomData2: any;
-  constructor(protected shared: UserService, private http: HttpClient) {}
+  constructor(protected shared: UserService, private http: HttpClient) {
+
+    
+  }
   ngOnInit(): void {
+    
+    const currentUserString = sessionStorage.getItem('currentUser');
+if (currentUserString !== null) {
+    const currentUser = JSON.parse(currentUserString);
+    console.log(currentUser);
+    const userEmail = currentUser.user_email;
+    const userRole = currentUser.user_pass;
+
+    console.log(userEmail);
+    console.log(userRole); 
+} else {
+}
     this.getPicture();
     console.log('Init State');
   }
@@ -87,6 +100,7 @@ export class MainComponent {
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
         });
+      
 
         console.log('2');
         this.getPicture();

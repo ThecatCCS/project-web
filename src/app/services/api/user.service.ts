@@ -12,9 +12,7 @@ export class UserService {
 
   user : UserGetResponse[] = [];
   userData : UserGetResponse | undefined;
-  constructor(private constants: Constants, private http: HttpClient){
-    this.getName();
-  }
+  constructor(private constants: Constants, private http: HttpClient){}
 
   async getName() {
     const url = 'http://localhost:3000/users';
