@@ -8,6 +8,8 @@ import { PictureGetResponse } from '../model/picture_get';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Navtop10Component } from '../nav/navtop10/navtop10.component';
 import { UserGetResponse } from '../model/user_get';
+import { ImageVotingSystem } from '../services/eloRating';
+import { Image } from '../services/eloRating';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -18,10 +20,8 @@ import { UserGetResponse } from '../model/user_get';
 export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
-  
-  constructor(protected shared: UserService, private http: HttpClient) {
 
-  }
+  constructor(protected shared: UserService, private http: HttpClient) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
@@ -32,15 +32,12 @@ export class MainComponent {
         const userRole = this.currentUser.user_pass;
         console.log(userEmail);
         console.log(userRole);
-        
-} 
-else {
-}
+      } else {
+      }
     }
     this.getPicture();
     console.log('Init State');
   }
-
   async getPicture() {
     const url = 'http://localhost:3000/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
@@ -55,11 +52,12 @@ else {
         .slice(0, 19)
         .replace('T', ' ');
       const currentUser = JSON.parse(
-        localStorage.getItem('currentUser') || '{}'
+        sessionStorage.getItem('currentUser') || '{}'
       ) as UserGetResponse;
-      if (currentUser === null) {
+      if (currentUser === undefined) {
         const machineIdString = window.navigator.userAgent;
         const machineIdNumber = parseInt(machineIdString, 10);
+        console.log("เข้านะ");
         const currentUserDefault: UserGetResponse = {
           user_id: machineIdNumber,
           name: function (name: any): unknown {
@@ -75,49 +73,24 @@ else {
           user_preference: null,
         };
 
-        localStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
+        sessionStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
       }
-     let playerRating: number = 0;
-let opponentRating: number = 0;
-let playerIndex: number;
-let opponentIndex: number;
-
-// เช็คว่ามีรูปที่โหวตหรือไม่
-if (this.Picture[0].pictrue_id) {
-    playerRating = this.Picture[0].pictrue_p;
-    opponentRating = this.Picture[1].pictrue_p;
-    playerIndex = 0;
-    opponentIndex = 1;
-} else {
-    playerRating = this.Picture[1].pictrue_p;
-    opponentRating = this.Picture[2].pictrue_p;
-    playerIndex = 1;
-    opponentIndex = 2;
-}
-
-const result: number = 1;
-
-const kFactor: number = 32;
-
-const expectedScore: number = 1 / (1 + Math.pow(10, (opponentRating - playerRating) / 400));
-
-const newRating: number = playerRating + kFactor * (result - expectedScore);
-const ratingChange: number = newRating - playerRating;
-
-if (ratingChange > 0) {
-    console.log(`รูปที่ ${playerIndex + 1} ได้รับคะแนนเพิ่มขึ้น ${ratingChange} คะแนน Elo`);
-} else if (ratingChange < 0) {
-    console.log(`รูปที่ ${playerIndex + 1} ได้รับคะแนนลดลง ${Math.abs(ratingChange)} คะแนน Elo`);
-} else {
-    console.log(`คะแนน Elo ของรูปที่ ${playerIndex + 1} ไม่เปลี่ยนแปลง`);
-}
-const unratedPictureRating: number = this.Picture[opponentIndex].pictrue_p;
-console.log(`รูปที่ ${opponentIndex + 1} ได้รับคะแนนลดลง ${kFactor} คะแนน Elo`);
-
-      if (this.Picture[0].pictrue_id) {
+      if (this.Picture[0].pictrue_id == p_id) {
+        const image1 = new Image(
+          this.Picture[0].pictrue_url,
+          this.Picture[0].pictrue_p
+        );
+        const image2 = new Image(
+          this.Picture[1].pictrue_url,
+          this.Picture[1].pictrue_p
+        );
+        const votingSystem = new ImageVotingSystem(image1, image2, 32);
+        votingSystem.updateEloRating(image1, image2);
+        console.log('รูป 1: ELO Rating =', image1.pictrue_p);
+        console.log('รูป 2: ELO Rating =', image2.pictrue_p);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: this.Picture[0].pictrue_p,
+          vote_point: image1.pictrue_p - this.Picture[0].pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -125,13 +98,9 @@ console.log(`รูปที่ ${opponentIndex + 1} ได้รับคะแ
         this.http.post(url1, body1).subscribe((response) => {
           console.log(response);
         });
-        console.log('1');
-        this.getPicture();
-      }
-      else{
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: this.Picture[1].pictrue_p,
+          vote_point: image2.pictrue_p - this.Picture[1].pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -139,9 +108,70 @@ console.log(`รูปที่ ${opponentIndex + 1} ได้รับคะแ
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
         });
+        const body3 = {
+          pictrue_p: image1.pictrue_p,
+        };
+        const body4 = {
+          pictrue_p: image2.pictrue_p,
+        };
+        const url3 = `http://localhost:3000/pictrue/${this.Picture[0].pictrue_id}`;
+        this.http.put(url3, body3).subscribe((response) => {
+          console.log(response);
+        });
+        const url4 = `http://localhost:3000/pictrue/${this.Picture[1].pictrue_id}`;
+        this.http.put(url4, body4).subscribe((response) => {
+          console.log(response);
+        });
 
-        console.log('2');
         this.getPicture();
+      } else {
+        const image1 = new Image(
+          this.Picture[1].pictrue_url,
+          this.Picture[1].pictrue_p
+        );
+        const image2 = new Image(
+          this.Picture[0].pictrue_url,
+          this.Picture[0].pictrue_p
+        );
+        const votingSystem = new ImageVotingSystem(image1, image2, 32);
+        votingSystem.updateEloRating(image1, image2);
+        console.log('รูป 1: ELO Rating =', image1.pictrue_p);
+        console.log('รูป 2: ELO Rating =', image2.pictrue_p);
+        const body1 = {
+          vote_timestamp: voteTimestamp,
+          vote_point: image1.pictrue_p - this.Picture[1].pictrue_p,
+          pt_id: this.Picture[1].pictrue_id,
+          u_id: currentUser.user_id,
+        };
+        const url1 = 'http://localhost:3000/vote/vote';
+        this.http.post(url1, body1).subscribe((response) => {
+          console.log(response);
+        });
+        const body2 = {
+          vote_timestamp: voteTimestamp,
+          vote_point: image2.pictrue_p - this.Picture[0].pictrue_p,
+          pt_id: this.Picture[0].pictrue_id,
+          u_id: currentUser.user_id,
+        };
+        const url2 = 'http://localhost:3000/vote/vote';
+        this.http.post(url2, body2).subscribe((response) => {
+          console.log(response);
+          this.getPicture();
+        });
+        const body3 = {
+          pictrue_p: image1.pictrue_p,
+        };
+        const body4 = {
+          pictrue_p: image2.pictrue_p,
+        };
+        const url3 = `http://localhost:3000/pictrue/${this.Picture[1].pictrue_id}`;
+        this.http.put(url3, body3).subscribe((response) => {
+          console.log(response);
+        });
+        const url4 = `http://localhost:3000/pictrue/${this.Picture[0].pictrue_id}`;
+        this.http.put(url4, body4).subscribe((response) => {
+          console.log(response);
+        });
       }
     }
   }
