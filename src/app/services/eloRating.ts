@@ -18,7 +18,7 @@ export class ImageVotingSystem {
     constructor(image1: Image, image2: Image) {
         this.image1 = image1;
         this.image2 = image2;
-        this.kFactor = 42;
+        this.kFactor = 15;
     }
 
     updateEloRating(winner: Image, loser: Image) {
