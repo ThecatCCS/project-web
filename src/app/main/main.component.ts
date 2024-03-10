@@ -20,7 +20,7 @@ import { Image } from '../services/eloRating';
 export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
-
+  userName: string | undefined;
   constructor(protected shared: UserService, private http: HttpClient) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
@@ -30,16 +30,21 @@ export class MainComponent {
       if (this.currentUser !== undefined) {
         const userEmail = this.currentUser.user_email;
         const userRole = this.currentUser.user_pass;
-        console.log(userEmail);
-        console.log(userRole);
+        // console.log(userEmail);
+        // console.log(userRole);
+        const userName = this.getUserName();
+        console.log(userName); 
       } else {
       }
     }
     this.getPicture();
-    console.log('Init State');
+    // console.log('Init State');
+  }
+  getUserName(): void {
+    this.userName = this.currentUser?.user_name;
+    // console.log(this.userName);
   }
   
- 
 async getPicture() {
   const url = 'http://localhost:3000/pictrue/all';
   const data = await lastValueFrom(this.http.get(url));

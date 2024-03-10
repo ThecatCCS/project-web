@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js'; // นำเข้า Chart จาก chart.js
+import { Chart } from 'chart.js'; 
 import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
 import { ActivatedRoute } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-line-chart',
   standalone: true,
@@ -16,7 +16,8 @@ export class LineChartComponent implements OnInit {
 
   constructor(
     private voteService: VoteService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
