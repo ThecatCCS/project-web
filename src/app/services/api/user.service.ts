@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../../config/constants';
 import { UserGetResponse } from '../../model/user_get';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -20,6 +20,11 @@ export class UserService {
       this.http.get(url));
     this.user = data as UserGetResponse[];
     console.log(this.user);
+  }
+
+  getUserById(userId: number): Observable<UserGetResponse> {
+    const url = `http://localhost:3000/users/${userId}`;
+    return this.http.get<UserGetResponse>(url);
   }
 }
 
