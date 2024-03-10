@@ -27,7 +27,9 @@
     </div>
     <div class="img-con">
         <div class="item">
-            <img class="logo" src="https://i.pinimg.com/564x/5d/3d/29/5d3d29d4ddefdb0feb67cf84ebe5c956.jpg" alt="image">
+            <div  *ngIf="userpic">
+                <img class="logo" src="{{ userpic }}" alt="User Picture">
+              </div>           
             <div class="detail">
                 <div *ngIf="userName">
                     <span class="Username">{{ userName }}</span>

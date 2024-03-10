@@ -18,7 +18,7 @@ export class ProfileComponent {
   currentUser: UserGetResponse | undefined;
   userName: string | undefined;
   pictures: PictureGetResponse[] = [];
-
+  userpic: string | undefined;
   constructor(private shared: UserService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -31,6 +31,7 @@ export class ProfileComponent {
         const userRole = this.currentUser.user_pass;
         // console.log(userEmail);
         // console.log(userRole);
+        this.getUserpic();
         this.getUserName();
       } else {
         // Handle case when currentUser is undefined
@@ -43,7 +44,10 @@ export class ProfileComponent {
     this.userName = this.currentUser?.user_name;
     console.log(this.userName);
   }
-
+  getUserpic(): void {
+    this.userpic = this.currentUser?.user_pictrue;
+    console.log(this.userpic);
+  }
   async getPicture() {
     const url = 'http://localhost:3000/pictrue';
     const data = await lastValueFrom(this.http.get(url));
