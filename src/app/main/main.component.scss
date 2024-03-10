@@ -64,6 +64,7 @@ body{
     cursor: pointer;
 }
 .picvote2,.picvote1 {
+    
     display: flex; /* เพิ่ม display: flex; */
     justify-content: center; /* เพิ่ม justify-content: center; */
     width: 100%;
@@ -74,6 +75,10 @@ body{
     background-position: center;
 }
 
+// .picvote1:hover,
+// .picvote2:hover {
+//     transform: scale(1.1); /* เพิ่มการเพิ่มขนาดเมื่อโฮเวอร์ */
+// }
 .logo img {
     vertical-align: middle;
     border-radius: 50%;
