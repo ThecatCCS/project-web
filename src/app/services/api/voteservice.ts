@@ -7,7 +7,7 @@ import { VoteGetResponse } from '../../model/vote_get';
   providedIn: 'root'
 })
 export class VoteService {
-  private apiUrl = 'http://localhost:3000/votes'; // เปลี่ยนเส้นทาง URL ให้ตรงกับ Express.js API ของคุณ
+  public apiUrl = 'http://localhost:3000/vote'; // เปลี่ยนเส้นทาง URL ให้ตรงกับ Express.js API ของคุณ
 
   constructor(private http: HttpClient) {}
 
