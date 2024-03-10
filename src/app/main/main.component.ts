@@ -76,21 +76,23 @@ export class MainComponent {
         sessionStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
       }
       if (this.Picture[0].pictrue_id == p_id) {
-        const image1 = new Image(
-          this.Picture[0].pictrue_url,
-          this.Picture[0].pictrue_p
-        );
-        const image2 = new Image(
-          this.Picture[1].pictrue_url,
-          this.Picture[1].pictrue_p
-        );
-        const votingSystem = new ImageVotingSystem(image1, image2, 32);
+        // const image1 = new Image(
+        //   this.Picture[0].pictrue_url,
+        //   this.Picture[0].pictrue_p
+        // );
+        // const image2 = new Image(
+        //   this.Picture[1].pictrue_url,
+        //   this.Picture[1].pictrue_p
+        // );
+        const image1 = new Image("url1", 1200);
+        const image2 = new Image("url2", 1000);
+        const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
         console.log('รูป 1: ELO Rating =', image1.pictrue_p);
         console.log('รูป 2: ELO Rating =', image2.pictrue_p);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p - this.Picture[0].pictrue_p,
+          vote_point: this.Picture[0].pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -133,7 +135,7 @@ export class MainComponent {
           this.Picture[0].pictrue_url,
           this.Picture[0].pictrue_p
         );
-        const votingSystem = new ImageVotingSystem(image1, image2, 32);
+        const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
         console.log('รูป 1: ELO Rating =', image1.pictrue_p);
         console.log('รูป 2: ELO Rating =', image2.pictrue_p);
