@@ -15,9 +15,9 @@
       <div class="logo">
         <img src="https://i.pinimg.com/564x/c2/36/74/c236747cd41f8a2605f8d6bfededb9ff.jpg" />
       </div>
-      <div class="pro">
-        <p>sasithon</p>
-      </div>
+        <div class="pro">
+          <p>{{ Picture[0].u_id }}</p>
+        </div>
     </div>
     <div class="picvote1" *ngIf="Picture && Picture.length > 0">
       <img [src]="Picture[0].pictrue_url" alt="รูปภาพ" (click)="check(Picture[0].pictrue_id)" />
@@ -34,12 +34,11 @@
         <img src="https://i.pinimg.com/564x/99/6b/df/996bdf397b61ce04ed5fa4e2282201c0.jpg" />
       </div>
       <div class="pro">
-        <p>Beemmmy_beem</p>
+        <p>{{ Picture[1].u_id }}</p>
       </div>
     </div>
     <div class="picvote2" *ngIf="Picture && Picture.length > 1">
       <img [src]="Picture[1].pictrue_url" alt="รูปภาพ" (click)="check(Picture[1].pictrue_id)" />
     </div>
   </div>
-  
 </body>

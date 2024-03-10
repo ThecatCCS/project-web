@@ -38,12 +38,14 @@ export class MainComponent {
     this.getPicture();
     console.log('Init State');
   }
-  async getPicture() {
-    const url = 'http://localhost:3000/pictrue/all';
-    const data = await lastValueFrom(this.http.get(url));
-    this.Picture = data as PictureGetResponse[];
-    console.log(this.Picture);
-  }
+  
+ 
+async getPicture() {
+  const url = 'http://localhost:3000/pictrue/all';
+  const data = await lastValueFrom(this.http.get(url));
+  this.Picture = data as PictureGetResponse[];
+  console.log(this.Picture);
+}
   check(p_id: number) {
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();

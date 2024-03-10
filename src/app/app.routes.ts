@@ -4,6 +4,8 @@ import { SigupComponent } from './sigup/sigup.component';
 import { MainComponent } from './main/main.component';
 import { Top10Component } from './top10/top10.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LineChartComponent } from './line-chart/linechart.component';
+
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'sigup', component: SigupComponent},
@@ -12,4 +14,5 @@ export const routes: Routes = [
     {path: 'main', component: MainComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'login/id', component: LoginComponent},
+    {path: 'chart', component: LineChartComponent}
 ];
