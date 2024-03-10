@@ -13,10 +13,10 @@ export class ImageVotingSystem {
     image1: Image;
     image2: Image;
 
-    constructor(image1: Image, image2: Image, kFactor: number) {
+    constructor(image1: Image, image2: Image) {
         this.image1 = image1;
         this.image2 = image2;
-        this.kFactor = kFactor;
+        this.kFactor = 32;
     }
 
     updateEloRating(winner: Image, loser: Image) {
@@ -30,6 +30,8 @@ export class ImageVotingSystem {
         const newEloRatingLoser = loser.pictrue_p + this.kFactor * (actualScoreLoser - expectedScoreLoser);
 
         winner.pictrue_p = Math.round(newEloRatingWinner);
+        console.log(winner.pictrue_p);
         loser.pictrue_p = Math.round(newEloRatingLoser);
+        console.log(loser.pictrue_p);
     }
 }
