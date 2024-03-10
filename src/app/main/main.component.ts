@@ -78,16 +78,16 @@ async getPicture() {
         sessionStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
       }
       if (this.Picture[0].pictrue_id == p_id) {
-        // const image1 = new Image(
-        //   this.Picture[0].pictrue_url,
-        //   this.Picture[0].pictrue_p
-        // );
-        // const image2 = new Image(
-        //   this.Picture[1].pictrue_url,
-        //   this.Picture[1].pictrue_p
-        // );
-        const image1 = new Image("url1", 1200);
-        const image2 = new Image("url2", 1000);
+        const image1 = new Image(
+          this.Picture[0].pictrue_url,
+          this.Picture[0].pictrue_p
+        );
+        const image2 = new Image(
+          this.Picture[1].pictrue_url,
+          this.Picture[1].pictrue_p
+        );
+        // const image1 = new Image("url1", 1200);
+        // const image2 = new Image("url2", 1000);
         const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
         console.log('รูป 1: ELO Rating =', image1);

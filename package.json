@@ -21,13 +21,10 @@
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
-<<<<<<< HEAD
     "@types/multer": "^1.4.11",
     "firebase": "^10.8.1",
     "multer": "^1.4.5-lts.1",
-=======
     "chart.js": "^4.4.2",
->>>>>>> 81eb9b00df513b06a667d399157df74c82a4b803
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
