@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js'; // นำเข้า Chart จาก chart.js
 import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
 import { ActivatedRoute } from '@angular/router';
@@ -50,23 +50,25 @@ export class LineChartComponent implements OnInit {
 
       console.log('Labels:', labels);
       console.log('Vote Points:', votePoints);
+
+      this.chart = new Chart("MyChart", {
+        type: 'bar', 
   
-      // this.chart = new Chart('MyChart', {
-      //   type: 'bar',
-      //   data: {
-      //     labels: labels, 
-      //     datasets: [
-      //       {
-      //         label: 'statistics',
-      //         data: votePoints,
-      //         backgroundColor: 'pink',
-      //       },
-      //     ],
-      //   },
-      //   options: {
-      //     aspectRatio: 2.5,
-      //   },
-      // });
+        data: {
+          labels: labels, 
+           datasets: [
+            {
+              label: "Sales",
+              data: votePoints,
+              backgroundColor: 'pink'
+            },
+          ]
+        },
+        options: {
+          aspectRatio:2.5
+        }
+        
+      });
     }
   }
 }
