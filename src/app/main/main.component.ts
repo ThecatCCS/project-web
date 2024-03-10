@@ -88,8 +88,8 @@ export class MainComponent {
         const image2 = new Image("url2", 1000);
         const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
-        console.log('รูป 1: ELO Rating =', image1.pictrue_p);
-        console.log('รูป 2: ELO Rating =', image2.pictrue_p);
+        console.log('รูป 1: ELO Rating =', image1);
+        console.log('รูป 2: ELO Rating =', image2);
         const body1 = {
           vote_timestamp: voteTimestamp,
           vote_point: this.Picture[0].pictrue_p,
