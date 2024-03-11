@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js'; 
+import { Chart } from 'chart.js';
 import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class LineChartComponent implements OnInit {
   vote: VoteGetResponse[] = [];
   public chart: any;
-  public pt_id: number = 1; 
+  public pt_id: number = 1;
 
   constructor(
     private voteService: VoteService,
@@ -52,23 +52,22 @@ export class LineChartComponent implements OnInit {
       console.log('Labels:', labels);
       console.log('Vote Points:', votePoints);
 
-      this.chart = new Chart("MyChart", {
-        type: 'bar', 
-  
+      this.chart = new Chart('MyChart', {
+        type: 'bar',
+
         data: {
-          labels: labels, 
-           datasets: [
+          labels: labels,
+          datasets: [
             {
-              label: "Sales",
+              label: 'statict',
               data: votePoints,
-              backgroundColor: 'pink'
+              backgroundColor: 'pink',
             },
-          ]
+          ],
         },
         options: {
-          aspectRatio:2.5
-        }
-        
+          aspectRatio: 2.5,
+        },
       });
     }
   }

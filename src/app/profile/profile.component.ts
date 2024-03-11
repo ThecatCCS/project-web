@@ -7,6 +7,9 @@ import { UserGetResponse } from '../model/user_get';
 import { CommonModule } from '@angular/common';
 import { PictureGetResponse } from '../model/picture_get';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -19,7 +22,9 @@ export class ProfileComponent {
   userName: string | undefined;
   pictures: PictureGetResponse[] = [];
   userpic: string | undefined;
-  constructor(private shared: UserService, private http: HttpClient) {}
+  constructor(private shared: UserService, private http: HttpClient,private router: Router) {
+
+  }
 
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
@@ -52,7 +57,6 @@ export class ProfileComponent {
     const url = 'http://localhost:3000/pictrue';
     const data = await lastValueFrom(this.http.get(url));
     this.pictures = data as PictureGetResponse[];
-    console.log(this.pictures);
     this.filterPicturesByUserId();
   }
 
@@ -61,5 +65,9 @@ export class ProfileComponent {
       this.pictures = this.pictures.filter(picture => picture.u_id === this.currentUser?.user_id);
       console.log(this.pictures)
     }
+  }
+  logout() {
+    sessionStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 }

@@ -10,6 +10,7 @@ import { Navtop10Component } from '../nav/navtop10/navtop10.component';
 import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
+import { Router } from 'express';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -21,7 +22,7 @@ export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
   userName: string | undefined;
-  
+  users: UserGetResponse[] = [];
   constructor(protected shared: UserService, private http: HttpClient) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
@@ -41,6 +42,8 @@ export class MainComponent {
     this.getPicture();
     // console.log('Init State');
   }
+
+
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     // console.log(this.userName);

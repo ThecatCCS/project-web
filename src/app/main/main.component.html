@@ -12,11 +12,11 @@
   </div>
   <div class="container">
     <div class="div" *ngIf="Picture && Picture.length > 0">
-      <div class="logo">
+      <!-- <div class="logo">
         <img src="https://i.pinimg.com/564x/c2/36/74/c236747cd41f8a2605f8d6bfededb9ff.jpg" />
-      </div>
+      </div> -->
       <div class="pro" *ngIf="userName">
-        <p>{{ userName }}</p>
+        <p> Picture By {{ userName }}</p>
       </div>
     </div>
     <div class="picvote1" *ngIf="Picture && Picture.length > 0">
@@ -30,11 +30,11 @@
   
   <div class="container2">
     <div class="div1" *ngIf="Picture && Picture.length > 1">
-      <div class="logo">
+      <!-- <div class="logo">
         <img src="https://i.pinimg.com/564x/99/6b/df/996bdf397b61ce04ed5fa4e2282201c0.jpg" />
-      </div>
+      </div> -->
       <div class="pro" *ngIf="userName">
-        <p>{{ userName }}</p>
+        <p> Picture By {{ userName}}</p>
       </div>
     </div>
     <div class="picvote2" *ngIf="Picture && Picture.length > 1">
