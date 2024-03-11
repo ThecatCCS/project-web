@@ -70,4 +70,5 @@ export class ProfileComponent {
     sessionStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
+  
 }
