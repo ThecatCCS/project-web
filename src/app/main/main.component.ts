@@ -61,7 +61,7 @@ export class MainComponent {
       const voteTimestamp: string = currentTime
         .toISOString()
         .slice(0, 19)
-        .replace('T', ' ');
+        ;
       const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}') as UserGetResponse;
       if (currentUser.user_id == null) {
         console.log("test12");

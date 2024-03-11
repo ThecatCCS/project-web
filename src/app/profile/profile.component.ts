@@ -71,14 +71,11 @@ export class ProfileComponent {
     sessionStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
-<<<<<<< HEAD
-=======
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
     console.log(pt_id);
     
   }
   
->>>>>>> ff9eb5d2d64f00db2443b732b226d25aec8a822f
   
 }
