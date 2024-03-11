@@ -4,15 +4,12 @@ import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { pointvote } from '../model/point_vote';
 import { count } from 'rxjs';
 import { urlencoded } from 'body-parser';
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './linechart.component.html',
 })
 export class LineChartComponent implements OnInit {
