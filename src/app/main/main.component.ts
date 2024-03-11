@@ -23,7 +23,7 @@ export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
   userName: string | undefined;
-  users: UserGetResponse[] = [];
+
   constructor(protected shared: UserService, private http: HttpClient) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
@@ -35,6 +35,7 @@ export class MainComponent {
         const userRole = this.currentUser.user_pass;
         // console.log(userEmail);
         // console.log(userRole);
+        this.getUserName();
         const userName = this.getUserName();
         console.log(userName);
       } else {
@@ -61,7 +62,7 @@ export class MainComponent {
       const voteTimestamp: string = currentTime
         .toISOString()
         .slice(0, 19)
-        .replace('T', ' ');
+        ;
       const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}') as UserGetResponse;
       if (currentUser.user_id == null) {
         console.log("test12");
