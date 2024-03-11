@@ -11,6 +11,7 @@ import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
 import { Router } from 'express';
+
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -35,7 +36,7 @@ export class MainComponent {
         // console.log(userEmail);
         // console.log(userRole);
         const userName = this.getUserName();
-        console.log(userName); 
+        console.log(userName);
       } else {
       }
     }
@@ -43,19 +44,17 @@ export class MainComponent {
     // console.log('Init State');
   }
 
-
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     // console.log(this.userName);
   }
 
-  
-async getPicture() {
-  const url = 'http://localhost:3000/pictrue/all';
-  const data = await lastValueFrom(this.http.get(url));
-  this.Picture = data as PictureGetResponse[];
-  console.log(this.Picture);
-}
+  async getPicture() {
+    const url = 'http://localhost:3000/pictrue/all';
+    const data = await lastValueFrom(this.http.get(url));
+    this.Picture = data as PictureGetResponse[];
+    console.log(this.Picture);
+  }
   check(p_id: number) {
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
@@ -63,13 +62,12 @@ async getPicture() {
         .toISOString()
         .slice(0, 19)
         .replace('T', ' ');
-      const currentUser = JSON.parse(
-        sessionStorage.getItem('currentUser') || '{}'
-      ) as UserGetResponse;
-      if (currentUser === undefined) {
+      const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}') as UserGetResponse;
+      if (currentUser.user_id == null) {
+        console.log("test12");
         const machineIdString = window.navigator.userAgent;
         const machineIdNumber = parseInt(machineIdString, 10);
-        console.log("เข้านะ");
+        console.log('เข้านะ');
         const currentUserDefault: UserGetResponse = {
           user_id: machineIdNumber,
           name: function (name: any): unknown {
@@ -84,8 +82,11 @@ async getPicture() {
           user_gender: null,
           user_preference: null,
         };
-
-        sessionStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
+        console.log(currentUserDefault)
+        sessionStorage.setItem(
+          'currentUser',
+          JSON.stringify(currentUserDefault)
+        );
       }
       if (this.Picture[0].pictrue_id == p_id) {
         const image1 = new Image(
@@ -104,7 +105,7 @@ async getPicture() {
         console.log('รูป 2: ELO Rating =', image2);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: this.Picture[0].pictrue_p,
+          vote_point: image1.pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -114,7 +115,7 @@ async getPicture() {
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image2.pictrue_p - this.Picture[1].pictrue_p,
+          vote_point: image2.pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -153,7 +154,7 @@ async getPicture() {
         console.log('รูป 2: ELO Rating =', image2.pictrue_p);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p - this.Picture[1].pictrue_p,
+          vote_point: image1.pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -163,7 +164,7 @@ async getPicture() {
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image2.pictrue_p - this.Picture[0].pictrue_p,
+          vote_point: image2.pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };

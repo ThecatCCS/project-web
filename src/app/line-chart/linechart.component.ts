@@ -21,18 +21,28 @@ export class LineChartComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.pt_id = params['pt_id'];
+      // this.pt_id = params['pt_id'];
+      this.pt_id = 4;
     });
-    this.voteService.getVotes().subscribe(
-      (data: VoteGetResponse[]) => {
-        this.vote = data;
-        console.log('Vote:', this.vote);
-        this.createChart();
-      },
-      (error) => {
-        console.error('Error loading votes:', error);
-      }
-    );
+    const url = `http://localhost:3000/pictrue/statistics/${this.pt_id}`;
+    const body = {};
+
+    this.http.get(url, body).subscribe((response) => {
+      console.log(response);
+      const data = response;
+      console.log(data)
+    });
+
+    // this.voteService.getVotes().subscribe(
+    //   (data: VoteGetResponse[]) => {
+    //     this.vote = data;
+    //     console.log('Vote:', this.vote);
+    //     this.createChart();
+    //   },
+    //   (error) => {
+    //     console.error('Error loading votes:', error);
+    //   }
+    // );
   }
 
   createChart() {
