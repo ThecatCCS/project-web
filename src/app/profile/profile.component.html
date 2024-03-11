@@ -67,10 +67,13 @@
                 <!-- <p>Sasithon_Nutty</p> -->
             </div>
             <div class="picvote1">
-                <div class="image-wrapper" *ngFor="let picture of pictures">
-                  <img src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}">
-                </div>
+              <div class="image-wrapper" *ngFor="let picture of pictures">
+                <img (click)="onClick(picture.pictrue_id)" src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}">
               </div>
+            </div>
+            
+            
+            
               
               
     </div>

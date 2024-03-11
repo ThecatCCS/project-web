@@ -22,6 +22,7 @@ export class ProfileComponent {
   userName: string | undefined;
   pictures: PictureGetResponse[] = [];
   userpic: string | undefined;
+  
   constructor(private shared: UserService, private http: HttpClient,private router: Router) {
 
   }
@@ -70,4 +71,11 @@ export class ProfileComponent {
     sessionStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
+  onClick(pt_id: number) {
+    this.router.navigate(['/linechart', pt_id]);
+    console.log(pt_id);
+    
+  }
+  
+  
 }
