@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getUserById(userId: number): Observable<UserGetResponse> {
-    const url = `http://localhost:3000/users/${userId}`;
+    const url = `http://localhost:3000/${userId}`;
     return this.http.get<UserGetResponse>(url);
   }
 }

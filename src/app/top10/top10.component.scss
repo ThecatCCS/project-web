@@ -1,90 +1,126 @@
-.containernav{
-    color: azure;
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content:space-between;
-          margin-left: 63%;
-          padding: 0 20px;
-  }
-  .logonav img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px; 
-  }
-  .logo1 img {
-    vertical-align: middle; 
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px;
-  }
-  
-  .toolbar-text {
-    color: azure;
-      cursor: pointer;
-      font-size: 15px;
-      font-family: "DM Serif Display", serif;
-    }
-    .toolbar-text1 {
-      color: azure;
-      font-size: 32px;
-      font-weight: bold;
-      font-family: "DM Serif Display", serif;
-    }
-    .toolbar-text:hover {
-      background-color: #eb96c2;
-      border-radius: 5px; /* ปรับขนาดของมุม */
-      font-family: "DM Serif Display", serif;
-    }
-body {
-    background-image: url("https://i.pinimg.com/564x/1d/2a/b9/1d2ab9368334c350d841e10b81c588fd.jpg");
-    display: flex;
-    flex-wrap: wrap;
-    background-position: center;
-    justify-content: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวนอน */
+.containernav {
+  color: azure;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 63%;
+  padding: 0 20px;
 }
-.pro{
-    font-weight: bold; 
-    font-size: 15px;
-    color: rgb(49, 44, 47);
+
+.logonav img {
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.logo1 img {
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.toolbar-text {
+  color: azure;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text1 {
+  color: azure;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text:hover {
+  background-color: #eb96c2;
+  border-radius: 5px;
+  /* ปรับขนาดของมุม */
+  font-family: "DM Serif Display", serif;
+}
+
+.top-container {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+
+  h1 {
+    font-size: 35px;
+    color: rgb(235, 97, 171);
     font-family: "DM Serif Display", serif;
-}
-.container {
-
-    display: flex;
-    flex-direction: column; /* จัดเรียงเนื้อหาเป็นแนวตั้ง */
-    justify-content: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวนอน */
-    align-items: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวตั้ง */
-    width: 30%;
-    height: 70%;
-    overflow: hidden;
-    background-size: contain; /* เปลี่ยนจาก cover เป็น contain */
-    background-position: center;
-    // margin-right: 30px;
-    margin-top: 55px;
-    gap: 15px;
-    cursor: pointer;
-
-}
-.picvote1 {
-    display: flex; /* เพิ่ม display: flex; */
-    justify-content: center; /* เพิ่ม justify-content: center; */
-    width: auto;
-    height: auto;
-    overflow: hidden;
-    background-size: contain; /* เปลี่ยนจาก cover เป็น contain */
-    background-position: center;
-}
-
-.logo img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px; 
+    text-align: center;
+    text-shadow: 3px 2px rgb(49, 29, 40);
+    
   }
-  .div {
-    display: flex;
-    align-items: center; /* จัดให้องค์ประกอบอยู่กึ่งกลางตามแนวดิ่ง */
-    gap: 5px; /* กำหนดระยะห่างระหว่างองค์ประกอบภายใน .div1 */
+}
+p{
+  font-size: 25px;
+  color: rgb(235, 97, 171);
+  font-family: "DM Serif Display", serif;
+  text-align: center;
+  text-shadow: 3px 2px rgb(49, 29, 40);
+  
+}
+
+// .img-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3,
+//       minmax(400px, 1fr));
+//   justify-content: center;
+//   gap: 50px;
+
+//   img {
+//     max-width: 100%;
+//     max-height: 100%;
+//     object-fit: cover;
+//     border-radius: 5px;
+//   }
+// }
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.leaderboard .item {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.counter-icon {
+  margin-left: 10px;
+  font-size: 25px;
+  color: rgb(235, 97, 171);
+  font-family: "DM Serif Display", serif;
+  text-align: center;
+  text-shadow: 3px 2px rgb(49, 29, 40);
+  margin-right: 10px;
+}
+
+.leaderboard img {
+  max-width: 15%;
+  max-height: 15%;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.text-container {
+  flex-grow: 1;
+  padding: 0 30px;
+}
+
+.text-container p {
+  margin: 0;
+  padding: 10px;
 }
