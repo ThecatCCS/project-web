@@ -22,7 +22,8 @@ import { Router } from 'express';
 export class MainComponent {
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
-  userName: string | undefined;
+  user1: UserGetResponse | undefined;
+  user2: UserGetResponse | undefined;
 
   constructor(protected shared: UserService, private http: HttpClient) {}
   ngOnInit(): void {
@@ -30,42 +31,45 @@ export class MainComponent {
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
       console.log(this.currentUser);
-      if (this.currentUser !== undefined) {
-        const userEmail = this.currentUser.user_email;
-        const userRole = this.currentUser.user_pass;
-        // console.log(userEmail);
-        // console.log(userRole);
-        this.getUserName();
-        const userName = this.getUserName();
-        console.log(userName);
-      } else {
-      }
     }
     this.getPicture();
     // console.log('Init State');
   }
 
-  getUserName(): void {
-    this.userName = this.currentUser?.user_name;
-    // console.log(this.userName);
-  }
-
-  async getPicture() {
+  async getPicture(): Promise<void> {
     const url = 'http://localhost:3000/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
     this.Picture = data as PictureGetResponse[];
     console.log(this.Picture);
+    
+    // Assuming this.Picture has been fetched successfully
+    if (this.Picture && this.Picture.length > 0) {
+      const [user1$, user2$] = await Promise.all([
+        this.shared.getUserById(this.Picture[0].u_id),
+        this.shared.getUserById(this.Picture[1].u_id)
+      ]);
+      
+      user1$.subscribe(user1 => {
+        console.log('User for Picture[0]:', user1);
+        this.user1 = user1;
+      });
+
+      user2$.subscribe(user2 => {
+        console.log('User for Picture[1]:', user2);
+        this.user2 = user2;
+      });
+    }
   }
+
   check(p_id: number) {
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
-      const voteTimestamp: string = currentTime
-        .toISOString()
-        .slice(0, 19)
-        ;
-      const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}') as UserGetResponse;
+      const voteTimestamp: string = currentTime.toISOString().slice(0, 19);
+      const currentUser = JSON.parse(
+        sessionStorage.getItem('currentUser') || '{}'
+      ) as UserGetResponse;
       if (currentUser.user_id == null) {
-        console.log("test12");
+        console.log('test12');
         const machineIdString = window.navigator.userAgent;
         const machineIdNumber = parseInt(machineIdString, 10);
         console.log('เข้านะ');
@@ -83,7 +87,7 @@ export class MainComponent {
           user_gender: null,
           user_preference: null,
         };
-        console.log(currentUserDefault)
+        console.log(currentUserDefault);
         sessionStorage.setItem(
           'currentUser',
           JSON.stringify(currentUserDefault)

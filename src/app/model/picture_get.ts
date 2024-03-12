@@ -1,5 +1,5 @@
 export interface PictureGetResponse {
-//   username: any;
+  username: any;
   pictrue_id: number;
   pictrue_url: string;
   pictrue_p: number;
