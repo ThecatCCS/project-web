@@ -16,4 +16,5 @@ export const routes: Routes = [
     {path: 'login/id', component: LoginComponent},
     {path: 'chart', component: LineChartComponent},
     { path: 'linechart/:id', component: LineChartComponent },
+
 ];

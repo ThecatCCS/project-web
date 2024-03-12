@@ -55,7 +55,7 @@ export class ProfileComponent {
     console.log(this.userpic);
   }
   async getPicture() {
-    const url = 'http://localhost:3000/pictrue';
+    const url = 'http://localhost:3000/pictrue/alls';
     const data = await lastValueFrom(this.http.get(url));
     this.pictures = data as PictureGetResponse[];
     this.filterPicturesByUserId();
@@ -73,9 +73,10 @@ export class ProfileComponent {
   }
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
-    console.log(pt_id);
-    
+    console.log("ออกอยู่จ้า",pt_id);
   }
+  
+  
   
   
 }

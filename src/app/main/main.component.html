@@ -1,44 +1,59 @@
 <div *ngIf="currentUser; else guestToolbar">
   <app-navtop10></app-navtop10>
-</div> 
+</div>
 <ng-template #guestToolbar>
   <app-nav></app-nav>
 </ng-template>
 
-
-<body>  
+<body>
   <div class="h1">
     <p>Click on the image to vote!!</p>
   </div>
   <div class="container">
     <div class="div" *ngIf="Picture && Picture.length > 0">
-      <!-- <div class="logo">
-        <img src="https://i.pinimg.com/564x/c2/36/74/c236747cd41f8a2605f8d6bfededb9ff.jpg" />
-      </div> -->
+      <div class="logo">
+        <img
+         [src]="user1?.user_pictrue"
+        />
+      </div>
       <div class="pro">
-        <p> Picture By {{user1?.user_name}}</p>
+        <p> {{ user1?.user_name }}</p>
       </div>
     </div>
-    <div class="picvote1" *ngIf="Picture && Picture.length > 0">
-      <img [src]="Picture[0].pictrue_url" alt="รูปภาพ" (click)="check(Picture[0].pictrue_id)" />
+    <div class="picvote1" >
+    <div class="image-wrapper" *ngIf="Picture && Picture.length > 0">
+      <img
+        [src]="Picture[0].pictrue_url"
+        alt="รูปภาพ"
+        (click)="check(Picture[0].pictrue_id)"
+      />
     </div>
   </div>
-  
+  </div>
+
   <div class="OR">
     <p>OR</p>
   </div>
-  
+
   <div class="container2">
     <div class="div1" *ngIf="Picture && Picture.length > 1">
-      <!-- <div class="logo">
-        <img src="https://i.pinimg.com/564x/99/6b/df/996bdf397b61ce04ed5fa4e2282201c0.jpg" />
-      </div> -->
+      <div class="logo">
+        <img
+        [src]="user2?.user_pictrue"
+       />
+      </div>
       <div class="pro">
-        <p> Picture By {{user2?.user_name}}</p>
+        <p>{{ user2?.user_name }}</p>
       </div>
     </div>
-    <div class="picvote2" *ngIf="Picture && Picture.length > 1">
-      <img [src]="Picture[1].pictrue_url" alt="รูปภาพ" (click)="check(Picture[1].pictrue_id)" />
+    <div class="picvote2">
+    <div class="image-wrapper" *ngIf="Picture && Picture.length > 1">
+      <img
+        [src]="Picture[1].pictrue_url"
+        alt="รูปภาพ"
+        (click)="check(Picture[1].pictrue_id)"
+      />
+    </div>
     </div>
   </div>
 </body>
