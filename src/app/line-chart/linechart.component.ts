@@ -14,64 +14,78 @@ import { urlencoded } from 'body-parser';
 })
 export class LineChartComponent implements OnInit {
   public chart: any;
- constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {
+    
     this.createChart();
   }
-  createChart(){
-    const url =  `http://localhost:3000/pictrue/statistics/${5}`;
+  createChart() {
+    const url = `http://localhost:3000/pictrue/statistics/${5}`;
     const body = {};
-
+    const scores: number[] = [];
     const labels: string[] = [];
+    const formattedDates: any = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(); 
+      date.setDate(date.getDate() - i); 
 
-for (let i = 0; i < 7; i++) {
-  const date = new Date(); // สร้างวัตถุ Date สำหรับวันปัจจุบัน
-  date.setDate(date.getDate() - i); // ลบจำนวนวันที่ต้องการ (7 วันย้อนหลัง)
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
 
-  // ดึงข้อมูลวัน เดือน และปี
-  const day = date.getDate();
-  const month = date.getMonth() + 1; // เริ่มนับเดือนที่ 1
-  const year = date.getFullYear();
 
-  // สร้างข้อความเป็นรูปแบบวัน เดือน ปี
-  const dateString = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+      const dateString = `${year}-${month < 10 ? '0' + month : month}-${
+        day < 10 ? '0' + day : day
+      }`;
 
-  labels.push(dateString); // เพิ่มข้อมูลลงในอาร์เรย์ labels
-  console.log(labels[0]);
-}
+      labels.push(dateString);
+    }
 
     this.http.get(url, body).subscribe((response) => {
       const data = response as pointvote[];
       console.log(data[0].total_score);
-      console.log(data[0].date)
-
-      const date = new Date(data[0].date);
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // เพิ่มศูนย์ด้านหน้าหากมีเพียงหนึ่งหลัก
-      const day = date.getDate().toString().padStart(2, '0'); // เพิ่มศูนย์ด้านหน้าหากมีเพียงหนึ่งหลัก
-
+      console.log(data);
+      console.log(data[0].date);
+      for (let index = 0; index < data.length; index++) {
+        const date = new Date(data[index].date);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
       
+        const formattedDate = `${year}-${month}-${day}`;
+       
+        formattedDates.push(formattedDate); 
+      }
+      formattedDates.reverse();
+      console.log(labels);
+      console.log(formattedDates);
+      let i = 0;
       
-      const formattedDate = `${year}-${month}-${day}`;
-      console.log(formattedDate); // Output: "2024-03-10"
-
-      const scores = data.map((item) => item.total_score); 
+      for (let index = 0; index < labels.length; index++) {
+        if (labels[index] === formattedDates[i]) {
+          scores.push(data[i].total_score);
+          i = i + 1;
+        } else {
+          scores.push(500);
+        }
+      }
       console.log(scores);
-  
-      // Create the chart inside the subscription callback
-      this.chart = new Chart("MyChart", {
-        type: 'bar', 
+
+      this.chart = new Chart('MyChart', {
+        type: 'bar',
         data: {
-          labels: labels, 
-          datasets: [{
-            label: "statics",
-            data: scores,
-            backgroundColor: 'pink'
-          }]
+          labels: labels,
+          datasets: [
+            {
+              label: 'statics',
+              data: scores,
+              backgroundColor: 'pink',
+            },
+          ],
         },
         options: {
-          aspectRatio: 2.5
-        }
+          aspectRatio: 2.5,
+        },
       });
     });
   }
