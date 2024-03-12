@@ -18,7 +18,7 @@ export class LineChartComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
   ngOnInit() {
     this.pt_id = this.route.snapshot.paramMap.get('id') || '';
-    console.log('ออกแล้วจ้า:', this.pt_id);
+    console.log('ออกแล้วจ้า :', this.pt_id);
 
     this.createChart();
   }
