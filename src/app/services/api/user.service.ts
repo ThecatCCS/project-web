@@ -15,7 +15,7 @@ export class UserService {
   constructor(private constants: Constants, private http: HttpClient){}
 
   async getName() {
-    const url = 'http://localhost:3000/users';
+    const url = this.constants.API_ENDPOINT +'/users';
     const data = await lastValueFrom(
       this.http.get(url));
     this.user = data as UserGetResponse[];
@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getUserById(userId: number): Observable<UserGetResponse> {
-    const url = `http://localhost:3000/${userId}`;
+    const url = this.constants.API_ENDPOINT + `/${userId}`;
     return this.http.get<UserGetResponse>(url);
   }
 }
