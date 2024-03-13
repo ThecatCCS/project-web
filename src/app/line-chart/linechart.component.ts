@@ -75,19 +75,16 @@ export class LineChartComponent implements OnInit {
           formattedDates.push(formattedDate);
         }
         let i = 0;
-
-        for (let index = 0; index < labels.length; index++) {
-          if (labels[index] == formattedDates[i]) {
-            scores.push(scores[index] + data[i].total_score);
-            console.log(scores[index] + data[i+1].total_score);
-            console.log(labels[index]);
-            console.log(formattedDates[0]);
-            i = i + 1;
-            
-          } else {
-              scores.push(scores[index]);
+          for (let index = 0; index < labels.length; index++) {
+            if (labels[index] == formattedDates[i]) {
+              scores.push(scores[index] + data[i].total_score);
+              
+              i = i + 1;
+              
+            } else {
+                scores.push(scores[index]);
+            }
           }
-        }
       } else {
         for (let index = 0; index < labels.length; index++) {
           scores.push(scores[index]);
