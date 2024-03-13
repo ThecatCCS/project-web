@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { pointget, pointvote } from '../model/point_vote';
 import { count, lastValueFrom } from 'rxjs';
@@ -31,6 +31,16 @@ export class LineChartComponent implements OnInit {
 }
   async createChart() {
     const url = `http://localhost:3000/pictrue/statistics/${6}`;
+  pt_id = '';
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.pt_id = this.route.snapshot.paramMap.get('id') || '';
+    console.log('ออกแล้วจ้า :', this.pt_id);
+
+    this.createChart();
+  }
+  createChart() {
+    const url = `http://localhost:3000/pictrue/statistics/${this.pt_id}`;
     const body = {};
 
 
@@ -38,13 +48,12 @@ export class LineChartComponent implements OnInit {
     const labels: string[] = [];
     const formattedDates: any = [];
     for (let i = 0; i < 7; i++) {
-      const date = new Date(); 
-      date.setDate(date.getDate() - i); 
+      const date = new Date();
+      date.setDate(date.getDate() - i);
 
       const day = date.getDate();
       const month = date.getMonth() + 1;
       const year = date.getFullYear();
-
 
       const dateString = `${year}-${month < 10 ? '0' + month : month}-${
         day < 10 ? '0' + day : day
@@ -66,8 +75,8 @@ export class LineChartComponent implements OnInit {
         const day = date.getDate().toString().padStart(2, '0');
         
         const formattedDate = `${year}-${month}-${day}`;
-       
-        formattedDates.push(formattedDate); 
+
+        formattedDates.push(formattedDate);
       }
       formattedDates.reverse();
       console.log(labels);
