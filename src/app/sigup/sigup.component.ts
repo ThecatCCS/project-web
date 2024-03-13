@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Constants } from '../config/constants';
 @Component({
   selector: 'app-sigup',
   standalone: true,
@@ -24,7 +25,7 @@ export class SigupComponent {
   img: any;
   type : number = 0;
   pefer : any;
-  constructor(private http: HttpClient,private rout: Router) {}
+  constructor(private http: HttpClient,private rout: Router,private constants: Constants) {}
 
   genders: Gender[] = [
     { value: 1, name: 'female' },
@@ -45,7 +46,7 @@ addNew() {
       user_preference: this.pefer,
       user_type: this.type
     };
-    const url = 'http://localhost:3000/user';
+    const url = this.constants.API_ENDPOINT + '/user';
     this.http.post(url, body).subscribe((response) => {
       console.log(response);
       this.navigateToLogin();

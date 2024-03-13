@@ -75,7 +75,7 @@ export class LineChartComponent implements OnInit {
           formattedDates.push(formattedDate);
         }
         let i = 0;
-          for (let index = 0; index < labels.length; index++) {
+          for (let index = 0; index < labels.length-1; index++) {
             if (labels[index] == formattedDates[i]) {
               scores.push(scores[index] + data[i].total_score);
               
@@ -86,11 +86,12 @@ export class LineChartComponent implements OnInit {
             }
           }
       } else {
-        for (let index = 0; index < labels.length; index++) {
+        for (let index = 0; index < labels.length-1; index++) {
           scores.push(scores[index]);
         }
       }
       labels.reverse();
+       
       console.log(scores);
 
       this.chart = new Chart('MyChart', {
