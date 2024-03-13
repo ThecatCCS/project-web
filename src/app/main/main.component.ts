@@ -11,7 +11,7 @@ import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
 import { Router } from 'express';
-
+import { Constants } from '../config/constants';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -25,7 +25,7 @@ export class MainComponent {
   user1: UserGetResponse | undefined;
   user2: UserGetResponse | undefined;
 
-  constructor(protected shared: UserService, private http: HttpClient) {}
+  constructor(protected shared: UserService, private http: HttpClient, private constants: Constants) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
@@ -33,28 +33,26 @@ export class MainComponent {
       console.log(this.currentUser);
     }
     this.getPicture();
-    // console.log('Init State');
   }
 
   async getPicture(): Promise<void> {
-    const url = 'http://localhost:3000/pictrue/all';
+    const url = this.constants.API_ENDPOINT + '/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
     this.Picture = data as PictureGetResponse[];
     console.log(this.Picture);
-    
-    // Assuming this.Picture has been fetched successfully
+
     if (this.Picture && this.Picture.length > 0) {
       const [user1$, user2$] = await Promise.all([
         this.shared.getUserById(this.Picture[0].u_id),
-        this.shared.getUserById(this.Picture[1].u_id)
+        this.shared.getUserById(this.Picture[1].u_id),
       ]);
-      
-      user1$.subscribe(user1 => {
+
+      user1$.subscribe((user1) => {
         console.log('User for Picture[0]:', user1);
         this.user1 = user1;
       });
 
-      user2$.subscribe(user2 => {
+      user2$.subscribe((user2) => {
         console.log('User for Picture[1]:', user2);
         this.user2 = user2;
       });
@@ -110,21 +108,21 @@ export class MainComponent {
         console.log('รูป 2: ELO Rating =', image2);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p-this.Picture[0].pictrue_p,
+          vote_point: image1.pictrue_p - this.Picture[0].pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url1 = 'http://localhost:3000/vote/vote';
+        const url1 = this.constants.API_ENDPOINT + '/vote/vote';
         this.http.post(url1, body1).subscribe((response) => {
           console.log(response);
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: this.Picture[1].pictrue_p-image2.pictrue_p,
+          vote_point:   image2.pictrue_p - this.Picture[1].pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url2 = 'http://localhost:3000/vote/vote';
+        const url2 = this.constants.API_ENDPOINT + '/vote/vote';
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
         });
@@ -134,11 +132,11 @@ export class MainComponent {
         const body4 = {
           pictrue_p: image2.pictrue_p,
         };
-        const url3 = `http://localhost:3000/pictrue/${this.Picture[0].pictrue_id}`;
+        const url3 = this.constants.API_ENDPOINT + `/pictrue/${this.Picture[0].pictrue_id}`;
         this.http.put(url3, body3).subscribe((response) => {
           console.log(response);
         });
-        const url4 = `http://localhost:3000/pictrue/${this.Picture[1].pictrue_id}`;
+        const url4 = this.constants.API_ENDPOINT + `/pictrue/${this.Picture[1].pictrue_id}`;
         this.http.put(url4, body4).subscribe((response) => {
           console.log(response);
         });
@@ -159,21 +157,21 @@ export class MainComponent {
         console.log('รูป 2: ELO Rating =', image2.pictrue_p);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p-this.Picture[1].pictrue_p,
+          vote_point: image1.pictrue_p - this.Picture[1].pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url1 = 'http://localhost:3000/vote/vote';
+        const url1 = this.constants.API_ENDPOINT + '/vote/vote';
         this.http.post(url1, body1).subscribe((response) => {
           console.log(response);
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: this.Picture[0].pictrue_p - image2.pictrue_p,
+          vote_point:  image2.pictrue_p - this.Picture[0].pictrue_p ,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
-        const url2 = 'http://localhost:3000/vote/vote';
+        const url2 = this.constants.API_ENDPOINT + '/vote/vote';
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
           this.getPicture();
@@ -184,11 +182,11 @@ export class MainComponent {
         const body4 = {
           pictrue_p: image2.pictrue_p,
         };
-        const url3 = `http://localhost:3000/pictrue/${this.Picture[1].pictrue_id}`;
+        const url3 = this.constants.API_ENDPOINT + `/pictrue/${this.Picture[1].pictrue_id}`;
         this.http.put(url3, body3).subscribe((response) => {
           console.log(response);
         });
-        const url4 = `http://localhost:3000/pictrue/${this.Picture[0].pictrue_id}`;
+        const url4 = this.constants.API_ENDPOINT + `/pictrue/${this.Picture[0].pictrue_id}`;
         this.http.put(url4, body4).subscribe((response) => {
           console.log(response);
         });

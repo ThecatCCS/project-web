@@ -7,94 +7,91 @@ import { HttpClient } from '@angular/common/http';
 import { pointget, pointvote } from '../model/point_vote';
 import { count, lastValueFrom } from 'rxjs';
 import { urlencoded } from 'body-parser';
+import { CommonModule } from '@angular/common';
+import { Constants } from '../config/constants';
 @Component({
   selector: 'app-line-chart',
   standalone: true,
   templateUrl: './linechart.component.html',
+  imports: [CommonModule],
 })
 export class LineChartComponent implements OnInit {
   public chart: any;
   numberValue: pointget[] | undefined;
-  constructor(private http: HttpClient) {}
+  pt_id = '';
+
+  constructor(
+    private http: HttpClient,
+    private activeatedRoute: ActivatedRoute,
+    private constants: Constants,
+  ) {}
   ngOnInit(): void {
+    this.pt_id = this.activeatedRoute.snapshot.paramMap.get('pt_id') || '';
+    console.log(this.pt_id);
     this.getpoint();
     this.createChart();
   }
 
   async getpoint() {
-    const url = `http://localhost:3000/pictrue/all/${4}`;
+    const url = this.constants.API_ENDPOINT + `/pictrue/all/${4}`;
     const datom = await lastValueFrom(this.http.get(url));
-    this.numberValue = datom as pointget[];
-    const numberValue2 = Number(this.numberValue);
-    console.log(numberValue2) // หรือ parseInt(this.numberValue) ขึ้นอยู่กับรูปแบบของข้อมูล
+    const pointGets: any[] = datom as pointget[];
+    console.log(pointGets[0]);
+    const numberValue2 = Number(pointGets[0].initial_score);
     return numberValue2;
-}
-  async createChart() {
-    const url = `http://localhost:3000/pictrue/statistics/${6}`;
-  pt_id = '';
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
-  ngOnInit() {
-    this.pt_id = this.route.snapshot.paramMap.get('id') || '';
-    console.log('ออกแล้วจ้า :', this.pt_id);
-
-    this.createChart();
   }
-  createChart() {
-    const url = `http://localhost:3000/pictrue/statistics/${this.pt_id}`;
+
+  async createChart() {
+    const url = this.constants.API_ENDPOINT + `/pictrue/statistics/${4}`;
     const body = {};
-
-
     const scores: number[] = [];
     const labels: string[] = [];
+    const pointValue = await this.getpoint();
     const formattedDates: any = [];
     for (let i = 0; i < 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-
       const day = date.getDate();
       const month = date.getMonth() + 1;
       const year = date.getFullYear();
-
       const dateString = `${year}-${month < 10 ? '0' + month : month}-${
         day < 10 ? '0' + day : day
       }`;
-
       labels.push(dateString);
     }
-
+    labels.reverse();
+    scores[0] = pointValue;
     this.http.get(url, body).subscribe((response) => {
       const data = response as pointvote[];
-      console.log(data[0].total_score);
-      console.log(data);
-      console.log(data[0].date);
-      
-      for (let index = 0; index < data.length; index++) {
-        const date = new Date(data[index].date);
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        
-        const formattedDate = `${year}-${month}-${day}`;
+      if (data && data.length > 0 && data[0].total_score !== undefined) {
+        for (let index = 0; index < data.length; index++) {
+          const date = new Date(data[index].date);
+          const year = date.getFullYear();
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const day = date.getDate().toString().padStart(2, '0');
 
-        formattedDates.push(formattedDate);
-      }
-      formattedDates.reverse();
-      console.log(labels);
-      
-      console.log(formattedDates);
-      let i = 0;
-      scores[0] = 400;
-      for (let index = 0; index < labels.length; index++) {
-        if (labels[index] === formattedDates[i]) {
-          scores.push(scores[index]+data[i].total_score);
-          i = i + 1;
-        } else {
+          const formattedDate = `${year}-${month}-${day}`;
 
-          if (scores) {
-            scores.push(scores[index])
+          formattedDates.push(formattedDate);
+        }
+        // console.log(labels);
+
+        // console.log(formattedDates);
+        let i = 0;
+
+        for (let index = 0; index < labels.length; index++) {
+          if (labels[index] === formattedDates[i]) {
+            scores.push(scores[index] + data[i].total_score);
+            i = i + 1;
+          } else {
+            if (scores) {
+              scores.push(scores[index]);
+            }
           }
-          
-          
+        }
+      } else {
+        for (let index = 0; index < labels.length; index++) {
+          scores.push(scores[index]);
         }
       }
       console.log(scores);
