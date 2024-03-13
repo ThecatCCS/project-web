@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VoteGetResponse } from '../../model/vote_get';
+import { Constants } from '../../config/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoteService {
-  public apiUrl = 'http://localhost:3000/vote'; // เปลี่ยนเส้นทาง URL ให้ตรงกับ Express.js API ของคุณ
-
-  constructor(private http: HttpClient) {}
+  public apiUrl = this.constants.API_ENDPOINT + '/vote'; 
+  constructor(private http: HttpClient , private constants : Constants) {}
 
   getVotes(): Observable<VoteGetResponse[]> {
     return this.http.get<VoteGetResponse[]>(this.apiUrl);
