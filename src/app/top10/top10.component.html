@@ -26,7 +26,8 @@
         <div class="name">
           <p>Picture by userID {{ item.u_id }}</p>
         </div>
-        <div class="difference">
+      
+        <div class="difference"  *ngIf="item.rank_difference != 0" >
           <p>{{ item.rank_difference }}</p>
         </div>
         <div class="rank">
@@ -38,10 +39,9 @@
               />
             </ng-container>
             <ng-container *ngIf="item.rank_difference == 0"> 
-              <img
-                src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
-                alt="Rank Image"
-              />
+            <div class="rank0">
+                <!-- <p >no rank chang</p> -->
+            </div>
             </ng-container>
             <ng-container *ngIf="item.rank_difference >= 1">
               <img
@@ -51,6 +51,7 @@
             </ng-container>
           </div>
         </div>
+        
         <div class="eloreating">
           <p>eloreating : {{ item.pictrue_p }}</p>
         </div>
