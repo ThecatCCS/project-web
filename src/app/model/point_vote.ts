@@ -6,3 +6,9 @@ export interface pointvote {
     count:       number;
     total_score: number;
 }
+
+
+
+export interface pointget{
+    initial_score: number;
+}

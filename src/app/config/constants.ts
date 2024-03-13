@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Constants {
-  public readonly API_ENDPOINT: string = 'http://localhost:3000/user ';
+  public readonly API_ENDPOINT: string = 'http://localhost:3000';
 }

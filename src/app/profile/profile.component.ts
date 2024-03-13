@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PictureGetResponse } from '../model/picture_get';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { Constants } from '../config/constants';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +23,7 @@ export class ProfileComponent {
   pictures: PictureGetResponse[] = [];
   userpic: string | undefined;
   
-  constructor(private shared: UserService, private http: HttpClient,private router: Router) {
+  constructor(private shared: UserService, private http: HttpClient,private router: Router,private constants: Constants) {
 
   }
 
@@ -55,7 +55,7 @@ export class ProfileComponent {
     console.log(this.userpic);
   }
   async getPicture() {
-    const url = 'http://localhost:3000/pictrue/alls';
+    const url = this.constants.API_ENDPOINT + '/pictrue/alls';
     const data = await lastValueFrom(this.http.get(url));
     this.pictures = data as PictureGetResponse[];
     this.filterPicturesByUserId();

@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/api/user.service';
+import { Constants } from '../config/constants';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,12 +16,12 @@ import { UserService } from '../services/api/user.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private http: HttpClient,private route: Router , protected shareData : UserService,private yourService: UserService) {}
+  constructor(private http: HttpClient,private route: Router , protected shareData : UserService,private yourService: UserService,private constants: Constants) {}
   
 
   
   async login(email: string, password: string) {
-    const url = 'http://localhost:3000/users';
+    const url = this.constants.API_ENDPOINT + '/users';
     try {
         const data = await lastValueFrom(this.http.get(url));
         const users = data as UserGetResponse[];
