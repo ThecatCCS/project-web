@@ -58,8 +58,9 @@ export class LineChartComponent implements OnInit {
         day < 10 ? '0' + day : day
       }`;
       labels.push(dateString);
+      console.log(labels)
     }
-    
+    labels.reverse();
     scores[0] = pointValue;
     this.http.get(url, body).subscribe((response) => {
       const data = response as pointvote[];
@@ -74,24 +75,38 @@ export class LineChartComponent implements OnInit {
 
           formattedDates.push(formattedDate);
         }
+        console.log(formattedDates)
         let i = 0;
-          for (let index = 0; index < labels.length-1; index++) {
+        console.log(labels.length);
+        
+          for (let index = 0; index < labels.length; index++) {
+            console.log(scores);
             if (labels[index] == formattedDates[i]) {
               scores.push(scores[index] + data[i].total_score);
+              console.log();
               
+              console.log(formattedDates[i])
+              console.log(labels[index])
               i = i + 1;
               
             } else {
                 scores.push(scores[index]);
             }
+           
+            
+            console.log(index);
+            
+            
           }
+         
       } else {
-        for (let index = 0; index < labels.length-1; index++) {
+        for (let index = 0; index < labels.length; index++) {
           scores.push(scores[index]);
         }
       }
-      labels.reverse();
-       
+      
+      const newArray = scores.slice(1);
+      console.log(newArray)
       console.log(scores);
 
       this.chart = new Chart('MyChart', {
@@ -101,7 +116,7 @@ export class LineChartComponent implements OnInit {
           datasets: [
             {
               label: 'statics',
-              data: scores,
+              data: newArray,
               backgroundColor: 'pink',
             },
           ],
