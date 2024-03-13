@@ -27,13 +27,13 @@ export class LineChartComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.pt_id = this.activeatedRoute.snapshot.paramMap.get('pt_id') || '';
-    console.log(this.pt_id);
+    console.log(this.pt_id,"ไม่ออกหรือป่าว");
     this.getpoint();
     this.createChart();
   }
 
   async getpoint() {
-    const url = this.constants.API_ENDPOINT + `/pictrue/all/${4}`;
+    const url = this.constants.API_ENDPOINT + `/pictrue/all/${this.pt_id}`;
     const datom = await lastValueFrom(this.http.get(url));
     const pointGets: any[] = datom as pointget[];
     console.log(pointGets[0]);
@@ -42,7 +42,7 @@ export class LineChartComponent implements OnInit {
   }
 
   async createChart() {
-    const url = this.constants.API_ENDPOINT + `/pictrue/statistics/${4}`;
+    const url = this.constants.API_ENDPOINT + `/pictrue/statistics/${this.pt_id}`;
     const body = {};
     const scores: number[] = [];
     const labels: string[] = [];
