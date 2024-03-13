@@ -15,35 +15,44 @@
     </div>
   </div>
 </mat-toolbar>
-
 <div class="top-container">
   <h1 class="TextHead">Top 10 most voted scenic views.</h1>
 
   <div class="leaderboard">
-    <div class="item">
+    <div class="item" *ngFor="let item of toprank.slice(0, 10); let i = index">
       <div class="counter-icon">{{ i + 1 }}</div>
-      <img
-        src="https://i.pinimg.com/564x/92/e9/04/92e9043a425466d6df5717663e903d42.jpg"
-        alt="Image"
-      />
+      <img [src]="item.pictrue_url" alt="Image" />
       <div class="text-container">
         <div class="name">
-          <p>Picturt By sasithon</p>
+          <p>Picture by userID {{ item.u_id }}</p>
+        </div>
+        <div class="difference">
+          <p>{{ item.rank_difference }}</p>
         </div>
         <div class="rank">
           <div class="dropdown">
-            <img
-              src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
-              alt="Image"
-            />
-            <img
-              src="https://cdn-icons-png.freepik.com/512/5800/5800655.png?ga=GA1.1.636306898.1696678666&"
-              alt="Image"
-            />
+            <ng-container *ngIf="item.rank_difference <= -1">
+              <img
+                src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
+                alt="Rank Image"
+              />
+            </ng-container>
+            <ng-container *ngIf="item.rank_difference == 0"> 
+              <img
+                src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
+                alt="Rank Image"
+              />
+            </ng-container>
+            <ng-container *ngIf="item.rank_difference >= 1">
+              <img
+                src="https://cdn-icons-png.freepik.com/512/5800/5800655.png?ga=GA1.1.636306898.1696678666&"
+                alt="Dropdown Image"
+              />
+            </ng-container>
           </div>
         </div>
         <div class="eloreating">
-          <p>: 658</p>
+          <p>eloreating : {{ item.pictrue_p }}</p>
         </div>
       </div>
     </div>
