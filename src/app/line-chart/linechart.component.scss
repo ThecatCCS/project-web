@@ -1,13 +1,24 @@
-
-.logonav img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px;
+// // .containernav{
+// //         height: 10%;
+// //           width: 10%;
+// //           display: flex;
+// //           padding: 0 20px;
+// //   }
+.home img {
+    flex-direction: row;
+    
+    display: flex;
   }
-  .toolbar-text {
-    color: azure;
-      cursor: pointer;
-      font-size: 15px;
-      font-family: "DM Serif Display", serif;
-    }
+  
+// .text {
+//     color: azure;
+//       cursor: pointer;
+//       font-size: 15px;
+//       font-family: "DM Serif Display", serif;
+//     }
+//  .icon-img{
+//     width: 50px;
+//     height: 50px;
+//     border-radius: 50%;
+//     border: 2px solid azure; /* เพิ่มเส้นขอบสี azure */
+//  }
