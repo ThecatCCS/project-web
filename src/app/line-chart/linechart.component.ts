@@ -33,7 +33,7 @@ export class LineChartComponent implements OnInit {
   }
 
   async getpoint() {
-    const url = this.constants.API_ENDPOINT + `/pictrue/user/${4}`;
+    const url = this.constants.API_ENDPOINT + `/pictrue/all/${4}`;
     const datom = await lastValueFrom(this.http.get(url));
     const pointGets: any[] = datom as pointget[];
     console.log(pointGets[0]);
