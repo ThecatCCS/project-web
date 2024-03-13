@@ -62,6 +62,8 @@ export class MainComponent {
   check(p_id: number) {
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
+      console.log("วันออกนะ",currentTime);
+      
       const voteTimestamp: string = currentTime.toISOString().slice(0, 19);
       const currentUser = JSON.parse(
         sessionStorage.getItem('currentUser') || '{}'
