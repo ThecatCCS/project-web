@@ -110,7 +110,7 @@ export class MainComponent {
         console.log('รูป 2: ELO Rating =', image2);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p,
+          vote_point: image1.pictrue_p-this.Picture[0].pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -120,7 +120,7 @@ export class MainComponent {
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image2.pictrue_p,
+          vote_point: this.Picture[1].pictrue_p-image2.pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -159,7 +159,7 @@ export class MainComponent {
         console.log('รูป 2: ELO Rating =', image2.pictrue_p);
         const body1 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image1.pictrue_p,
+          vote_point: image1.pictrue_p-this.Picture[1].pictrue_p,
           pt_id: this.Picture[1].pictrue_id,
           u_id: currentUser.user_id,
         };
@@ -169,7 +169,7 @@ export class MainComponent {
         });
         const body2 = {
           vote_timestamp: voteTimestamp,
-          vote_point: image2.pictrue_p,
+          vote_point: this.Picture[0].pictrue_p - image2.pictrue_p,
           pt_id: this.Picture[0].pictrue_id,
           u_id: currentUser.user_id,
         };

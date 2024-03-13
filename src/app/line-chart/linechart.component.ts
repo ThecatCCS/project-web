@@ -4,8 +4,8 @@ import { VoteGetResponse } from '../model/vote_get';
 import { VoteService } from '../services/api/voteservice';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { pointvote } from '../model/point_vote';
-import { count } from 'rxjs';
+import { pointget, pointvote } from '../model/point_vote';
+import { count, lastValueFrom } from 'rxjs';
 import { urlencoded } from 'body-parser';
 @Component({
   selector: 'app-line-chart',
@@ -14,14 +14,26 @@ import { urlencoded } from 'body-parser';
 })
 export class LineChartComponent implements OnInit {
   public chart: any;
+  numberValue: pointget[] | undefined;
   constructor(private http: HttpClient) {}
   ngOnInit(): void {
-    
+    this.getpoint();
     this.createChart();
   }
-  createChart() {
-    const url = `http://localhost:3000/pictrue/statistics/${5}`;
+
+  async getpoint() {
+    const url = `http://localhost:3000/pictrue/all/${4}`;
+    const datom = await lastValueFrom(this.http.get(url));
+    this.numberValue = datom as pointget[];
+    const numberValue2 = Number(this.numberValue);
+    console.log(numberValue2) // หรือ parseInt(this.numberValue) ขึ้นอยู่กับรูปแบบของข้อมูล
+    return numberValue2;
+}
+  async createChart() {
+    const url = `http://localhost:3000/pictrue/statistics/${6}`;
     const body = {};
+
+
     const scores: number[] = [];
     const labels: string[] = [];
     const formattedDates: any = [];
@@ -46,27 +58,34 @@ export class LineChartComponent implements OnInit {
       console.log(data[0].total_score);
       console.log(data);
       console.log(data[0].date);
+      
       for (let index = 0; index < data.length; index++) {
         const date = new Date(data[index].date);
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const day = date.getDate().toString().padStart(2, '0');
-      
+        
         const formattedDate = `${year}-${month}-${day}`;
        
         formattedDates.push(formattedDate); 
       }
       formattedDates.reverse();
       console.log(labels);
+      
       console.log(formattedDates);
       let i = 0;
-      
+      scores[0] = 400;
       for (let index = 0; index < labels.length; index++) {
         if (labels[index] === formattedDates[i]) {
-          scores.push(data[i].total_score);
+          scores.push(scores[index]+data[i].total_score);
           i = i + 1;
         } else {
-          scores.push(500);
+
+          if (scores) {
+            scores.push(scores[index])
+          }
+          
+          
         }
       }
       console.log(scores);
