@@ -76,8 +76,26 @@ export class ProfileComponent {
       console.log("ออกอยู่จ้า",pt_id);
       
     }
-    
+    uploadFile(file: File) {
+      const url = this.constants.API_ENDPOINT +`/upload/${this.currentUser?.user_id}`;
+      const formData = new FormData();
+      formData.append('filename', file, file.name);
+      console.log(formData,"tese");
+      return this.http.post(url, formData);
+    }
   
   
-  
+    onFileSelected(event: any) {
+      const file = event.target.files[0];
+      this.uploadFile(file).subscribe(
+        (response) => {
+          console.log('File uploaded successfully:', response);
+          // Handle response from server
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+          // Handle error
+        }
+      );
+    }
 }

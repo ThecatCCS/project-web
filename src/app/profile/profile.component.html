@@ -41,7 +41,9 @@
                 <!-- <span class="follow">Follow Us : </span> -->
             </div>
             <div class="buttons">
-                <button mat-stroked-button  class="custom-button">Upload New Photo</button>
+              <button mat-stroked-button class="custom-button" (click)="fileInput.click()">Upload New Photo</button>
+<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+
                 <button mat-flat-button  class="custom-button">Edit Profile</button>
             </div>
         </div>
