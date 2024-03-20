@@ -46,7 +46,7 @@ export class MainComponent {
         this.shared.getUserById(this.Picture[0].u_id),
         this.shared.getUserById(this.Picture[1].u_id),
       ]);
-
+  
       user1$.subscribe((user1) => {
         console.log('User for Picture[0]:', user1);
         this.user1 = user1;
@@ -102,8 +102,6 @@ export class MainComponent {
           this.Picture[1].pictrue_url,
           this.Picture[1].pictrue_p
         );
-        // const image1 = new Image("url1", 1200);
-        // const image2 = new Image("url2", 1000);
         const votingSystem = new ImageVotingSystem(image1, image2);
         console.log("ออกกกกกก",image1,image2
         );
