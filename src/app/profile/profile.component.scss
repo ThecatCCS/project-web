@@ -212,7 +212,7 @@
   filter: brightness(90%);
 }
 
-.material-icons {
+.material-icons{
   position: absolute;
   color: white;
   cursor: pointer;
@@ -225,7 +225,10 @@
   color: #ff4500;
   background-color: rgba(0, 0, 0, 0.8);
 }
-
+.maticn{
+  justify-content:space-between ;
+  margin-right: 10%;
+}
 .hidden {
   display: none;
 }
