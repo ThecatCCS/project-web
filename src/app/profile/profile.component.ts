@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
 import { forkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
+import { UpdateProfileDialogComponent } from './editprofile/editprofile.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -30,10 +31,22 @@ export class ProfileComponent {
   gender: string = '';
   age: number = 0;
   pefer : any;
+
   
-  constructor(private shared: UserService, private http: HttpClient,private router: Router,private constants: Constants) {
+  constructor(private shared: UserService, private http: HttpClient,private router: Router,private constants: Constants,    private dialog: MatDialog) {
 
   }
+  editProfile(): void {
+    const dialogRef = this.dialog.open(UpdateProfileDialogComponent, {
+      width: '500px',
+      // data: { userData: this.userData }
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   // Handle the result of the dialog
+    // });
+ }
 
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
@@ -43,8 +56,7 @@ export class ProfileComponent {
       if (this.currentUser !== undefined) {
         const userEmail = this.currentUser.user_email;
         const userRole = this.currentUser.user_pass;
-        // console.log(userEmail);
-        // console.log(userRole);
+      
         this.getUserpic();
         this.getUserName();
       } else {
@@ -52,6 +64,7 @@ export class ProfileComponent {
       }
     }
     this.getPicture();
+
   }
 
   async onDelete(pt_id: number) {
@@ -63,12 +76,10 @@ export class ProfileComponent {
     console.log(status);
     } else {
       console.log('Canceled image deletion');
+     
     }
+    this.getPicture();
   }
-  aditepicture(arg0: number) {
-
-    }
-    
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     console.log(this.userName);

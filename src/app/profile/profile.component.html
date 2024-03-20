@@ -58,7 +58,7 @@
           (change)="onFileSelected($event)"
         />
 
-        <button mat-flat-button class="custom-button">Edit Profile</button>
+        <button mat-flat-button class="custom-button"(click)="editProfile()">Edit Profile</button>
       </div>
     </div>
   </div>
@@ -99,10 +99,9 @@
               type="file"
               #fileInput
               style="display: none"
-              (change)="    onFileSelected2($event,picture.pictrue_id)"
+              (change)="onFileSelected2($event, picture.pictrue_id)"
             />
           </div>
-
           <img src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
         </div>
       </div>

@@ -116,7 +116,7 @@ export class LineChartComponent implements OnInit {
             {
               label: 'statics',
               data: newArray,
-              backgroundColor: 'blue',
+              backgroundColor: 'black',
             },
           ],
         },
