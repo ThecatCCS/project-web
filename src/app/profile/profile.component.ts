@@ -94,52 +94,14 @@ export class ProfileComponent {
       console.log("ออกอยู่จ้า",pt_id);
       
     }
-    uploadFile(file: File) {
-      const url = this.constants.API_ENDPOINT +`/upload/${this.currentUser?.user_id}`;
-      const formData = new FormData();
-      formData.append('filename', file, file.name);
-      console.log(formData,"tese");
-      return this.http.post(url, formData);
-    }
-    updateFile(file: File) {
-      const url = this.constants.API_ENDPOINT + `/upload/update/${this.currentUser?.user_id}`;
-      const formData = new FormData();
-      formData.append('filename', file, file.name);
-      console.log(formData,"test");
-  
-      return this.http.put(url, formData);
-    }
-    updataprofileBody(file: File) {
-      const body = {
-        user_name: this.name,
-        user_pass: this.password,
-        user_gender: this.gender,
-        user_age: this.age,
-        user_preference: this.pefer
-      };
-    
-      const uploadUrl = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
-      const updateUrl = this.constants.API_ENDPOINT + `/upload/userprofile/${this.currentUser?.user_id}`;
-    
-      const formData = new FormData();
-      formData.append('filename', file, file.name);
-    
-      return forkJoin([
-        this.http.put(uploadUrl, formData),
-        this.http.put(updateUrl, body)
-      ]).pipe(
-        switchMap(([uploadResponse, updateResponse]) => {
-          console.log(uploadResponse, updateResponse);
-          this.getPicture();
-          return [uploadResponse, updateResponse]; 
-        })
-      );
-    }
-    
-
-    onFileSelected(event: any) {
+    onFileSelected1(event: any) {
       const file = event.target.files[0];
-      this.uploadFile(file).subscribe(
+      const url = this.constants.API_ENDPOINT + `/upload/${this.currentUser?.user_id}`;
+      const formData = new FormData();
+      formData.append('filename', file, file.name);
+      console.log(formData, "tese");
+    
+      this.http.post(url, formData).subscribe(
         (response) => {
           console.log('File uploaded successfully:', response);
         },
@@ -147,7 +109,66 @@ export class ProfileComponent {
           console.error('Error uploading file:', error);
         }
       );
-    };
+    }
+    
+    onFileSelected2(event: any) {
+      const file = event.target.files[0];
+      const url = this.constants.API_ENDPOINT + `/upload/update/${this.currentUser?.user_id}`;
+      const formData = new FormData();
+      formData.append('filename', file, file.name);
+      console.log(formData, "test");
+    
+      this.http.put(url, formData).subscribe(
+        (response) => {
+          console.log('File uploaded successfully:', response);
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+        }
+      );
+    }
+    
+    // onFileSelected3(event: any) {
+    //   const file = event.target.files[0];
+    //   this.updataprofileBody(file).subscribe(
+    //     ([uploadResponse, updateResponse]) => {
+    //       console.log('File uploaded successfully:', uploadResponse);
+    //       console.log('Profile updated successfully:', updateResponse);
+    //     },
+    //     (error) => {
+    //       console.error('Error updating profile:', error);
+    //     }
+    //   );
+    // }
+    
+    // updataprofileBody(file: File) {
+    //   const body = {
+    //     user_name: this.name,
+    //     user_pass: this.password,
+    //     user_gender: this.gender,
+    //     user_age: this.age,
+    //     user_preference: this.pefer
+    //   };
+    
+    //   const uploadUrl = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
+    //   const updateUrl = this.constants.API_ENDPOINT + `/upload/userprofile/${this.currentUser?.user_id}`;
+    
+    //   const formData = new FormData();
+    //   formData.append('filename', file, file.name);
+    
+    //   return forkJoin([
+    //     this.http.put(uploadUrl, formData),
+    //     this.http.put(updateUrl, body)
+    //   ]).pipe(
+    //     switchMap(([uploadResponse, updateResponse]) => {
+    //       console.log(uploadResponse, updateResponse);
+    //       this.getPicture();
+    //       return [uploadResponse, updateResponse]; 
+    //     })
+    //   );
+    // }
+    
+
   
     
 }
