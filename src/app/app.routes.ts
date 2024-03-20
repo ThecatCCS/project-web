@@ -11,6 +11,7 @@ export const routes: Routes = [
     {path: 'sigup', component: SigupComponent},
     {path: '', component: MainComponent},
     {path: 'top10', component: Top10Component},
+    {path: 'main/id', component: MainComponent},
     {path: 'main', component: MainComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'login/id', component: LoginComponent},
