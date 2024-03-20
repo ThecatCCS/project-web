@@ -18,6 +18,7 @@ import { Constants } from '../config/constants';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
+
   currentUser: UserGetResponse | undefined;
   userName: string | undefined;
   pictures: PictureGetResponse[] = [];
@@ -40,11 +41,38 @@ export class ProfileComponent {
         this.getUserpic();
         this.getUserName();
       } else {
-        // Handle case when currentUser is undefined
+
       }
     }
     this.getPicture();
   }
+
+  onDelete(pt_id: number) {
+  if (confirm('คุณแน่ใจหรือไม่ที่ต้องการลบรูปภาพนี้?')) {
+    fetch(`/delete/${pt_id}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('เกิดข้อผิดพลาดในการลบรูปภาพ');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.affected_row > 0) {
+        alert('รูปภาพถูกลบเรียบร้อยแล้ว');
+
+      } else {
+        throw new Error('ไม่สามารถลบรูปภาพได้');
+      }
+    })
+    .catch(error => {
+      console.error('เกิดข้อผิดพลาด:', error);
+      alert('เกิดข้อผิดพลาดในการลบรูปภาพ');
+    });
+  }
+}
+
   
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
@@ -98,4 +126,5 @@ export class ProfileComponent {
         }
       );
     }
+    
 }

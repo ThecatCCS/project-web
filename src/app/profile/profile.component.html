@@ -22,61 +22,83 @@
   </div>
 </mat-toolbar>
 <div class="vote-con">
-    <div class="h1">
+  <div class="h1">
     <h1>User Profile</h1>
-    </div>
-    <div class="img-con">
-        <div class="item">
-            <div  *ngIf="userpic">
-                <img class="logo" src="{{ userpic }}" alt="User Picture">
-              </div>           
-            <div class="detail">
-                <div *ngIf="userName">
-                    <span class="Username">{{ userName }}</span>
-                  </div>
-                <div class="user-info">
-                    <img class="icon_img" src="https://i.pinimg.com/564x/3d/cb/80/3dcb80f6eae47eb1cc138440f60d7f49.jpg">
-                    <span class="pic_count">All Photo</span>
-                </div>
-                <!-- <span class="follow">Follow Us : </span> -->
-            </div>
-            <div class="buttons">
-              <button mat-stroked-button class="custom-button" (click)="fileInput.click()">Upload New Photo</button>
-<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
-
-                <button mat-flat-button  class="custom-button">Edit Profile</button>
-            </div>
-        </div>
-    </div>
-    <hr style="margin-top: 20px; border: 1px solid #e06cc1; border-radius: 20px;">
-    <!-- <h3 style="padding: 0 20px;">OR</h3> -->
-
+  </div>
+  <div class="img-con">
     <div class="item">
-        <div class="user-p">
-            <img class="icon_u" src="https://i.pinimg.com/564x/10/4d/76/104d766b5acdf782fd224ab58a1c5326.jpg">
-            <span class="pic_co">Picture by {{ userName }}</span>
+      <div *ngIf="userpic">
+        <img class="logo" src="{{ userpic }}" alt="User Picture" />
+      </div>
+      <div class="detail">
+        <div *ngIf="userName">
+          <span class="Username">{{ userName }}</span>
         </div>
-        <div class="buttons">
-            <button class="buttons" mat-button color="accent">
-                <mat-icon>delete</mat-icon>
-                Delete
-            </button>
+        <div class="user-info">
+          <img
+            class="icon_img"
+            src="https://i.pinimg.com/564x/3d/cb/80/3dcb80f6eae47eb1cc138440f60d7f49.jpg"
+          />
+          <span class="pic_count">All Photo</span>
         </div>
+        <!-- <span class="follow">Follow Us : </span> -->
+      </div>
+      <div class="buttons">
+        <button
+          mat-stroked-button
+          class="custom-button"
+          (click)="fileInput.click()"
+        >
+          Upload New Photo
+        </button>
+        <input
+          type="file"
+          #fileInput
+          style="display: none"
+          (change)="onFileSelected($event)"
+        />
+
+        <button mat-flat-button class="custom-button">Edit Profile</button>
+      </div>
     </div>
-    <div class="image_user">
-        <div class="container">
-            <div class="pro">
-                <!-- <p>Sasithon_Nutty</p> -->
-            </div>
-            <div class="picvote1">
-              <div class="image-wrapper" *ngFor="let picture of pictures">
-                <img (click)="onClick(picture.pictrue_id)" src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}">
-              </div>
-            </div>
-            
-            
-            
-              
-              
+  </div>
+  <hr
+    style="margin-top: 20px; border: 1px solid #e06cc1; border-radius: 20px"
+  />
+  <!-- <h3 style="padding: 0 20px;">OR</h3> -->
+
+  <div class="item">
+    <div class="user-p">
+      <img
+        class="icon_u"
+        src="https://i.pinimg.com/564x/10/4d/76/104d766b5acdf782fd224ab58a1c5326.jpg"
+      />
+      <span class="pic_co">Picture by {{ userName }}</span>
     </div>
+    <div class="buttons">
+      <button class="buttons" mat-button color="accent">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="image_user">
+    <div class="container">
+      <div class="pro">
+        <!-- <p>Sasithon_Nutty</p> -->
+      </div>
+      <div class="picvote1">
+        <div class="image-wrapper" *ngFor="let picture of pictures">
+          <img
+            (click)="onClick(picture.pictrue_id)"
+            src="{{ picture.pictrue_url }}"
+            alt="{{ picture.pictrue_id }}"
+          />
+          <i class="material-icons" (click)="onDelete(picture.pictrue_id)"
+            >delete_forever</i
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
