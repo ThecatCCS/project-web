@@ -56,14 +56,19 @@ export class ProfileComponent {
 
   async onDelete(pt_id: number) {
     const userConfirmed = window.confirm('Do you want to delete this image?');
+    console.log(userConfirmed);
     if (userConfirmed) {
       const status = await this.constants.API_ENDPOINT +`/pictrue/delete/${pt_id}`;
-      window.location.reload();
+      const data = await lastValueFrom(this.http.delete(status));
+    console.log(status);
     } else {
       console.log('Canceled image deletion');
     }
   }
-  
+  aditepicture(arg0: number) {
+
+    }
+    
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     console.log(this.userName);
@@ -94,6 +99,7 @@ export class ProfileComponent {
       console.log("ออกอยู่จ้า",pt_id);
       
     }
+<<<<<<< Updated upstream
     onFileSelected1(event: any) {
       const file = event.target.files[0];
       const url = this.constants.API_ENDPOINT + `/upload/${this.currentUser?.user_id}`;
@@ -102,6 +108,39 @@ export class ProfileComponent {
       console.log(formData, "tese");
     
       this.http.post(url, formData).subscribe(
+=======
+    uploadFile(file: File) {
+      const url = this.constants.API_ENDPOINT +`/upload/${this.currentUser?.user_id}`;
+      const formData = new FormData();
+      formData.append('filename', file, file.name);
+      console.log(formData,"tese");
+      return this.http.post(url, formData);
+    }
+    updateFile(file: File, pt_id: number) {
+      const url = `${this.constants.API_ENDPOINT}/update/${pt_id}`;
+      const formData = new FormData();
+      formData.append('file', file); // แก้ 'filename' เป็น 'file' ตาม API ที่ต้องการ
+      console.log(formData, "test");
+    
+      return this.http.put(url, formData);
+    }
+    
+    onUpdatepic(event: any) {
+      const file = event.target.files[0];
+      this.updateFile(file, this.pt_id).subscribe(
+        (response) => {
+          console.log('File uploaded successfully:', response);
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+        }
+      );
+    }
+    
+    onFileSelected(event: any) {
+      const file = event.target.files[0];
+      this.uploadFile(file).subscribe(
+>>>>>>> Stashed changes
         (response) => {
           console.log('File uploaded successfully:', response);
         },

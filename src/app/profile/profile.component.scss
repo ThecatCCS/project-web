@@ -212,8 +212,8 @@
   filter: brightness(90%);
 }
 
-.material-icons{
-  position: absolute;
+.material-icons,.material-symbols-outlined{
+  // position: absolute;
   color: white;
   cursor: pointer;
   border-radius: 50%;
@@ -225,10 +225,15 @@
   color: #ff4500;
   background-color: rgba(0, 0, 0, 0.8);
 }
-.maticn{
-  justify-content:space-between ;
-  margin-right: 10%;
+.material-symbols-outlined:hover {
+  color: #2082de;
+  background-color: rgba(0, 0, 0, 0.8);
 }
+.material-symbols-outlined1:hover {
+  color: #0da805;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .hidden {
   display: none;
 }

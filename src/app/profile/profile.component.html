@@ -83,14 +83,27 @@
       </div>
       <div class="picvote1">
         <div class="image-wrapper" *ngFor="let picture of pictures">
-          <i class="material-icons" (click)="onDelete(picture.pictrue_id)"
-            >delete_forever</i>
+          <div class="maticon">
+            <i class="material-icons" (click)="onDelete(picture.pictrue_id)"
+              >delete_forever</i
+            >
+            <i
+              class="material-symbols-outlined"
+              (click)="onClick(picture.pictrue_id)"
+              >monitoring</i
+            >
+            <i class="material-symbols-outlined" (click)="fileInput.click()"
+              >enable</i
+            >
+            <input
+              type="file"
+              #fileInput
+              style="display: none"
+              (change)="onUpdatepic($event, pt_id)"
+            />
+          </div>
 
-          <img
-            (click)="onClick(picture.pictrue_id)"
-            src="{{ picture.pictrue_url }}"
-            alt="{{ picture.pictrue_id }}"
-          />
+          <img src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
         </div>
       </div>
     </div>
