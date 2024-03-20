@@ -139,9 +139,9 @@ export class ProfileComponent {
       );
     }
     
-    onFileSelected2(event: any) {
+    onFileSelected2(event: any , pt_id : number) {
       const file = event.target.files[0];
-      const url = this.constants.API_ENDPOINT + `/upload/update/${this.currentUser?.user_id}`;
+      const url = this.constants.API_ENDPOINT + `/upload/update/${pt_id}`;
       const formData = new FormData();
       formData.append('filename', file, file.name);
       console.log(formData, "test");
