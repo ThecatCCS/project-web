@@ -1,205 +1,231 @@
-.containernav{
-    color: azure;
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content:space-between;
-          margin-left: 63%;
-          padding: 0 20px;
-  }
-  .logonav img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px; 
-  }
-  .logo1 img {
-    vertical-align: middle; 
-    border-radius: 50%;
-    width: 50px;
+.containernav {
+  color: azure;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 63%;
+  padding: 0 20px;
+}
+
+.logonav img {
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.logo1 img {
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.toolbar-text {
+  color: azure;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text1 {
+  color: azure;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text:hover {
+  background-color: #eb96c2;
+  border-radius: 5px;
+  /* ปรับขนาดของมุม */
+  font-family: "DM Serif Display", serif;
+}
+
+.TextHead {
+  font-size: 36px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.h1 {
+  color: #f386bf;
+  text-shadow: 3px 2px rgb(85, 77, 83);
+  /* กำหนดเงาข้อความ */
+}
+
+.vote-con {
+  margin: 30px 0;
+  padding: 0 100px;
+  font-family: "DM Serif Display", serif;
+  color: rgb(85, 77, 83);
+
+}
+
+.item {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+  background-color: white;
+  padding: 5px;
+}
+
+.logo:hover {
+  outline: 3px solid #384d6c;
+}
+
+.detail {
+  padding: 0 30px;
+}
+
+.Username {
+  font-size: 28px;
+  font-weight: bolder;
+  color: #f083bb;
+  text-shadow: 3px 2px rgb(232, 212, 227);
+  /* กำหนดเงาข้อความ */
+}
+
+.user-info {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.user-p {
+  display: flex;
+  align-items: center;
+
+  .icon_u {
+    height: 40px;
+    width: auto;
+    object-fit: cover;
     margin-right: 10px;
   }
-  
-  .toolbar-text {
-    color: azure;
-      cursor: pointer;
-      font-size: 15px;
-      font-family: "DM Serif Display", serif;
-    }
-    .toolbar-text1 {
-      color: azure;
-      font-size: 32px;
-      font-weight: bold;
-      font-family: "DM Serif Display", serif;
-    }
-    .toolbar-text:hover {
-      background-color: #eb96c2;
-      border-radius: 5px; /* ปรับขนาดของมุม */
-      font-family: "DM Serif Display", serif;
-    }
-    .TextHead {
-        font-size: 36px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        padding: 40px 0;
-      }
-      .h1{
-        color: #f386bf;
-        text-shadow: 3px 2px rgb(85, 77, 83); /* กำหนดเงาข้อความ */
-      }
-      .vote-con {
-        margin: 30px 0;
-        padding: 0 100px;
-        font-family: "DM Serif Display", serif;
-        color:rgb(85, 77, 83);
-       
-      }
-      
-      .item {
-        flex-direction: row;
-        align-items: center;
-        display: flex;
-      }
-      .logo {
-        height: 100px;
-        width: 100px;
-        object-fit: cover;
-        border-radius: 100%;
-        background-color: white;
-        padding: 5px;
-      }
-      
-      .logo:hover {
-        outline: 3px solid #384d6c;
-      }
-      
-      .detail {
-        padding: 0 30px;
-      }
-      
-      .Username {
-        font-size: 28px;
-        font-weight: bolder;
-        color: #f083bb;
-        text-shadow: 3px 2px rgb(232, 212, 227); /* กำหนดเงาข้อความ */
-      }
-      
-      .user-info {
-        padding-top: 10px;
-        display: flex;
-        align-items: center;
-      }
-      
-      .user-p {
-        display: flex;
-        align-items: center;
-        .icon_u {
-          height: 40px;
-          width: auto;
-          object-fit: cover;
-          margin-right: 10px;
-        }
-        
-        .pic_co {
-          font-size: 22px;
-          font-weight: 800;
-        }
-      }
-      
-      .icon_img {
-        height: 30px;
-        width: auto;
-        object-fit: cover;
-        margin-right: 10px;
-      }
-      
-      .pic_count {
-        font-size: 18px;
-        font-weight: 300;
-      }
-      
-      .follow {
-        padding-top: 10px;
-        display: flex;
-        align-items: center;
-        font-size: 18px;
-        font-weight: 300;
-      }
-      
-      .buttons {
-        margin-left: auto;
-        cursor: pointer;
-        color: hsl(329, 15%, 33%);
-        font-family: "DM Serif Display", serif;
-        border-color: #ffffff;
-      }
-      
-      .custom-button {
-        margin: 0 10px;
-        width: 170px;
-        height: 40px;
-        border-color: #ffffff;
-      }
-      
-      .custom-button[mat-stroked-button] {
-        background-color:  #f083bb;
-        color: #ffffff;
-        font-family: "DM Serif Display", serif;
-        cursor: pointer;
-      }
-      
-      .custom-button[mat-flat-button] {
-        background-color:  #f083bb;
-        color: #ffffff;
-        font-family: "DM Serif Display", serif;
-        cursor: pointer;
-      }
-      
 
-      .image_user {
-          display: flex;
-          flex-wrap: wrap;
-          background-position: center;
-          justify-content: center;
-      }
-      
-      .container {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-          background-size: contain;
-          background-position: center;
-          gap: 15px;
-          cursor: pointer;
-      }
-      
-      .picvote1 {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-      }
-      
-      .image-wrapper {
-          width: calc(33.33% - 10px);
-          height: auto;
-          overflow: hidden;
-          margin: 5px;
-      }
-      
-      .image-wrapper img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 5px;
-      }
-      .image-wrapper:hover {
-          filter: brightness(90%);
-      }
+  .pic_co {
+    font-size: 22px;
+    font-weight: 800;
+  }
+}
 
-      .hidden {
-        display: none;
-      }
-      
+.icon_img {
+  height: 30px;
+  width: auto;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.pic_count {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.follow {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.buttons {
+  margin-left: auto;
+  cursor: pointer;
+  color: hsl(329, 15%, 33%);
+  font-family: "DM Serif Display", serif;
+  border-color: #ffffff;
+}
+
+.custom-button {
+  margin: 0 10px;
+  width: 170px;
+  height: 40px;
+  border-color: #ffffff;
+}
+
+.custom-button[mat-stroked-button] {
+  background-color: #f083bb;
+  color: #ffffff;
+  font-family: "DM Serif Display", serif;
+  cursor: pointer;
+}
+
+.custom-button[mat-flat-button] {
+  background-color: #f083bb;
+  color: #ffffff;
+  font-family: "DM Serif Display", serif;
+  cursor: pointer;
+}
+
+
+.image_user {
+  display: flex;
+  flex-wrap: wrap;
+  background-position: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.picvote1 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.image-wrapper {
+  width: calc(33.33% - 10px);
+  height: auto;
+  overflow: hidden;
+  margin: 5px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.image-wrapper:hover {
+  filter: brightness(90%);
+}
+
+.material-icons {
+  position: absolute;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.5s ease;
+}
+
+.material-icons:hover {
+  color: #ff4500;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.hidden {
+  display: none;
+}
