@@ -75,7 +75,6 @@
       />
       <span class="pic_co">Picture by {{ userName }}</span>
     </div>
-   
   </div>
   <div class="image_user">
     <div class="container">
@@ -83,17 +82,15 @@
         <!-- <p>Sasithon_Nutty</p> -->
       </div>
       <div class="picvote1">
-        
         <div class="image-wrapper" *ngFor="let picture of pictures">
           <i class="material-icons" (click)="onDelete(picture.pictrue_id)"
-          >delete_forever</i >
+            >delete_forever</i>
+
           <img
-          
             (click)="onClick(picture.pictrue_id)"
             src="{{ picture.pictrue_url }}"
             alt="{{ picture.pictrue_id }}"
           />
-         
         </div>
       </div>
     </div>

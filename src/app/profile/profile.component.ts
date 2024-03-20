@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserGetResponse } from '../model/user_get';
 import { CommonModule } from '@angular/common';
 import { PictureGetResponse } from '../model/picture_get';
-import { lastValueFrom } from 'rxjs';
+import { count, lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
 
@@ -47,32 +47,15 @@ export class ProfileComponent {
     this.getPicture();
   }
 
-  onDelete(pt_id: number) {
-  if (confirm('คุณแน่ใจหรือไม่ที่ต้องการลบรูปภาพนี้?')) {
-    fetch(`/delete/${pt_id}`, {
-      method: 'DELETE'
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('เกิดข้อผิดพลาดในการลบรูปภาพ');
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (data.affected_row > 0) {
-        alert('รูปภาพถูกลบเรียบร้อยแล้ว');
-
-      } else {
-        throw new Error('ไม่สามารถลบรูปภาพได้');
-      }
-    })
-    .catch(error => {
-      console.error('เกิดข้อผิดพลาด:', error);
-      alert('เกิดข้อผิดพลาดในการลบรูปภาพ');
-    });
+  async onDelete(pt_id: number) {
+    const userConfirmed = window.confirm('Do you want to delete this image?');
+    if (userConfirmed) {
+      const status = await this.constants.API_ENDPOINT +`/pictrue/delete/${pt_id}`;
+      window.location.reload();
+    } else {
+      console.log('Canceled image deletion');
+    }
   }
-}
-
   
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
