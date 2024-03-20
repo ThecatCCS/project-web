@@ -19,17 +19,25 @@ export class ImageVotingSystem {
         this.image1 = image1;
         this.image2 = image2;
         this.kFactor = 32;
+       
+
     }
 
     updateEloRating(winner: Image, loser: Image) {
         const expectedScoreWinner = 1 / (1 + Math.pow(10, (loser.pictrue_p - winner.pictrue_p) / 400));
         const expectedScoreLoser = 1 / (1 + Math.pow(10, (winner.pictrue_p - loser.pictrue_p) / 400));
-
+        console.log("ขนะะ",expectedScoreWinner);
+        console.log("แพ้",expectedScoreLoser);
         const newEloRatingWinner = winner.pictrue_p + this.kFactor * (1 - expectedScoreWinner);
         const newEloRatingLoser = loser.pictrue_p + this.kFactor * (0 - expectedScoreLoser);
 
+console.log("ชนะ",winner.pictrue_p + this.kFactor * (1 - expectedScoreWinner));
+console.log("แพ้ ",loser.pictrue_p + this.kFactor * (0 - expectedScoreLoser));
+
+
         winner.pictrue_p = Math.round(newEloRatingWinner);
         loser.pictrue_p = Math.round(newEloRatingLoser);
+       
     }
 }
 

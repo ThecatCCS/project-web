@@ -105,7 +105,11 @@ export class MainComponent {
         // const image1 = new Image("url1", 1200);
         // const image2 = new Image("url2", 1000);
         const votingSystem = new ImageVotingSystem(image1, image2);
+        console.log("ออกกกกกก",image1,image2
+        );
+        
         votingSystem.updateEloRating(image1, image2);
+
         console.log('รูป 1: ELO Rating =', image1);
         console.log('รูป 2: ELO Rating =', image2);
         const body1 = {

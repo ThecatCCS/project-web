@@ -96,7 +96,6 @@ export class LineChartComponent implements OnInit {
             
             console.log(index);
             
-            
           }
          
       } else {
@@ -110,14 +109,14 @@ export class LineChartComponent implements OnInit {
       console.log(scores);
 
       this.chart = new Chart('MyChart', {
-        type: 'bar',
+        type: 'line',
         data: {
           labels: labels,
           datasets: [
             {
               label: 'statics',
               data: newArray,
-              backgroundColor: 'pink',
+              backgroundColor: 'blue',
             },
           ],
         },
