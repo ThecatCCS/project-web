@@ -92,6 +92,7 @@ export class ProfileComponent {
     const url = this.constants.API_ENDPOINT + '/pictrue/alls';
     const data = await lastValueFrom(this.http.get(url));
     this.pictures = data as PictureGetResponse[];
+    
     this.filterPicturesByUserId();
   }
 
