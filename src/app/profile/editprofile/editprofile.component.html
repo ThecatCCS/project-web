@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row" style="justify-content: flex-start;">
    
-    <input #inputField hidden type="file" (click)="inputField.value = ''" />
-    <img class="logo" src="https://i.pinimg.com/736x/27/49/db/2749dbc1128628928784db8c4bbb5bfc.jpg" alt="image" (click)="inputField.click()">
-    
+    <input #inputField hidden type="file" (change)="onFileSelected3($event)" accept="image/*">
+<img class="logo" src="https://i.pinimg.com/736x/27/49/db/2749dbc1128628928784db8c4bbb5bfc.jpg" alt="image" (click)="inputField.click()">
     <p class="H_text">Username :</p>
     <mat-form-field class="inp" appearance="outline">
       <mat-label>Enter new username</mat-label>
@@ -36,8 +35,6 @@
       <mat-label>Enter new prefernce</mat-label>
       <input matInput [(ngModel)]="pefer" />
     </mat-form-field>
-
-  
   </div>
-  <button mat-flat-button color="primary" class="custom-button" (click)="addupdate()" >Eidt</button>
+  <button mat-flat-button color="primary" class="custom-button" (click)="onFileSelected3($event)" >Eidt</button>
 </div>
