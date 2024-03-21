@@ -23,11 +23,11 @@ export class LineChartComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private activeatedRoute: ActivatedRoute,
-    private constants: Constants,
+    private constants: Constants
   ) {}
   ngOnInit(): void {
     this.pt_id = this.activeatedRoute.snapshot.paramMap.get('pt_id') || '';
-    console.log(this.pt_id,"ไม่ออกหรือป่าว");
+    console.log(this.pt_id, 'ไม่ออกหรือป่าว');
     this.getpoint();
     this.createChart();
   }
@@ -42,7 +42,8 @@ export class LineChartComponent implements OnInit {
   }
 
   async createChart() {
-    const url = this.constants.API_ENDPOINT + `/pictrue/statistics/${this.pt_id}`;
+    const url =
+      this.constants.API_ENDPOINT + `/pictrue/statistics/${this.pt_id}`;
     const body = {};
     const scores: number[] = [];
     const labels: string[] = [];
@@ -58,7 +59,7 @@ export class LineChartComponent implements OnInit {
         day < 10 ? '0' + day : day
       }`;
       labels.push(dateString);
-      console.log(labels)
+      console.log(labels);
     }
     labels.reverse();
     scores[0] = pointValue;
@@ -75,37 +76,33 @@ export class LineChartComponent implements OnInit {
 
           formattedDates.push(formattedDate);
         }
-        console.log(formattedDates)
+        console.log(formattedDates);
         let i = 0;
         console.log(labels.length);
-        
-          for (let index = 0; index < labels.length; index++) {
-            console.log(scores);
-            if (labels[index] == formattedDates[i]) {
-              scores.push(scores[index] + data[i].total_score);
-              console.log();
-              
-              console.log(formattedDates[i])
-              console.log(labels[index])
-              i = i + 1;
-              
-            } else {
-                scores.push(scores[index]);
-            }
-           
-            
-            console.log(index);
-            
+
+        for (let index = 0; index < labels.length; index++) {
+          console.log(scores);
+          if (labels[index] == formattedDates[i]) {
+            scores.push(scores[index] + data[i].total_score);
+            console.log();
+
+            console.log(formattedDates[i]);
+            console.log(labels[index]);
+            i = i + 1;
+          } else {
+            scores.push(scores[index]);
           }
-         
+
+          console.log(index);
+        }
       } else {
         for (let index = 0; index < labels.length; index++) {
           scores.push(scores[index]);
         }
       }
-      
+
       const newArray = scores.slice(1);
-      console.log(newArray)
+      console.log(newArray);
       console.log(scores);
 
       this.chart = new Chart('MyChart', {
@@ -116,12 +113,21 @@ export class LineChartComponent implements OnInit {
             {
               label: 'statics',
               data: newArray,
-              backgroundColor: 'black',
+              backgroundColor: 'rgba(0, 0, 255, 0.2)', 
+              borderColor: 'pink', 
+              pointBackgroundColor: 'pink', 
+              pointBorderColor: 'back', 
+              pointStyle: 'circle',
             },
           ],
         },
         options: {
-          aspectRatio: 2.5,
+          aspectRatio: 0.5, 
+          responsive: true, 
+          maintainAspectRatio: false, 
+          font: {
+            size: 14 
+        }
         },
       });
     });

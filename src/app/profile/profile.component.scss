@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 63%;
+  margin-left: 64%;
   padding: 0 20px;
 }
 
@@ -91,7 +91,7 @@
 .Username {
   font-size: 28px;
   font-weight: bolder;
-  color: #f083bb;
+  color:  #f083bb;
   text-shadow: 3px 2px rgb(232, 212, 227);
   /* กำหนดเงาข้อความ */
 }
@@ -185,7 +185,7 @@
   background-size: contain;
   background-position: center;
   gap: 15px;
-  cursor: pointer;
+    // cursor: pointer;
 }
 
 .picvote1 {
@@ -202,27 +202,35 @@
 }
 
 .image-wrapper img {
+  
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
 
-.image-wrapper:hover {
-  filter: brightness(90%);
+
+.maticon {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding-top: 7px;
+
 }
 
 .material-icons,.material-symbols-outlined{
-  // position: absolute;
   color: white;
   cursor: pointer;
   border-radius: 50%;
-  background-color: #83a6f0;
+  background-color: #f1c991 ;
   transition: color 0.2s ease, background-color 0.2s ease, transform 0.5s ease;
+  padding: 6px; 
+  margin-right: 2px; /* ระยะห่างที่ต้องการให้ไอคอนแต่ละอันห่างกัน */
 }
 
 .material-icons:hover {
-  color: #e689c5;
+  color: #f083bb;
   background-color:white; 
 }
 .material-symbols-outlined:hover {

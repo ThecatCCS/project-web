@@ -1,38 +1,43 @@
 <div class="container">
-    <div class="row" style="justify-content: flex-start;">
-      <!-- <p style="color: black; font-size: 36px; text-align: left; font-weight: 400;">Login to VoteView</p> -->
-      <input #inputField hidden type="file" (click)="inputField.value = ''" />
-      <img class="logo" src="https://i.pinimg.com/564x/c6/72/9b/c6729bb81456bad950f77934a5614fe6.jpg" alt="image" (click)="inputField.click()">
-      <p class="H_text">Username:</p>
-      <mat-form-field class="inp" appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name" />
-    </mat-form-field>
-  
-      <p class="H_text">Email:</p>
-      <mat-form-field class="inp" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" />
+  <div class="row" style="justify-content: flex-start;">
+   
+    <input #inputField hidden type="file" (click)="inputField.value = ''" />
+    <img class="logo" src="https://i.pinimg.com/736x/27/49/db/2749dbc1128628928784db8c4bbb5bfc.jpg" alt="image" (click)="inputField.click()">
+    
+    <p class="H_text">Username :</p>
+    <mat-form-field class="inp" appearance="outline">
+      <mat-label>Enter new username</mat-label>
+      <input matInput  [(ngModel)]="name">
     </mat-form-field>
 
-      <p class="H_text">Password:</p>
-      <mat-form-field class="inp" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="password" />
+    <p class="H_text">Age :</p>
+    <mat-form-field class="inp" appearance="outline">
+      <mat-label>Enter new Age</mat-label>
+      <input matInput [(ngModel)]="age" />
+    </mat-form-field>
+
+    <p class="H_text">Gender :</p>
+   
+    <mat-form-field class="inp" appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select [(ngModel)]="gender">
+        @for (gender of genders; track gender)
+        { 
+        <mat-option [value]="gender.value">{{
+          gender.name
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+
+    <p class="H_text">prefernce :</p>
+    <mat-form-field class="inp" appearance="outline">
+      <mat-label>Enter new prefernce</mat-label>
+      <input matInput [(ngModel)]="pefer" />
     </mat-form-field>
 
   
-      <p class="H_text">New Password:</p>
-      <mat-form-field class="inp" appearance="outline">
-        <mat-label>Enter your new password</mat-label>
-        <input matInput type="password" id="password" #password>
-      </mat-form-field>
-  
-      <p class="H_text">Confirm New Password:</p>
-      <mat-form-field class="inp" appearance="outline">
-        <mat-label>Confirm your new password</mat-label>
-        <input matInput type="password" id="password2" #password2>
-      </mat-form-field>
-    </div>
-    <!-- <button mat-flat-button color="primary" class="custom-button" (click)="edit(name.value , password.value ,password2.value , email.value)">Eidt</button> -->
   </div>
+  <button mat-flat-button color="primary" class="custom-button" >Eidt</button>
+</div>

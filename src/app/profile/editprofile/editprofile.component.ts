@@ -25,19 +25,16 @@ import { MatSelectModule } from '@angular/material/select';
 export class UpdateProfileDialogComponent {
   id : number = 0;
   name: string = '';
-  email: any;
-  password: any;
   gender: string = '';
   age: number = 0;
   img: any;
-  type : number = 0;
   pefer : any;
   genders: Gender[] = [
     { value: 1, name: 'female' },
     { value: 2, name: 'Male' }
   ];
 
-  edit(arg0: string, arg1: string, arg2: string, arg3: string) {
+  edit() {
     
   }
   onFileChange($event: Event) {
