@@ -55,9 +55,24 @@ export class ProfileComponent {
     // });
   }
 
-  ngOnInit(): void {
+ async ngOnInit() {
+    const url = this.constants.API_ENDPOINT + '/users';
+    try {
+      const data = await lastValueFrom(this.http.get(url));
+      const users = data as UserGetResponse[];
+      const foundUser = users.find(
+        (user) => user.user_id === this.currentUser?.user_id
+      );
 
-    this.setusernew();
+      if (foundUser) {
+        console.log('User found:', foundUser);
+        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+      } else {
+        alert('User not found or incorrect credentials.');
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
     this.getUsernew();
     this.getUserpic();
     this.getUserName();
@@ -81,33 +96,11 @@ export class ProfileComponent {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
-      console.log(this.currentUser);
-      if (this.currentUser !== undefined) {
-        const userEmail = this.currentUser.user_email;
-        const userRole = this.currentUser.user_pass;
-      } 
     }
   }
   async setusernew() {
-    const url = this.constants.API_ENDPOINT + '/users';
-    try {
-      const data = await lastValueFrom(this.http.get(url));
-      const users = data as UserGetResponse[];
-      const foundUser = users.find(
-        (user) => user.user_id === this.currentUser?.user_id
-      );
-
-      if (foundUser) {
-        console.log('User found:', foundUser);
-        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-      } else {
-        alert('User not found or incorrect credentials.');
-      }
-    } catch (error) {
-      console.error('Error occurred:', error);
-    }
+  
   }
-
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     console.log(this.userName);
