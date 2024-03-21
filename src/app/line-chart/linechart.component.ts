@@ -122,7 +122,7 @@ export class LineChartComponent implements OnInit {
           ],
         },
         options: {
-          aspectRatio: 0.5, 
+          aspectRatio: 0.6, 
           responsive: true, 
           maintainAspectRatio: false, 
           font: {
