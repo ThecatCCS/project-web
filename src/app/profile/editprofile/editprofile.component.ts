@@ -37,32 +37,33 @@ export class UpdateProfileDialogComponent {
     { value: 1, name: 'female' },
     { value: 2, name: 'Male' }
   ];
-  constructor(private http: HttpClient,private constants: Constants){
-
-  }
-
-  
+  constructor(private http: HttpClient,private constants: Constants){}
   onFileSelected3(event: any) {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
     }
-    const file = event.target.files[0];
-    const url = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
-    const formData = new FormData();
-    formData.append('filename', file, file.name);
-    console.log(formData, "test");
-    
-    this.http.put(url, formData).subscribe(
-      (response) => {
-        console.log('File uploaded successfully:', response);
-      this.addupdate();
-      },
-      (error) => {
-        console.error('Error uploading file:', error);
-      }
-    );
+    if (event && event.target && event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const url = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
+      const formData = new FormData();
+      formData.append('filename', file, file.name);
+      console.log(formData, "test");
+      this.http.put(url, formData).subscribe(
+        (response) => {
+          console.log('File uploaded successfully:', response);
+         
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+        }
+      );
+    } else {
+      console.error('No file selected');
+    }
+    this.addupdate();
   }
+  
   
   addupdate() {
     const body = {
@@ -71,11 +72,13 @@ export class UpdateProfileDialogComponent {
       user_age: this.age,
       user_preference: this.pefer,
     };
-    const url = this.constants.API_ENDPOINT + `/upload/userprofile/${this.currentUser?.user_id}`;
+    const url = this.constants.API_ENDPOINT + `/upload/userprofile/${7}`;
     this.http.put(url, body).subscribe((response) => {
       console.log(response);
     });
   }
+
+
 }
 interface Gender {
   value: number;
