@@ -63,12 +63,13 @@ export class ProfileComponent {
       if (this.currentUser !== undefined) {
         const userEmail = this.currentUser.user_email;
         const userRole = this.currentUser.user_pass;
+        this.setusernew();
         this.getUserpic();
         this.getUserName();
       } else {
       }
     }
-    this.setusernew();
+    
     this.getPicture();
   }
 
