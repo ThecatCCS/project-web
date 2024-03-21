@@ -56,7 +56,7 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
-    this.getUsernew();
+
     this.setusernew();
     this.getUsernew();
     this.getUserpic();

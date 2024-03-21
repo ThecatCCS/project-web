@@ -43,8 +43,11 @@ export class UpdateProfileDialogComponent {
     if (event && event.target && event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
     }
+    
   }
   onFormSubmit(event: any): void {
+    window.confirm('Do you want to delete this image?');
+    window.location.reload() 
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
@@ -65,9 +68,9 @@ export class UpdateProfileDialogComponent {
     } else {
       console.error('No file selected.');
     }
-    
     this.addupdate();
   }
+
   addupdate() {
     const body = {
       user_name: this.name,
@@ -79,8 +82,9 @@ export class UpdateProfileDialogComponent {
     this.http.put(url, body).subscribe((response) => {
       console.log(response);
     });
+
   }
- 
+
   
 }
 interface Gender {
