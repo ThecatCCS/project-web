@@ -40,6 +40,10 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 8044861a252b782ccf46f9fbad6959f33cce1619
 
   
   onFileSelected3(event: any , u_id : number) {
@@ -52,11 +56,11 @@ export class UpdateProfileDialogComponent {
     const formData = new FormData();
     formData.append('filename', file, file.name);
     console.log(formData, "test");
-  
+    
     this.http.put(url, formData).subscribe(
       (response) => {
         console.log('File uploaded successfully:', response);
-        this.addupdate(u_id); // เรียกใช้ addupdate() พร้อมกับการส่ง u_id ไป
+      this.addupdate();
       },
       (error) => {
         console.error('Error uploading file:', error);
@@ -64,14 +68,14 @@ export class UpdateProfileDialogComponent {
     );
   }
   
-  addupdate(u_id: number) {
+  addupdate() {
     const body = {
       user_name: this.name,
       user_gender: this.gender,
       user_age: this.age,
       user_preference: this.pefer,
     };
-    const url = this.constants.API_ENDPOINT + `/upload/userprofile/${u_id}`;
+    const url = this.constants.API_ENDPOINT + `/upload/userprofile/${this.currentUser?.user_id}`;
     this.http.put(url, body).subscribe((response) => {
       console.log(response);
     });
