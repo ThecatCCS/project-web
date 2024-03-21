@@ -31,6 +31,7 @@ export class ProfileComponent {
   gender: string = '';
   age: number = 0;
   pefer: any;
+  user: UserGetResponse[] =[];
 
   constructor(
     private shared: UserService,
@@ -56,8 +57,6 @@ export class ProfileComponent {
   }
 
  async ngOnInit() {
-
-    this.setusernew();
     this.getUsernew();
     this.getUserpic();
     this.getUserName();
@@ -83,33 +82,34 @@ export class ProfileComponent {
       this.currentUser = JSON.parse(currentUserString);
     }
   }
-  async setusernew() {
-    const url = this.constants.API_ENDPOINT + '/users';
-    try {
-      const data = await lastValueFrom(this.http.get(url));
-      const users = data as UserGetResponse[];
-      const foundUser = users.find(
-        (user) => user.user_id === this.currentUser?.user_id
-      );
+  // async setusernew() {
+  //   const url = this.constants.API_ENDPOINT + '/users';
+  //   try {
+  //     const data = await lastValueFrom(this.http.get(url));
+  //     const users = data as UserGetResponse[];
+  //     const foundUser = users.find(
+  //       (user) => user.user_id === this.currentUser?.user_id
+  //     );
 
-      if (foundUser) {
-        console.log('User found:', foundUser);
-        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-      } else {
-        alert('User not found or incorrect credentials.');
-      }
-    } catch (error) {
-      console.error('Error occurred:', error);
-    }
-  }
+  //     if (foundUser) {
+  //       console.log('User found:', foundUser);
+  //       sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+  //     } else {
+  //       alert('User not found or incorrect credentials.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error occurred:', error);
+  //   }
+  // }
   getUserName(): void {
     this.userName = this.currentUser?.user_name;
     console.log(this.userName);
   }
-  getUserpic(): void {
-  
-    this.userpic = this.currentUser?.user_pictrue;
-    console.log(this.userpic);
+  async getUserpic() {
+    const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
+    const user_data = await lastValueFrom(this.http.get(url));
+    const userDataResponse = user_data as UserGetResponse;
+    this.userpic = userDataResponse.user_pictrue;
   }
   async getPicture() {
     const url = this.constants.API_ENDPOINT + '/pictrue/alls';
