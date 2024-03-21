@@ -12,6 +12,8 @@ import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
 import { Router } from 'express';
 import { Constants } from '../config/constants';
+import { MatDialog } from '@angular/material/dialog';
+import { ElorateComponent } from './elorate/elorate.component';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -25,7 +27,7 @@ export class MainComponent {
   user1: UserGetResponse | undefined;
   user2: UserGetResponse | undefined;
 
-  constructor(protected shared: UserService, private http: HttpClient, private constants: Constants) {}
+  constructor(protected shared: UserService, private http: HttpClient, private constants: Constants,    private dialog: MatDialog) {}
   ngOnInit(): void {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
@@ -35,7 +37,7 @@ export class MainComponent {
     this.getPicture();
 
   }
-
+ 
   async getPicture(): Promise<void> {
     const url = this.constants.API_ENDPOINT + '/pictrue/all';
     const data = await lastValueFrom(this.http.get(url));
@@ -61,6 +63,9 @@ export class MainComponent {
   }
 
   check(p_id: number) {
+    const dialogRef = this.dialog.open(ElorateComponent, {
+      width: '500px',
+    });
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
       console.log("วันออกนะ",currentTime);
@@ -105,7 +110,7 @@ export class MainComponent {
         );
         const votingSystem = new ImageVotingSystem(image1, image2);
         console.log("ออกกกกกก",image1,image2
-        );
+ );
         
         votingSystem.updateEloRating(image1, image2);
 
