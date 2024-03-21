@@ -33,6 +33,7 @@ export class MainComponent {
       console.log(this.currentUser);
     }
     this.getPicture();
+
   }
 
   async getPicture(): Promise<void> {
