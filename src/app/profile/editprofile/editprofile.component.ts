@@ -40,10 +40,7 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
- 
-
-  
-  onFileSelected3(event: any , u_id : number) {
+  onFileSelected3(event: any) {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
@@ -77,6 +74,8 @@ export class UpdateProfileDialogComponent {
       console.log(response);
     });
   }
+
+
 }
 interface Gender {
   value: number;
