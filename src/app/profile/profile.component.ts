@@ -13,6 +13,7 @@ import { forkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UpdateProfileDialogComponent } from './editprofile/editprofile.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ChangpassComponent } from './changpass/changpass.component';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -38,10 +39,14 @@ export class ProfileComponent {
     private constants: Constants,
     private dialog: MatDialog
   ) {}
+  changPass() {
+    const dialogRef = this.dialog.open(ChangpassComponent, {
+      width: '500px',
+    });
+  }
   editProfile(): void {
     const dialogRef = this.dialog.open(UpdateProfileDialogComponent, {
       width: '500px',
-      // data: { userData: this.userData }
     });
 
     // dialogRef.afterClosed().subscribe(result => {

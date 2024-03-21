@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row" style="justify-content: flex-start;">
+  
+      <p class="H_text">old password :</p>
+      <mat-form-field class="inp" appearance="outline">
+        <mat-label>Enter old password</mat-label>
+        <input matInput [(ngModel)]="oldpassword1" />
+      </mat-form-field>
+ 
+      <p class="H_text">old password :</p>
+      <mat-form-field class="inp" appearance="outline">
+        <mat-label>confrem password</mat-label>
+        <input matInput [(ngModel)]="oldpassword2" />
+      </mat-form-field>
+  
+  
+      <p class="H_text">new password :</p>
+      <mat-form-field class="inp" appearance="outline">
+        <mat-label>Enter new password</mat-label>
+        <input matInput [(ngModel)]="newpassword" />
+      </mat-form-field>
+    </div>
+    <button mat-flat-button color="primary" class="custom-button" (click)="addupdate()">Chang</button>
+  </div>
