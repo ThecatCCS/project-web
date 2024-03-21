@@ -40,6 +40,12 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
+<<<<<<< Updated upstream
+=======
+  edit() {
+    
+  }
+>>>>>>> Stashed changes
 
 
   
@@ -77,8 +83,6 @@ export class UpdateProfileDialogComponent {
       console.log(response);
     });
   }
-
-
 }
 interface Gender {
   value: number;
