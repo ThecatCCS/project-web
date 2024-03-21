@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../../config/constants';
+import { UserGetResponse } from '../../model/user_get';
 @Component({
   selector: 'app-update-profile-dialog',
   standalone: true,
@@ -31,6 +32,7 @@ export class UpdateProfileDialogComponent {
   age: number = 0;
   img: any;
   pefer : any;
+  currentUser: UserGetResponse | undefined;
   genders: Gender[] = [
     { value: 1, name: 'female' },
     { value: 2, name: 'Male' }
@@ -38,27 +40,16 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
-  edit() {
-    
-  }
-  onFileChange($event: Event) {
-    
-  }
-  updateProfile() {
-    
-  }
-  onFileSelected($event: Event) {
-    
-  }
-  onSubmit() {
-    
-  }
-  user: any = {}; // Define user property here
+
 
   
   onFileSelected3(event: any , u_id : number) {
+    const currentUserString = sessionStorage.getItem('currentUser');
+    if (currentUserString !== null) {
+      this.currentUser = JSON.parse(currentUserString);
+    }
     const file = event.target.files[0];
-    const url = this.constants.API_ENDPOINT + `/upload/userpictrue/${u_id}`;
+    const url = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
     const formData = new FormData();
     formData.append('filename', file, file.name);
     console.log(formData, "test");

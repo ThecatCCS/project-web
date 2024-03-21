@@ -126,17 +126,7 @@ export class ProfileComponent {
       return this.http.put(url, formData);
     }
     
-    // onUpdatepic(event: any) {
-    //   const file = event.target.files[0];
-    //   this.updateFile(file, this.pt_id).subscribe(
-    //     (response) => {
-    //       console.log('File uploaded successfully:', response);
-    //     },
-    //     (error) => {
-    //       console.error('Error uploading file:', error);
-    //     }
-    //   );
-    // }
+  
     
     onFileSelected(event: any) {
       const file = event.target.files[0];
