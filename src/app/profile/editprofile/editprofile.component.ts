@@ -40,13 +40,9 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
-<<<<<<< HEAD
-=======
- 
->>>>>>> 8044861a252b782ccf46f9fbad6959f33cce1619
 
   
-  onFileSelected3(event: any , u_id : number) {
+  onFileSelected3(event: any) {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
