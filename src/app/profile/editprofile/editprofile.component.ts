@@ -40,13 +40,6 @@ export class UpdateProfileDialogComponent {
   constructor(private http: HttpClient,private constants: Constants){
 
   }
-<<<<<<< Updated upstream
-=======
-  edit() {
-    
-  }
->>>>>>> Stashed changes
-
 
   
   onFileSelected3(event: any , u_id : number) {
