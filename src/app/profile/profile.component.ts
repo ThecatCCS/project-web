@@ -113,6 +113,7 @@ export class ProfileComponent {
     console.log(this.userName);
   }
   getUserpic(): void {
+  
     this.userpic = this.currentUser?.user_pictrue;
     console.log(this.userpic);
   }
