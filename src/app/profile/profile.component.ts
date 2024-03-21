@@ -56,20 +56,11 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
-    const currentUserString = sessionStorage.getItem('currentUser');
-    if (currentUserString !== null) {
-      this.currentUser = JSON.parse(currentUserString);
-      console.log(this.currentUser);
-      if (this.currentUser !== undefined) {
-        const userEmail = this.currentUser.user_email;
-        const userRole = this.currentUser.user_pass;
-        this.setusernew();
-        this.getUserpic();
-        this.getUserName();
-      } else {
-      }
-    }
-    
+    this.getUsernew();
+    this.setusernew();
+    this.getUsernew();
+    this.getUserpic();
+    this.getUserName();
     this.getPicture();
   }
 
@@ -85,6 +76,17 @@ export class ProfileComponent {
       console.log('Canceled image deletion');
     }
     this.getPicture();
+  }
+  getUsernew(){
+    const currentUserString = sessionStorage.getItem('currentUser');
+    if (currentUserString !== null) {
+      this.currentUser = JSON.parse(currentUserString);
+      console.log(this.currentUser);
+      if (this.currentUser !== undefined) {
+        const userEmail = this.currentUser.user_email;
+        const userRole = this.currentUser.user_pass;
+      } 
+    }
   }
   async setusernew() {
     const url = this.constants.API_ENDPOINT + '/users';
