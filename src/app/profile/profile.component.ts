@@ -56,23 +56,8 @@ export class ProfileComponent {
   }
 
  async ngOnInit() {
-    const url = this.constants.API_ENDPOINT + '/users';
-    try {
-      const data = await lastValueFrom(this.http.get(url));
-      const users = data as UserGetResponse[];
-      const foundUser = users.find(
-        (user) => user.user_id === this.currentUser?.user_id
-      );
 
-      if (foundUser) {
-        console.log('User found:', foundUser);
-        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-      } else {
-        alert('User not found or incorrect credentials.');
-      }
-    } catch (error) {
-      console.error('Error occurred:', error);
-    }
+    this.setusernew();
     this.getUsernew();
     this.getUserpic();
     this.getUserName();
@@ -99,7 +84,23 @@ export class ProfileComponent {
     }
   }
   async setusernew() {
-  
+    const url = this.constants.API_ENDPOINT + '/users';
+    try {
+      const data = await lastValueFrom(this.http.get(url));
+      const users = data as UserGetResponse[];
+      const foundUser = users.find(
+        (user) => user.user_id === this.currentUser?.user_id
+      );
+
+      if (foundUser) {
+        console.log('User found:', foundUser);
+        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+      } else {
+        alert('User not found or incorrect credentials.');
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
   }
   getUserName(): void {
     this.userName = this.currentUser?.user_name;

@@ -46,7 +46,7 @@ export class UpdateProfileDialogComponent {
     
   }
   onFormSubmit(event: any): void {
-    window.confirm('Do you want to delete this image?');
+    window.confirm('do you want to edit');
     window.location.reload() 
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
