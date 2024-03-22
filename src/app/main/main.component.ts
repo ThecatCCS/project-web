@@ -113,8 +113,8 @@ export class MainComponent {
         
         votingSystem.updateEloRating(image1, image2);
 
-        console.log('รูป 1: ELO Rating =', image1);
-        console.log('รูป 2: ELO Rating =', image2);
+        console.log('รูป 1: ELO Rating =',  32 *  (1- ImageVotingSystem.expectedScoreWinner));
+        console.log('รูป 2: ELO Rating =', 32 *  (0 - ImageVotingSystem.expectedScoreLoser));
         const body1 = {
           vote_timestamp: voteTimestamp,
           vote_point: image1.pictrue_p - this.Picture[0].pictrue_p,
@@ -150,7 +150,7 @@ export class MainComponent {
           console.log(response);
         });
 
-        this.getPicture();
+ 
       } else {
         const image1 = new Image(
           this.Picture[1].pictrue_url,
@@ -162,8 +162,8 @@ export class MainComponent {
         );
         const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
-        console.log('รูป 1: ELO Rating =', image1.pictrue_p);
-        console.log('รูป 2: ELO Rating =', image2.pictrue_p);
+        console.log('รูป 1: ELO Rating =',  32 *  (1 - ImageVotingSystem.expectedScoreWinner));
+        console.log('รูป 2: ELO Rating =', 32 *  (0 - ImageVotingSystem.expectedScoreLoser));
         const body1 = {
           vote_timestamp: voteTimestamp,
           vote_point: image1.pictrue_p - this.Picture[1].pictrue_p,
@@ -183,7 +183,7 @@ export class MainComponent {
         const url2 = this.constants.API_ENDPOINT + '/vote/vote';
         this.http.post(url2, body2).subscribe((response) => {
           console.log(response);
-          this.getPicture();
+       
         });
         const body3 = {
           pictrue_p: image1.pictrue_p,
@@ -203,6 +203,11 @@ export class MainComponent {
     }
     const dialogRef = this.dialog.open(ElorateComponent, {
       width: '500px',
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      // เมื่อ dialog ปิด
+      this.getPicture();
     });
   }
 }

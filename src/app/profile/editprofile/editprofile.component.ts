@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -25,13 +25,14 @@ import { UserGetResponse } from '../../model/user_get';
     MatSelectModule
   ],
 })
-export class UpdateProfileDialogComponent {
+export class UpdateProfileDialogComponent  implements OnInit  {
   id : number = 0;
   name: string = '';
-  gender: string = '';
-  age: number = 0;
+  gender: any;
+  age: any;
   img: any;
   pefer : any;
+  url : any;
   currentUser: UserGetResponse | undefined;
   selectedFile: File | undefined;
   genders: Gender[] = [
@@ -39,6 +40,37 @@ export class UpdateProfileDialogComponent {
     { value: 2, name: 'Male' }
   ];
   constructor(private http: HttpClient,private constants: Constants){}
+
+  ngOnInit(): void {
+    this.getUser();
+
+  }
+    getUser() {
+      const currentUserString = sessionStorage.getItem('currentUser');
+      if (currentUserString !== null) {
+        this.currentUser = JSON.parse(currentUserString);
+      }
+      const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
+      this.http.get(url).toPromise()
+        .then((user_data) => {
+          const userDataResponse = user_data as UserGetResponse;
+          this.url =  userDataResponse.user_pictrue;
+              this.name = userDataResponse.user_name;
+              this.age = userDataResponse.user_age;
+              if(userDataResponse.user_gender == 1 ){
+                 this.gender = "female"
+              }else{
+                this.gender = "Male" 
+              }
+              
+              this.pefer = userDataResponse.user_preference;
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+    
+      
+  }
   onFileSelected(event: any): void {
     if (event && event.target && event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
@@ -83,7 +115,7 @@ export class UpdateProfileDialogComponent {
     this.http.put(url, body).subscribe((response) => {
       console.log(response);
     });
-
+    window.location.reload() 
   }
 
   

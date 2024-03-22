@@ -48,7 +48,10 @@ item: any;
     this.getUsernew();
     this.getUser();
     this.getPicture();
+    this.getUser();
+   
   }
+  
   async onDelete(pt_id: number) {
     const userConfirmed = window.confirm('Do you want to delete this image?');
     console.log(userConfirmed);

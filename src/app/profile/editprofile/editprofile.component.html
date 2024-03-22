@@ -2,10 +2,11 @@
   <div class="row" style="justify-content: flex-start;">
    
     <input #inputField hidden type="file" (change)="onFileSelected($event)" accept="image/*">
-<img class="logo" src="https://i.pinimg.com/736x/27/49/db/2749dbc1128628928784db8c4bbb5bfc.jpg" alt="image" (click)="inputField.click()">
+<img class="logo" src="{{url}}" alt="image"  (click)="inputField.click()">
+
     <p class="H_text">Username :</p>
     <mat-form-field class="inp" appearance="outline">
-      <mat-label>Enter new username</mat-label>
+      <mat-label></mat-label>
       <input matInput  [(ngModel)]="name">
     </mat-form-field>
 
@@ -18,7 +19,7 @@
     <p class="H_text">Gender :</p>
    
     <mat-form-field class="inp" appearance="outline">
-      <mat-label>Gender</mat-label>
+      <mat-label>{{this.gender}}</mat-label>
       <mat-select [(ngModel)]="gender">
         @for (gender of genders; track gender)
         { 

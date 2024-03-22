@@ -22,6 +22,6 @@ export class ElorateComponent {
   loserelo : number = ImageVotingSystem.newEloRatingLoser;
     
  www : number =  32 *  (1 - ImageVotingSystem.expectedScoreWinner);
- lll : number =  32 *  (1 - ImageVotingSystem.expectedScoreLoser);
+ lll : number =  32 *  (0 - ImageVotingSystem.expectedScoreLoser);
 }
 
