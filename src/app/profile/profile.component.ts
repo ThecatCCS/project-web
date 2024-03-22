@@ -49,17 +49,12 @@ export class ProfileComponent {
     const dialogRef = this.dialog.open(UpdateProfileDialogComponent, {
       width: '500px',
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   // Handle the result of the dialog
-    // });
   }
 
  async ngOnInit() {
     this.getUsernew();
+   this.getUserName();
     this.getUserpic();
-    this.getUserName();
     this.getPicture();
   }
 
@@ -82,6 +77,10 @@ export class ProfileComponent {
       this.currentUser = JSON.parse(currentUserString);
     }
   }
+  getUserName(): void {
+    this.userName = this.currentUser?.user_name;
+    console.log(this.userName);
+  }
   // async setusernew() {
   //   const url = this.constants.API_ENDPOINT + '/users';
   //   try {
@@ -101,10 +100,8 @@ export class ProfileComponent {
   //     console.error('Error occurred:', error);
   //   }
   // }
-  getUserName(): void {
-    this.userName = this.currentUser?.user_name;
-    console.log(this.userName);
-  }
+
+
   async getUserpic() {
     const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
     const user_data = await lastValueFrom(this.http.get(url));

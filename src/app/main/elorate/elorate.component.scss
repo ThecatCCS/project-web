@@ -1,0 +1,38 @@
+.container {
+  background-image: url("https://i.pinimg.com/564x/98/f9/6d/98f96d7a8cd77e23549f1c008ebfea42.jpg");
+  width: 100%;
+  height: 100%;
+  background-color: #ececec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.oldpoint,
+.total,
+.chang {
+  margin-top: -50px;
+  font-size: 25px;
+  color: rgb(101, 89, 97);
+  font-family: "DM Serif Display", serif;
+  text-align: center;
+  // font-weight: bold;
+}
+
+.fornn {
+  font-size: 35px;
+  color: rgb(235, 97, 171);
+  font-family: "Bungee Shade", sans-serif;
+  width: 100%;
+  text-align: center;
+
+}
+.fornn1 {
+  font-size: 35px;
+  color: rgb(235, 97, 171);
+  font-family: "Bungee Shade", sans-serif;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px; 
+}

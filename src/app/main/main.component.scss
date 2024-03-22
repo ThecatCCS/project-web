@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url("https://i.pinimg.com/564x/1d/2a/b9/1d2ab9368334c350d841e10b81c588fd.jpg");
     // justify-content: center;
     // align-items: center;
@@ -9,70 +9,83 @@ body{
     align-items: center;
     display: flex;
 }
+
 .h1 {
     font-size: 35px;
     color: rgb(235, 97, 171);
-        font-family: "DM Serif Display", serif;
+    font-family: "DM Serif Display", serif;
     width: 100%;
     text-align: center;
-    text-shadow: 3px 2px rgb(49, 29, 40); 
-    position: absolute; 
+    text-shadow: 3px 2px rgb(49, 29, 40);
+    position: absolute;
     top: 0;
-    z-index: 9999; 
-    padding: 10px; 
-    margin-top: 40px; 
-    transition: transform 0.3s; 
+    padding: 10px;
+    margin-top: 40px;
+    transition: transform 0.3s;
 }
+
 .h1.active {
-    transform: scale(0.8); 
-} 
-.OR{
+    transform: scale(0.8);
+}
+
+.OR {
     font-size: 35px;
     color: rgb(235, 97, 171);
     font-family: "DM Serif Display", serif;
     text-align: center;
-    text-shadow: 3px 2px rgb(49, 29, 40); /* กำหนดเงาข้อความ */
+    text-shadow: 3px 2px rgb(49, 29, 40);
+    /* กำหนดเงาข้อความ */
 }
-.pro{
+
+.pro {
     // gap: 10px;
     padding: 3%;
-    font-weight: bold; 
+    font-weight: bold;
     font-size: 15px;
     color: rgb(49, 44, 47);
     font-family: "DM Serif Display", serif;
     // text-shadow: 3px 2px rgb(49, 29, 40); /* กำหนดเงาข้อความ */
 }
+
 .container {
     width: 30%;
     height: 80%;
     overflow: hidden;
-    background-size: contain; /* เปลี่ยนจาก cover เป็น contain */
+    background-size: contain;
+    /* เปลี่ยนจาก cover เป็น contain */
     background-position: center;
     margin-right: 30px;
     margin-top: 55px;
     gap: 15px;
     cursor: pointer;
 }
-.container2  {
+
+.container2 {
     width: 30%;
     height: 80%;
     overflow: hidden;
-    background-size: contain; /* เปลี่ยนจาก cover เป็น contain */
+    background-size: contain;
+    /* เปลี่ยนจาก cover เป็น contain */
     background-position: center;
     margin-left: 50px;
     gap: 15px;
     margin-top: 55px;
     cursor: pointer;
 }
-.picvote2,.picvote1 {
-    
-    display: flex; /* เพิ่ม display: flex; */
-    justify-content: center; /* เพิ่ม justify-content: center; */
+
+.picvote2,
+.picvote1 {
+
+    display: flex;
+    /* เพิ่ม display: flex; */
+    justify-content: center;
+    /* เพิ่ม justify-content: center; */
     width: auto;
     height: auto;
     // border-radius: 5%;
     overflow: hidden;
-    background-size: contain; /* เปลี่ยนจาก cover เป็น contain */
+    background-size: contain;
+    /* เปลี่ยนจาก cover เป็น contain */
     background-position: center;
 }
 
@@ -85,17 +98,24 @@ body{
     border-radius: 50%;
     width: 50px;
     // margin-right: 10px; 
-  }
-  .div {
-    display: flex;
-    align-items: center; /* จัดให้องค์ประกอบอยู่กึ่งกลางตามแนวดิ่ง */
-    gap: 5px; /* กำหนดระยะห่างระหว่างองค์ประกอบภายใน .div1 */
 }
+
+.div {
+    display: flex;
+    align-items: center;
+    /* จัดให้องค์ประกอบอยู่กึ่งกลางตามแนวดิ่ง */
+    gap: 5px;
+    /* กำหนดระยะห่างระหว่างองค์ประกอบภายใน .div1 */
+}
+
 .div1 {
     display: flex;
-    align-items: center; /* จัดให้องค์ประกอบอยู่กึ่งกลางตามแนวดิ่ง */
-    gap: 5px; /* กำหนดระยะห่างระหว่างองค์ประกอบภายใน .div1 */
+    align-items: center;
+    /* จัดให้องค์ประกอบอยู่กึ่งกลางตามแนวดิ่ง */
+    gap: 5px;
+    /* กำหนดระยะห่างระหว่างองค์ประกอบภายใน .div1 */
 }
+
 .image-wrapper:hover {
     filter: brightness(80%);
 }
