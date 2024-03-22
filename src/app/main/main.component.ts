@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { PictureGetResponse } from '../model/picture_get';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Navtop10Component } from '../nav/navtop10/navtop10.component';
+
 import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
@@ -63,9 +64,7 @@ export class MainComponent {
   }
 
   check(p_id: number) {
-    const dialogRef = this.dialog.open(ElorateComponent, {
-      width: '500px',
-    });
+
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
       console.log("วันออกนะ",currentTime);
@@ -202,5 +201,8 @@ export class MainComponent {
         });
       }
     }
+    const dialogRef = this.dialog.open(ElorateComponent, {
+      width: '500px',
+    });
   }
 }

@@ -1,0 +1,73 @@
+<mat-toolbar style="background-color: #ef81b4">
+    <div class="logonav">
+      <img
+        src="https://i.pinimg.com/736x/6e/e0/37/6ee037debbedd202d6c68df93bf2cbc4.jpg"
+      />
+    </div>
+    <span class="toolbar-text1">Cat breed vote</span>
+  
+    <div class="containernav">
+      <div class="logonav">
+        <img
+          src="https://i.pinimg.com/236x/9f/da/86/9fda86b52b4c0e8e649418e7e556b690.jpg"
+        />
+        <a class="toolbar-text" onclick="routerLink" href="/main">Home</a>
+      </div>
+      <div class="logo1">
+        <img
+          src="https://i.pinimg.com/564x/59/41/6d/59416d43745cb175f13729948ed2db08.jpg"
+        />
+        <a class="toolbar-text" onclick="routerLink" href="/top10">Top10</a>
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="vote-con">
+    <div class="h1">
+      <h1>User Profile</h1>
+    </div>
+    <div class="img-con">
+      <div class="item">
+        <div *ngIf="userpic">
+          <img class="logo" src="{{ userpic }}" alt="User Picture" />
+        </div>
+        <div class="detail">
+          <div *ngIf="userName">
+            <span class="Username">{{ userName }}</span>
+          </div>
+          <div class="user-info">
+            <img
+              class="icon_img"
+              src="https://i.pinimg.com/564x/3d/cb/80/3dcb80f6eae47eb1cc138440f60d7f49.jpg"
+            />
+            <span class="pic_count">All Photo</span>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+    <hr
+      style="margin-top: 20px; border: 1px solid #e06cc1; border-radius: 20px"
+    />
+    <div class="item">
+      <div class="user-p">
+        <img
+          class="icon_u"
+          src="https://i.pinimg.com/564x/10/4d/76/104d766b5acdf782fd224ab58a1c5326.jpg"
+        />
+        <span class="pic_co">Picture by {{ userName }}</span>
+      </div>
+    </div>
+    <div class="image_user">
+      <div class="container">
+        <div class="pro">
+        </div>
+        <div class="picvote1">
+          <div class="image-wrapper" *ngFor="let picture of pictures">
+          
+            <img src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

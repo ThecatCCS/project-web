@@ -35,19 +35,14 @@ export class ImageVotingSystem {
     updateEloRating(winner: Image, loser: Image) {
         ImageVotingSystem. expectedScoreWinner = 1 / (1 + Math.pow(10, (loser.pictrue_p - winner.pictrue_p) / 400));
         ImageVotingSystem. expectedScoreLoser = 1 / (1 + Math.pow(10, (winner.pictrue_p - loser.pictrue_p) / 400));
-        console.log("ขนะะ",ImageVotingSystem.expectedScoreWinner);
-        console.log("แพ้",ImageVotingSystem.expectedScoreLoser);
-
+       
 
         ImageVotingSystem. newEloRatingWinner = winner.pictrue_p + this.kFactor * (1 - ImageVotingSystem.expectedScoreWinner);
         ImageVotingSystem. newEloRatingLoser = loser.pictrue_p + this.kFactor * (0 - ImageVotingSystem.expectedScoreLoser);
-        console.log(this.kFactor * (1 - ImageVotingSystem.expectedScoreWinner));
-        console.log(this.kFactor * (0 - ImageVotingSystem.expectedScoreLoser));
         
         winner.pictrue_p = Math.round(ImageVotingSystem.newEloRatingWinner);
         loser.pictrue_p = Math.round(ImageVotingSystem.newEloRatingLoser);
-        console.log("คนชนะ",ImageVotingSystem.newEloRatingWinner);
-        console.log("คนแพ้",ImageVotingSystem.newEloRatingLoser)
+       
        
     }
 }

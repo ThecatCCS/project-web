@@ -34,6 +34,7 @@ export class ProfileComponent {
   pefer: any;
   user: UserGetResponse[] =[];
   toprank : ToprankGetResponse [] = [];
+item: any;
   constructor(
     private shared: UserService,
     private http: HttpClient,
@@ -41,17 +42,8 @@ export class ProfileComponent {
     private constants: Constants,
     private dialog: MatDialog
   ) {}
-  changPass() {
-    const dialogRef = this.dialog.open(ChangpassComponent, {
-      width: '500px',
-    });
-  }
-  editProfile(): void {
-    const dialogRef = this.dialog.open(UpdateProfileDialogComponent, {
-      width: '500px',
-    });
-  }
-
+     
+ 
  async ngOnInit() {
     this.getUsernew();
    this.getUserName();
@@ -178,4 +170,15 @@ export class ProfileComponent {
       }
     );
   }
+  changPass() {
+    const dialogRef = this.dialog.open(ChangpassComponent, {
+      width: '500px',
+    });
+  }
+  editProfile(): void {
+    const dialogRef = this.dialog.open(UpdateProfileDialogComponent, {
+      width: '500px',
+    });
+  }
+
 }
