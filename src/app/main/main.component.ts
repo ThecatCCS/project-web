@@ -32,6 +32,7 @@ export class MainComponent {
       this.currentUser = JSON.parse(currentUserString);
       console.log(this.currentUser);
     }
+    
     this.getPicture();
 
   }
@@ -61,6 +62,7 @@ export class MainComponent {
   }
 
   check(p_id: number) {
+    
     if (this.Picture !== undefined) {
       const currentTime: Date = new Date();
       console.log("วันออกนะ",currentTime);
@@ -104,6 +106,7 @@ export class MainComponent {
           this.Picture[1].pictrue_p
         );
         const votingSystem = new ImageVotingSystem(image1, image2);
+       
         console.log("ออกกกกกก",image1,image2
         );
         
@@ -197,5 +200,7 @@ export class MainComponent {
         });
       }
     }
+    console.log("Expected Score for Winner:", ImageVotingSystem.expectedScoreWinner);
+    console.log("Expected Score for Loser:", ImageVotingSystem.expectedScoreLoser);
   }
 }

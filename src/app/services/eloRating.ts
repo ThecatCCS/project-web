@@ -14,6 +14,8 @@ export class ImageVotingSystem {
     kFactor: number;
     image1: Image;
     image2: Image;
+    static expectedScoreWinner: number;
+    static expectedScoreLoser: number;
 
     constructor(image1: Image, image2: Image) {
         this.image1 = image1;
@@ -24,15 +26,15 @@ export class ImageVotingSystem {
     }
 
     updateEloRating(winner: Image, loser: Image) {
-        const expectedScoreWinner = 1 / (1 + Math.pow(10, (loser.pictrue_p - winner.pictrue_p) / 400));
-        const expectedScoreLoser = 1 / (1 + Math.pow(10, (winner.pictrue_p - loser.pictrue_p) / 400));
-        console.log("ขนะะ",expectedScoreWinner);
-        console.log("แพ้",expectedScoreLoser);
-        const newEloRatingWinner = winner.pictrue_p + this.kFactor * (1 - expectedScoreWinner);
-        const newEloRatingLoser = loser.pictrue_p + this.kFactor * (0 - expectedScoreLoser);
+        ImageVotingSystem.expectedScoreWinner = 1 / (1 + Math.pow(10, (this.image2.pictrue_p - this.image1.pictrue_p) / 400));
+        ImageVotingSystem.expectedScoreLoser = 1 / (1 + Math.pow(10, (this.image1.pictrue_p - this.image2.pictrue_p) / 400));
+        console.log("ขนะะ",ImageVotingSystem.expectedScoreWinner);
+        console.log("แพ้",ImageVotingSystem.expectedScoreLoser);
+        const newEloRatingWinner = winner.pictrue_p + this.kFactor * (1 - ImageVotingSystem.expectedScoreWinner);
+        const newEloRatingLoser = loser.pictrue_p + this.kFactor * (0 - ImageVotingSystem.expectedScoreLoser);
 
-console.log("ชนะ",winner.pictrue_p + this.kFactor * (1 - expectedScoreWinner));
-console.log("แพ้ ",loser.pictrue_p + this.kFactor * (0 - expectedScoreLoser));
+        console.log("ชนะ",winner.pictrue_p + this.kFactor * (1 - ImageVotingSystem.expectedScoreWinner));
+        console.log("แพ้ ",loser.pictrue_p + this.kFactor * (0 - ImageVotingSystem.expectedScoreLoser));
 
 
         winner.pictrue_p = Math.round(newEloRatingWinner);
