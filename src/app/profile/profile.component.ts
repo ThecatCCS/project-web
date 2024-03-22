@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 import { UpdateProfileDialogComponent } from './editprofile/editprofile.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangpassComponent } from './changpass/changpass.component';
+import { ToprankGetResponse } from '../model/toprank_get';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -32,7 +33,7 @@ export class ProfileComponent {
   age: number = 0;
   pefer: any;
   user: UserGetResponse[] =[];
-
+  toprank : ToprankGetResponse [] = [];
   constructor(
     private shared: UserService,
     private http: HttpClient,
