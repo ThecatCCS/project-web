@@ -51,13 +51,11 @@ export class ProfileComponent {
     });
   }
 
- async ngOnInit() {
+  ngOnInit() {
     this.getUsernew();
-   this.getUserName();
-    this.getUserpic();
+    this.getUser();
     this.getPicture();
   }
-
   async onDelete(pt_id: number) {
     const userConfirmed = window.confirm('Do you want to delete this image?');
     console.log(userConfirmed);
@@ -77,44 +75,55 @@ export class ProfileComponent {
       this.currentUser = JSON.parse(currentUserString);
     }
   }
-  getUserName(): void {
-    this.userName = this.currentUser?.user_name;
-    console.log(this.userName);
+  async setusernew() {
+    const url = this.constants.API_ENDPOINT + '/users';
+    try {
+      const data = await lastValueFrom(this.http.get(url));
+      const users = data as UserGetResponse[];
+      const foundUser = users.find(
+        (user) => user.user_id === this.currentUser?.user_id
+      );
+
+      if (foundUser) {
+        console.log('User found:', foundUser);
+        sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+      } else {
+        alert('User not found or incorrect credentials.');
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
   }
-  // async setusernew() {
-  //   const url = this.constants.API_ENDPOINT + '/users';
-  //   try {
-  //     const data = await lastValueFrom(this.http.get(url));
-  //     const users = data as UserGetResponse[];
-  //     const foundUser = users.find(
-  //       (user) => user.user_id === this.currentUser?.user_id
-  //     );
-
-  //     if (foundUser) {
-  //       console.log('User found:', foundUser);
-  //       sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-  //     } else {
-  //       alert('User not found or incorrect credentials.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error occurred:', error);
-  //   }
-  // }
 
 
-  async getUserpic() {
+  getUser() {
     const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
-    const user_data = await lastValueFrom(this.http.get(url));
-    const userDataResponse = user_data as UserGetResponse;
-    this.userpic = userDataResponse.user_pictrue;
-  }
-  async getPicture() {
-    const url = this.constants.API_ENDPOINT + '/pictrue/alls';
-    const data = await lastValueFrom(this.http.get(url));
-    this.pictures = data as PictureGetResponse[];
+    this.http.get(url).toPromise()
+      .then((user_data) => {
+        const userDataResponse = user_data as UserGetResponse;
 
-    this.filterPicturesByUserId();
+        this.userpic = userDataResponse.user_pictrue;
+        console.log(this.userpic);
+        
+        this.userName = userDataResponse.user_name;
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
   }
+  
+  getPicture() {
+    const url = this.constants.API_ENDPOINT + '/pictrue/alls';
+    this.http.get(url).toPromise()
+      .then((data) => {
+        this.pictures = data as PictureGetResponse[];
+        this.filterPicturesByUserId();
+      })
+      .catch(error => {
+        console.error('Error fetching picture data:', error);
+      });
+  }
+  
 
   filterPicturesByUserId() {
     if (this.currentUser) {

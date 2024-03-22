@@ -39,29 +39,34 @@ export class MainComponent {
 
   }
  
-  async getPicture(): Promise<void> {
+  getPicture() {
     const url = this.constants.API_ENDPOINT + '/pictrue/all';
-    const data = await lastValueFrom(this.http.get(url));
-    this.Picture = data as PictureGetResponse[];
-    console.log(this.Picture);
-
-    if (this.Picture && this.Picture.length > 0) {
-      const [user1$, user2$] = await Promise.all([
-        this.shared.getUserById(this.Picture[0].u_id),
-        this.shared.getUserById(this.Picture[1].u_id),
-      ]);
+    this.http.get(url).toPromise()
+      .then((data) => {
+        this.Picture = data as PictureGetResponse[];
+        console.log(this.Picture);
   
-      user1$.subscribe((user1) => {
-        console.log('User for Picture[0]:', user1);
-        this.user1 = user1;
+        if (this.Picture && this.Picture.length > 0) {
+          const user1$ = this.shared.getUserById(this.Picture[0].u_id).toPromise();
+          const user2$ = this.shared.getUserById(this.Picture[1].u_id).toPromise();
+  
+          Promise.all([user1$, user2$])
+            .then(([user1, user2]) => {
+              console.log('User for Picture[0]:', user1);
+              console.log('User for Picture[1]:', user2);
+              this.user1 = user1;
+              this.user2 = user2;
+            })
+            .catch(error => {
+              console.error('Error getting user data:', error);
+            });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching picture data:', error);
       });
-
-      user2$.subscribe((user2) => {
-        console.log('User for Picture[1]:', user2);
-        this.user2 = user2;
-      });
-    }
   }
+  
 
   check(p_id: number) {
     const dialogRef = this.dialog.open(ElorateComponent, {
@@ -204,7 +209,6 @@ export class MainComponent {
         });
       }
     }
-    console.log("Expected Score for Winner:", ImageVotingSystem.expectedScoreWinner);
-    console.log("Expected Score for Loser:", ImageVotingSystem.expectedScoreLoser);
+    
   }
 }

@@ -21,9 +21,6 @@ export class ImageVotingSystem {
     static expectedScoreWinner: number;
     static expectedScoreLoser: number;
 
-    static expectedScoreWinner : number;
-    static expectedScoreLoser : number;
-
     static newEloRatingWinner : number;
     static newEloRatingLoser : number;
     constructor(image1: Image, image2: Image) {
