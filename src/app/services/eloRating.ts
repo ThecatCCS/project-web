@@ -18,9 +18,8 @@ export class ImageVotingSystem {
     kFactor: number;
     image1: Image;
     image2: Image;
-
-    static expectedScoreWinner : number;
-    static expectedScoreLoser : number;
+    static expectedScoreWinner: number;
+    static expectedScoreLoser: number;
 
     static newEloRatingWinner : number;
     static newEloRatingLoser : number;

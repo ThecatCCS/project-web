@@ -14,13 +14,16 @@ export class UserService {
   userData : UserGetResponse | undefined;
   constructor(private constants: Constants, private http: HttpClient){}
 
-  async getName() {
+  getName() {
     const url = this.constants.API_ENDPOINT +'/users';
-    const data = await lastValueFrom(
-      this.http.get(url));
-    this.user = data as UserGetResponse[];
-    console.log(this.user);
+    return this.http.get(url)
+      .toPromise()
+      .then((data) => {
+        this.user = data as UserGetResponse[];
+        console.log(this.user);
+      });
   }
+  
 
   getUserById(userId: number): Observable<UserGetResponse> {
     const url = this.constants.API_ENDPOINT + `/${userId}`;
