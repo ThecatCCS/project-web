@@ -72,6 +72,7 @@ export class UpdateProfileDialogComponent {
   }
 
   addupdate() {
+
     const body = {
       user_name: this.name,
       user_gender: this.gender,
