@@ -133,10 +133,12 @@ item: any;
     sessionStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
+
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
     console.log('ออกอยู่จ้า', pt_id);
   }
+  
   uploadFile(file: File) {
     const url =
       this.constants.API_ENDPOINT + `/upload/${this.currentUser?.user_id}`;
