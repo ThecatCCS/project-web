@@ -4,11 +4,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button'
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
-import { FormControl, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-sigup',
   standalone: true,
@@ -33,14 +32,16 @@ export class SigupComponent {
     { value: 2, name: 'Male' }
   ];
 
+  validateEmail(email: string): boolean {
+    const emailPattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+  }
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-    Validators.pattern("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
-  ]);
- 
 addNew() {
+  if (!this.validateEmail(this.email)) {
+    alert("incerrect Email!!!!");
+    return;
+  }
     const body = {
       user_name: this.name,
       user_email: this.email,
