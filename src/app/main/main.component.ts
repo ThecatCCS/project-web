@@ -65,7 +65,7 @@ export class MainComponent {
         name: function (name: any): unknown {
           throw new Error('Function not implemented.');
         },
-        user_email: '',
+        user_email: 'dddd',
         user_pass: '',
         user_type: 0,
         user_pictrue: '',
