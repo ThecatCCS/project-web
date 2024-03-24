@@ -6,12 +6,11 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PictureGetResponse } from '../model/picture_get';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Navtop10Component } from '../nav/navtop10/navtop10.component';
-
+import { Navtop10Component } from '../nav/navtop10/navtop10.component'
 import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
 import { MatDialog } from '@angular/material/dialog';
 import { ElorateComponent } from './elorate/elorate.component';
@@ -23,6 +22,7 @@ import { ElorateComponent } from './elorate/elorate.component';
   imports: [NavComponent, Navtop10Component, CommonModule, MatToolbarModule],
 })
 export class MainComponent {
+
   currentUser: UserGetResponse | undefined;
   Picture: PictureGetResponse[] | undefined;
   user1: UserGetResponse | undefined;
@@ -32,6 +32,7 @@ export class MainComponent {
     protected shared: UserService,
     private http: HttpClient,
     private constants: Constants,
+    private router : Router,
     private dialog: MatDialog
   ) {}
   ngOnInit(): void {
@@ -79,7 +80,14 @@ export class MainComponent {
 
     this.getPicture();
   }
-
+      onClick(userId?: number) {
+        if (userId !== undefined) {
+          this.router.navigate(['/profileuser', userId]);
+          console.log("อกกกก",userId);
+          
+        }
+      }
+ 
   async getPicture(): Promise<void> {
     const url =
       this.constants.API_ENDPOINT + `/pictrue/duo/${this.currentUser?.user_id}`;
