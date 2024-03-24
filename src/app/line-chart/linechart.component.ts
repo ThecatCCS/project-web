@@ -8,6 +8,7 @@ import { pointget, pointvote } from '../model/point_vote';
 import { count, lastValueFrom } from 'rxjs';
 import { urlencoded } from 'body-parser';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 import { Constants } from '../config/constants';
 @Component({
   selector: 'app-line-chart',
@@ -23,7 +24,8 @@ export class LineChartComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private activeatedRoute: ActivatedRoute,
-    private constants: Constants
+    private constants: Constants,
+    private location : Location
   ) {}
   ngOnInit(): void {
     this.pt_id = this.activeatedRoute.snapshot.paramMap.get('pt_id') || '';
@@ -31,7 +33,9 @@ export class LineChartComponent implements OnInit {
     this.getpoint();
     this.createChart();
   }
-
+  goBack() {
+    this.location.back();
+  }
   async getpoint() {
     const url = this.constants.API_ENDPOINT + `/pictrue/all/${this.pt_id}`;
     const datom = await lastValueFrom(this.http.get(url));

@@ -35,9 +35,8 @@
         />
       </div>
       <div class="detail">
-        <div>
-            <h2>User Profile</h2>
-            <p>User Name: {{ this.username }}</p>
+        <div class="Username">
+            <span>{{ this.username }}</span>
           </div>
         <div class="user-info">
           <img
@@ -69,7 +68,7 @@
       <div class="picvote1">
         <div class="image-wrapper"  *ngFor="let picture of picture">
           <div class="maticon">
-            <i class="material-symbols-outlined">monitoring</i>
+            <i class="material-symbols-outlined" (click)="Online(picture.pictrue_id)">monitoring</i>
           </div>
           <img
             src="{{this.picture.pictrue_url}}"

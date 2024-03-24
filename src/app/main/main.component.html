@@ -1,4 +1,4 @@
-<div *ngIf="currentUser; else guestToolbar">
+<div *ngIf="currentUser?.user_age != null; else guestToolbar">
   <app-navtop10></app-navtop10>
 </div>
 <ng-template #guestToolbar>
@@ -11,9 +11,16 @@
   </div>
   <div class="container">
     <div class="div" *ngIf="Picture && Picture.length > 0">
-      <div class="logo">
+
+      <div class="logo" *ngIf="currentUser?.user_age != null; else name">
         <img (click)="onClick(user1?.user_id)" [src]="user1?.user_pictrue" />
       </div>
+      <ng-template class="logo" #name>
+        <img  [src]="user1?.user_pictrue" />
+      </ng-template>
+
+      
+      
       <div class="pro">
         <p>{{ user1?.user_name }}</p>
       </div>
@@ -34,10 +41,14 @@
   </div>
 
   <div class="container2">
-    <div class="div1" *ngIf="Picture && Picture.length > 1">
-      <div class="logo">
+    <div class="div" *ngIf="Picture && Picture.length > 0">
+      <div class="logo" *ngIf="currentUser?.user_age != null; else name">
         <img (click)="onClick(user2?.user_id)" [src]="user2?.user_pictrue" />
       </div>
+      <ng-template class="logo" #name>
+        <img  [src]="user2?.user_pictrue" />
+      </ng-template>
+
       <div class="pro">
         <p>{{ user2?.user_name }}</p>
       </div>

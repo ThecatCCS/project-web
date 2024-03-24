@@ -1,117 +1,205 @@
+.body {
+  font-family: 'Lato', Arial, sans-serif;
+  color: #989c9b;
+}
 
-.d-flex {
-    font-family: Anonymous Pro, monospace;
-    background-image: url('https://i.pinimg.com/564x/01/c9/cf/01c9cf2b812e38530fea107047f03102.jpg');
-  }
-  .all{
-    color: #0b0a0b;
-    text-align: center;
-  }
-  .header{
-    
-    padding-top: 50px;
-    padding-bottom: 30px;
-  }
-  
-  .container-fluid {
-    color: #eb96c2;
-    font-family: "Abril Fatface", serif;
-    padding: 0 100px;
-    
-  }
-  
-  .container-fluid p {
+td.rank,
+td.team,
+td.points,
+td.up-down {
+  font-family: "Aboreto", sans-serif;
+  margin-bottom: -56px;
+  text-align: center;
+}
 
-    font-size: 22px;
-  }
-  
-  .table-header {
+td.material-symbols-outlined {
 
-    font-size: 18px;
-    font-weight: bolder;
-  }
-  
-  .table-data {
-    font-size: 16px;
-    font-weight: lighter;
-    cursor: pointer;
-  }
-  
-  
-  .thead-light{
+  margin-bottom: -56px;
+  text-align: center;
+}
 
-    text-align: center;
-  }
-  .text-heading {
-  
-    font-size: 16px;
-    font-weight: lighter;
-    cursor: pointer;
-  
-  }
-  
-  a.btn {
-    color: #010101;
-    width: 70px;
-    margin-right: 10px;
-    font-size: 16px;
-    font-weight: lighter;
-  }
-  
-  .icon-large {
-    font-size: 26px;
-  }
-  
-  .avatar {
-    width: 45px;
-    height: 45px;
-    border: 2px solid #ccc;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
+
+.h1 {
+  color: rgb(249, 204, 137);
+  font-family: "DM Serif Display", serif;
+  // text-align: center;
+  text-shadow: 3px 2px rgb(137, 123, 131);
+  // top: 0;
+  // // padding: 10px;
+  // margin-top: 10px;
+  // transition: transform 0.3s;
+}
+
+.container>header {
+  margin: 0 auto;
+  padding: 1em;
+  text-align: center;
+}
+
+.container>header h1 {
+  font-weight: 600;
+  font-size: 3em;
+  margin: 0;
+}
+
+.wrapper {
+  font-family: "DM Serif Display", serif;
+  text-align: center;
+  line-height: 1.5em;
+  margin: 0 auto;
+  padding: 2em 0 3em;
+  width: 90%;
+  max-width: 2000px;
+  overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  /* Reduced width */
+  background: rgba(255, 233, 254, 0.411);
+  margin: 0 auto;
+  /* Center the table horizontally */
+}
+
+th {
+  background-color: rgb(245, 177, 223);
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+
+}
+
+td,
+th {
+  padding: 1em 1.5em;
+  text-align: center;
+}
+
+.team img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+
+tbody th {
+  background-color: #2ea879;
+}
+
+tbody tr:nth-child(2n-1) {
+  background-image: url("https://i.pinimg.com/736x/40/be/9b/40be9ba275e84313841b9b6003ab9f4b.jpg");
+  transition: all .125s ease-in-out;
+}
+
+// tbody tr:hover {
+//   background-color: #edd48f58;
+// }
+
+td.rank {
+  text-transform: capitalize;
+}
+
+
 .containernav {
-    color: azure;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 64%;
-    padding: 0 20px;
-  }
-  
-  .logonav img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px;
-  }
-  
-  .logo1 img {
-    vertical-align: middle;
-    border-radius: 50%;
-    width: 50px;
-    margin-right: 10px;
-  }
-  
-  .toolbar-text {
-    color: azure;
-    cursor: pointer;
-    font-size: 15px;
-    font-family: "DM Serif Display", serif;
-  }
-  
-  .toolbar-text1 {
-    color: azure;
-    font-size: 32px;
-    font-weight: bold;
-    font-family: "DM Serif Display", serif;
-  }
-  
-  .toolbar-text:hover {
-    background-color: #eb96c2;
-    border-radius: 5px;
-    /* ปรับขนาดของมุม */
-    font-family: "DM Serif Display", serif;
-  }
-  @import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+  color: azure;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 55%;
+  padding: 0 15px;
+}
+
+.logonav img {
+  vertical-align: middle !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  margin-right: 10px !important;
+}
+.navimg img {
+  vertical-align: middle ;
+  border-radius: 50% ;
+  width: 50px ;
+  height: 50px ;
+  margin-left: 70px ;
+}
+
+
+.logo1 img {
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+.search-bar{
+margin-left: 64%;
+}
+.search-bar label {
+  font-family: "DM Serif Display", serif;
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+
+.search-bar input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.search-bar button[type="submit"] {
+  padding: 8px 12px;
+  background-color:  #8abbf6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-bar button[type="submit"]:hover {
+  background-color: #f4ca9a;
+}
+
+.toolbar-text {
+  color: azure;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text1 {
+  color: azure;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "DM Serif Display", serif;
+}
+
+.toolbar-text:hover {
+  background-color: #eb96c2;
+  border-radius: 5px;
+  font-family: "DM Serif Display", serif;
+}
+
+.material-symbols-outlined {
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: #f083bb;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.5s ease;
+  padding: 10px;
+
+
+}
+
+
+.material-symbols-outlined:hover {
+  color: #f1c991;
+  background-color: white;
+}

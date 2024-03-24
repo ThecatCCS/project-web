@@ -8,6 +8,7 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-sigup',
   standalone: true,
@@ -33,6 +34,11 @@ export class SigupComponent {
   ];
 
 
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+    Validators.pattern("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
+  ]);
  
 addNew() {
     const body = {

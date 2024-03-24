@@ -28,11 +28,16 @@ export class LoginComponent {
         const foundUser = users.find(user => user.user_email === email && user.user_pass === password);
 
         if (foundUser) {
-            console.log("User found:", foundUser);
-            sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-            
-            this.navigateToMain();
-            
+            if(foundUser.user_type == 1 ){
+                this.navigateToAddmin(foundUser.user_id);
+
+            }
+            else {
+                console.log("User found:", foundUser);
+                sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
+                
+                this.navigateToMain();
+            }
         } else {
             alert("User not found or incorrect credentials.");
         }
@@ -42,6 +47,9 @@ export class LoginComponent {
 }
     navigateToMain() {
         this.route.navigate(["/main"]);
+    }
+    navigateToAddmin(id : number) {
+        this.route.navigate(["/addmin/" + id]);
     }
 
 }

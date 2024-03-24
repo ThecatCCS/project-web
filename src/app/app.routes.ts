@@ -20,5 +20,6 @@ export const routes: Routes = [
     {path: 'chart', component: LineChartComponent},
     { path: 'linechart/:pt_id', component: LineChartComponent },
     { path: 'profileuser/:userId', component: ProfileuserComponent },
+    { path: 'addmin/:id', component: AddminComponent },
 
 ];

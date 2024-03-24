@@ -34,7 +34,6 @@ yarn-error.log
 /connect.lock
 /coverage
 /libpeerconnection.log
-testem.log
 /typings
 
 # System files

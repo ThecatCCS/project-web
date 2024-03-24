@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router } from 'express';
 import { Constants } from '../config/constants';
 import { UserGetResponse } from '../model/user_get';
 import { PictureGetResponse } from '../model/picture_get';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/api/user.service';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profileuser.component.scss',
 })
 export class ProfileuserComponent implements OnInit {
+
   username: string | undefined;
   currentUser: UserGetResponse | undefined;
   picture: PictureGetResponse[] = [];
@@ -23,6 +24,7 @@ export class ProfileuserComponent implements OnInit {
   userId: any;
   constructor(
     private route: ActivatedRoute,
+    private router :Router,
     private userService: UserService,
     private http: HttpClient,
 
@@ -39,7 +41,6 @@ export class ProfileuserComponent implements OnInit {
     
 
   getUser() {
-
     this.route.params.subscribe((params) => {
        this.userId = params['userId'];
       console.log("อกกก",this.userId);
@@ -61,6 +62,11 @@ export class ProfileuserComponent implements OnInit {
       .catch((error) => {
         console.error('Error fetching user data:', error);
       });
+  }
+
+  Online(pt_id: number) {
+    this.router.navigate(['/linechart', pt_id]);
+    console.log('ออกอยู่จ้า', pt_id);
   }
 
   getPicture() {

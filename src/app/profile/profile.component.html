@@ -45,7 +45,7 @@
       </div>
       <div class="buttons">
         
-        <button
+        <button  *ngIf="pictures.length < 5"
           mat-stroked-button
           class="custom-button"
           (click)="fileInput.click()"
@@ -104,7 +104,8 @@
               (change)="onFileSelected2($event, picture.pictrue_id)"
             />
           </div>
-          <img src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
+          <img 
+           src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
           
         </div>
         
