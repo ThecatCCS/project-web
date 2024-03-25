@@ -38,7 +38,6 @@ export class ProfileuserComponent implements OnInit {
   
     }
   
-    
 
   getUser() {
     this.route.params.subscribe((params) => {
