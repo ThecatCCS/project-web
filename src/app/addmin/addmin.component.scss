@@ -106,13 +106,14 @@ td.rank {
   color: azure;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  // flex-direction: row;
   justify-content: space-between;
-  margin-left: 55%;
+  margin-left: 65%;
   padding: 0 15px;
 }
 
 .logonav img {
+
   vertical-align: middle !important;
   border-radius: 50% !important;
   width: 50px !important;
@@ -175,12 +176,21 @@ margin-left: 64%;
 }
 
 .toolbar-text1 {
+  align-items: center;
   color: azure;
   font-size: 32px;
   font-weight: bold;
   font-family: "DM Serif Display", serif;
 }
+.toolbar-textadd {
+  position: relative; /* เปลี่ยนเป็นตำแหน่งเชิงสัมพันธ์ */
+  top: 6px; /* ขยับลงมาที่ต้องการ */
+  color: azure;
+  font-size: 15px;
 
+  font-weight: bold;
+  font-family: "DM Serif Display", serif;
+}
 .toolbar-text:hover {
   background-color: #eb96c2;
   border-radius: 5px;

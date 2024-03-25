@@ -41,6 +41,7 @@ export class ChangpassComponent implements OnInit {
     }
     const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
     this.http
+    
       .get(url)
       .toPromise()
       .then((user_data) => {

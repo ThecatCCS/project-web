@@ -25,7 +25,7 @@ import { ToprankGetResponse } from '../model/toprank_get';
 export class ProfileComponent {
   currentUser: UserGetResponse | undefined;
   userName: string | undefined;
-  pictures: PictureGetResponse[] = [];
+  pictures:  ToprankGetResponse [] = []
   userpic: string | undefined;
   name: string = '';
   password: any;
@@ -33,7 +33,7 @@ export class ProfileComponent {
   age: number = 0;
   pefer: any;
   user: UserGetResponse[] =[];
-  toprank : ToprankGetResponse [] = [];
+  
 item: any;
   constructor(
     private shared: UserService,
@@ -112,7 +112,7 @@ item: any;
     const url = this.constants.API_ENDPOINT + '/pictrue/alls';
     this.http.get(url).toPromise()
       .then((data) => {
-        this.pictures = data as PictureGetResponse[];
+        this.pictures = data as  ToprankGetResponse [];
         this.filterPicturesByUserId();
       })
       .catch(error => {
@@ -129,10 +129,7 @@ item: any;
       console.log(this.pictures);
     }
   }
-  logout() {
-    sessionStorage.removeItem('currentUser');
-    this.router.navigate(['/login']);
-  }
+
 
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);

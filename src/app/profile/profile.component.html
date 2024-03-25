@@ -86,7 +86,6 @@
       <div class="picvote1">
         <div class="image-wrapper" *ngFor="let picture of pictures">
           <div class="maticon">
-         
             <i class="material-icons" (click)="onDelete(picture.pictrue_id)"
               >delete_forever</i
             >
@@ -104,10 +103,36 @@
               style="display: none"
               (change)="onFileSelected2($event, picture.pictrue_id)"
             />
+            <div class="ranking">
+              <div class="material-icons5"  *ngIf="picture.rank_difference != 0" >
+                <p>{{ picture.rank_difference  }}</p>
+              </div>
+              <div class="rank">
+                <div class="dropdown">
+                  <ng-container *ngIf="picture.rank_difference <= -1">
+                    <img
+                      src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
+                      alt="Rank Image"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="picture.rank_difference == 0"> 
+                  <div class="rank0">
+                      <!-- <p >no rank chang</p> -->
+                  </div>
+                  </ng-container>
+                  <ng-container *ngIf="picture.rank_difference >= 1">
+                    <img
+                      src="https://cdn-icons-png.freepik.com/512/5800/5800655.png?ga=GA1.1.636306898.1696678666&"
+                      alt="Dropdown Image"
+                    />
+                  </ng-container>
+                </div>
+              </div>
+              </div>
           </div>
           <img 
            src="{{ picture.pictrue_url }}" alt="{{ picture.pictrue_id }}" />
-          
+       
         </div>
         
       </div>

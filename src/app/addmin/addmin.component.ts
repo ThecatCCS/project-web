@@ -22,11 +22,13 @@ export class AddminComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
 }
-  logout() {
-    sessionStorage.removeItem('id');
-    this.rout.navigate(['/login']);
-  }
-  
+logout() {
+  sessionStorage.removeItem('currentUser');
+  this.user = []; // หรือ this.user = null; ตามที่ต้องการ
+  this.rout.navigate(['/login']);
+  console.log("sdsdl;s");
+
+}
  async getUser() {
     const url = this.constants.API_ENDPOINT + `/users`;
     let data = await lastValueFrom(this.http.get(url));

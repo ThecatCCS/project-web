@@ -29,8 +29,10 @@ export class LoginComponent {
 
         if (foundUser) {
             if(foundUser.user_type == 1 ){
-                this.navigateToAddmin(foundUser.user_id);
+                sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
 
+                
+                this.navigateToAddmin();
             }
             else {
                 console.log("User found:", foundUser);
@@ -48,8 +50,10 @@ export class LoginComponent {
     navigateToMain() {
         this.route.navigate(["/main"]);
     }
-    navigateToAddmin(id : number) {
-        this.route.navigate(["/addmin/" + id]);
+    navigateToAddmin() {
+        this.route.navigate(["/addmin" ]);
+
+        
     }
 
 }
