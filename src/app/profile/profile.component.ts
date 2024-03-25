@@ -54,12 +54,12 @@ item: any;
   
   async onDelete(pt_id: number) {
     const userConfirmed = window.confirm('Do you want to delete this image?');
-    console.log(userConfirmed);
+  
     if (userConfirmed) {
       const status =
         (await this.constants.API_ENDPOINT) + `/pictrue/delete/${pt_id}`;
       const data = await lastValueFrom(this.http.delete(status));
-      console.log(status);
+   
     } else {
       console.log('Canceled image deletion');
     }
@@ -81,7 +81,7 @@ item: any;
       );
 
       if (foundUser) {
-        console.log('User found:', foundUser);
+      
         sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
       } else {
         alert('User not found or incorrect credentials.');
@@ -99,7 +99,7 @@ item: any;
         const userDataResponse = user_data as UserGetResponse;
 
         this.userpic = userDataResponse.user_pictrue;
-        console.log(this.userpic);
+    
         
         this.userName = userDataResponse.user_name;
       })
@@ -126,14 +126,14 @@ item: any;
       this.pictures = this.pictures.filter(
         (picture) => picture.u_id === this.currentUser?.user_id
       );
-      console.log(this.pictures);
+ 
     }
   }
 
 
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
-    console.log('ออกอยู่จ้า', pt_id);
+ 
   }
   
   uploadFile(file: File) {
@@ -141,14 +141,14 @@ item: any;
       this.constants.API_ENDPOINT + `/upload/${this.currentUser?.user_id}`;
     const formData = new FormData();
     formData.append('filename', file, file.name);
-    console.log(formData, 'tese');
+
     return this.http.post(url, formData);
   }
   updateFile(file: File, pt_id: number) {
     const url = `${this.constants.API_ENDPOINT}/update/${pt_id}`;
     const formData = new FormData();
     formData.append('file', file); // แก้ 'filename' เป็น 'file' ตาม API ที่ต้องการ
-    console.log(formData, 'test');
+
 
     return this.http.put(url, formData);
   }
@@ -170,7 +170,7 @@ item: any;
     const url = this.constants.API_ENDPOINT + `/upload/update/${pt_id}`;
     const formData = new FormData();
     formData.append('filename', file, file.name);
-    console.log(formData, 'test');
+
 
     this.http.put(url, formData).subscribe(
       (response) => {

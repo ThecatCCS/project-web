@@ -26,7 +26,7 @@ export class Navtop10Component implements OnInit {
  async getpic(){
     const currentUserString = sessionStorage.getItem('currentUser');
     this.currentUser = currentUserString ? JSON.parse(currentUserString) : null;
-    console.log("dfdfhh",this.currentUser.user_pictrue);
+   
     
     // const url =
     // this.constants.API_ENDPOINT + `/${this.currentUser.user_id}`;

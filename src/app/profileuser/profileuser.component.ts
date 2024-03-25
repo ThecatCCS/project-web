@@ -8,42 +8,48 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/api/user.service';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
+import { ToprankGetResponse } from '../model/toprank_get';
 @Component({
   selector: 'app-profileuser',
   standalone: true,
-  imports: [MatToolbarModule,CommonModule],
+  imports: [MatToolbarModule, CommonModule],
   templateUrl: './profileuser.component.html',
   styleUrl: './profileuser.component.scss',
 })
 export class ProfileuserComponent implements OnInit {
-
   username: string | undefined;
   currentUser: UserGetResponse | undefined;
-  picture: PictureGetResponse[] = [];
+  picture: ToprankGetResponse[] = [];
   userpic: string | undefined;
   userId: any;
+  userage: any;
+  usergender: any;
+  userpre: any;
   constructor(
     private route: ActivatedRoute,
-    private router :Router,
+    private router: Router,
     private userService: UserService,
     private http: HttpClient,
-
+    private location: Location,
     private constants: Constants
   ) {}
-  
-  ngOnInit(): void {
 
-        this.getPicture();
-        this.getUser();
-  
-    }
-  
+  ngOnInit(): void {
+    this.getPicture();
+    this.getUser();
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
 
   getUser() {
     this.route.params.subscribe((params) => {
-       this.userId = params['userId'];
-      console.log("อกกก",this.userId);
-    })
+      this.userId = params['userId'];
+    });
+
     const url = this.constants.API_ENDPOINT + `/${this.userId}`;
     this.http
       .get(url)
@@ -51,12 +57,20 @@ export class ProfileuserComponent implements OnInit {
       .then((user_data) => {
         const userDataResponse = user_data as UserGetResponse;
 
+        this.userage = userDataResponse.user_age;
+        if (userDataResponse.user_gender == 2) {
+          this.usergender = 'Famel';
+        } else {
+          this.usergender = 'Meal';
+        }
+
+        this.userage = userDataResponse.user_age;
+
+        this.userpre = userDataResponse.user_preference;
+
         this.userpic = userDataResponse.user_pictrue;
-        console.log(this.userpic);
 
         this.username = userDataResponse.user_name;
-        console.log("d",this.username);
-        
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
@@ -65,7 +79,6 @@ export class ProfileuserComponent implements OnInit {
 
   Online(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
-    console.log('ออกอยู่จ้า', pt_id);
   }
 
   getPicture() {
@@ -74,9 +87,8 @@ export class ProfileuserComponent implements OnInit {
       .get(url)
       .toPromise()
       .then((data) => {
-        this.picture = data as PictureGetResponse[];
+        this.picture = data as ToprankGetResponse[];
         this.filterPicturesByUserId();
-  
       })
       .catch((error) => {
         console.error('Error fetching picture data:', error);
@@ -85,15 +97,10 @@ export class ProfileuserComponent implements OnInit {
 
   filterPicturesByUserId() {
     if (this.userId) {
-      console.log("gghgghh",this.userId);
-      console.log(this.picture);
       this.picture = this.picture.filter(
-        
         (picture) => picture.u_id == this.userId
-      
-        
       );
-      console.log("dfdfdfd",this.picture);
+
     }
   }
 }

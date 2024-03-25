@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { ToprankGetResponse } from '../model/toprank_get';
 import { UserService } from '../services/api/user.service';
 import { UserGetResponse } from '../model/user_get';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-top10',
     standalone: true,
@@ -17,11 +19,24 @@ import { UserGetResponse } from '../model/user_get';
     imports: [ Navtop10Component,MatToolbarModule,MatIconModule,CommonModule]
 })
 export class Top10Component{
+
     i: number = 0;
     toprank : ToprankGetResponse [] = [];
-
-constructor(private http: HttpClient, private constants: Constants,private userService: UserService){}
-    ngOnInit(): void {
+    currentUser : UserGetResponse | undefined;
+    type : number | undefined;
+constructor(private http: HttpClient, private constants: Constants,private userService: UserService, private location : Location,private rout : Router){}
+onClick(userId?: number) {
+  if (userId !== undefined) {
+    this.rout.navigate(['/profileuser', userId]);
+  }
+}
+ngOnInit(): void {
+      const currentUserString = sessionStorage.getItem('currentUser');
+      if (currentUserString !== null) {
+        this.currentUser = JSON.parse(currentUserString);
+        this.type = this.currentUser?.user_type;
+      }
+       
         const counterIcons = document.querySelectorAll('.counter-icon');
         counterIcons.forEach((icon: Element) => {
             this.i++; 
@@ -34,13 +49,14 @@ constructor(private http: HttpClient, private constants: Constants,private userS
           const url = `${this.constants.API_ENDPOINT}/pictrue/alls`;
           const data = await lastValueFrom(this.http.get<ToprankGetResponse[]>(url));
           this.toprank = data;
-          console.log("รูปจะออก", this.toprank);
           this.updateCounterIcons();
         } catch (error) {
           console.error('Error fetching pictures:', error);
         }
       }
-    
+      goBack() {
+        this.location.back();
+      }
       updateCounterIcons() {
         this.toprank.forEach((item, index) => {
           (item as any).counter = index + 1;

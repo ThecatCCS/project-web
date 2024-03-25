@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-addmin',
   standalone: true,
@@ -18,28 +19,25 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
 export class AddminComponent implements OnInit {
  user : UserGetResponse [] = [];
  timeIn: number | undefined;
-  constructor(private rout : Router , private constants:Constants , private http : HttpClient){}
+  constructor(private rout : Router , private constants:Constants , private http : HttpClient,   private location : Location){}
   ngOnInit(): void {
     this.getUser();
 }
 logout() {
   sessionStorage.removeItem('currentUser');
-  this.user = []; // หรือ this.user = null; ตามที่ต้องการ
-  this.rout.navigate(['/login']);
-  console.log("sdsdl;s");
-
+  this.location.back();
 }
+
  async getUser() {
-    const url = this.constants.API_ENDPOINT + `/users`;
+    const url = this.constants.API_ENDPOINT + `/userPro`;
     let data = await lastValueFrom(this.http.get(url));
     this.user = data as UserGetResponse[];
-    console.log("dsdds",this.user[0]);
     
   }
 
   Online(id: number) {
     this.rout.navigate(['/profileuser', id]);
-    console.log('ออกอยู่จ้า',id);
+
   }
   time() {
     const url = `${this.constants.API_ENDPOINT}/vote/${this.timeIn}`;
@@ -47,7 +45,7 @@ logout() {
  
     this.http.put(url, null).subscribe(
       (response) => {
-        console.log(response);
+ 
         
       },
       (error) => {

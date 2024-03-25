@@ -9,15 +9,18 @@
   <div class="containernav">
     <div class="logonav">
       <img
-        src="https://i.pinimg.com/236x/9f/da/86/9fda86b52b4c0e8e649418e7e556b690.jpg"
+        style="
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-left: 2%;
+          margin-top: 5px;
+          cursor: pointer;
+        "
+        (click)="goBack()"
+        src="data:image/jpeg;base64,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"
       />
-      <a class="toolbar-text" onclick="routerLink" href="/main">Home</a>
-    </div>
-    <div class="logo1">
-      <img
-        src="https://i.pinimg.com/564x/59/41/6d/59416d43745cb175f13729948ed2db08.jpg"
-      />
-      <a class="toolbar-text" onclick="routerLink" href="/top10">Top10</a>
+      <a class="toolbar-text">back</a>
     </div>
   </div>
 </mat-toolbar>
@@ -28,22 +31,21 @@
   <div class="img-con">
     <div class="item">
       <div>
-        <img
-          class="logo"
-          src="{{this.userpic}}"
-          alt="User Picture"
-        />
+        <img class="logo" src="{{ this.userpic }}" alt="User Picture" />
       </div>
       <div class="detail">
         <div class="Username">
-            <span>{{ this.username }}</span>
-          </div>
+          <span>{{ this.username }}</span>
+        </div>
         <div class="user-info">
-          <img
+          <!-- <img
             class="icon_img"
             src="https://i.pinimg.com/564x/3d/cb/80/3dcb80f6eae47eb1cc138440f60d7f49.jpg"
-          />
-          <span class="pic_count">All Photo</span>
+          /> -->
+          <span class="pic_count"
+            >Age : {{ this.userage }} <br> Gender : {{ this.usergender }} <br>
+            Preference : {{ this.userpre }}</span
+          >
         </div>
       </div>
     </div>
@@ -51,7 +53,6 @@
   <hr
     style="margin-top: 20px; border: 1px solid #e06cc1; border-radius: 20px"
   />
-
 
   <div class="item">
     <div class="user-p">
@@ -64,15 +65,42 @@
   </div>
   <div class="image_user">
     <div class="container">
-      <div class="pro"></div>
       <div class="picvote1">
-        <div class="image-wrapper"  *ngFor="let picture of picture">
+        <div class="image-wrapper" *ngFor="let picture of picture">
           <div class="maticon">
-            <i class="material-symbols-outlined" (click)="Online(picture.pictrue_id)">monitoring</i>
+            <i
+              class="material-symbols-outlined"
+              (click)="Online(picture.pictrue_id)"
+              >monitoring</i
+            >
+            <div class="ranking">
+              <div class="material-icons5" *ngIf="picture.rank_difference != 0">
+                <p>{{ picture.rank_difference }}</p>
+              </div>
+              <div class="rank">
+                <div class="dropdown">
+                  <ng-container *ngIf="picture.rank_difference <= -1">
+                    <img
+                      src="https://cdn-icons-png.freepik.com/512/5800/5800691.png"
+                      alt="Rank Image"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="picture.rank_difference == 0">
+                    <div class="rank0">
+                      <!-- <p >no rank chang</p> -->
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="picture.rank_difference >= 1">
+                    <img
+                      src="https://cdn-icons-png.freepik.com/512/5800/5800655.png?ga=GA1.1.636306898.1696678666&"
+                      alt="Dropdown Image"
+                    />
+                  </ng-container>
+                </div>
+              </div>
+            </div>
           </div>
-          <img
-            src="{{this.picture.pictrue_url}}"
-          />
+          <img src="{{ this.picture.pictrue_url }}" />
         </div>
       </div>
     </div>

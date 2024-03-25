@@ -88,7 +88,7 @@ export class UpdateProfileDialogComponent  implements OnInit  {
       const url = this.constants.API_ENDPOINT + `/upload/userpictrue/${this.currentUser?.user_id}`;
       const formData = new FormData();
       formData.append('filename', this.selectedFile, this.selectedFile.name);
-      console.log(formData, "test");
+    
       this.http.put(url, formData).subscribe(
         (response) => {
           console.log('File uploaded successfully:', response);
@@ -113,7 +113,7 @@ export class UpdateProfileDialogComponent  implements OnInit  {
     };
     const url = this.constants.API_ENDPOINT + `/upload/userprofile/${this.currentUser?.user_id}`;
     this.http.put(url, body).subscribe((response) => {
-      console.log(response);
+  
     });
     window.location.reload() 
   }

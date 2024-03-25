@@ -6,8 +6,7 @@ export class Image {
     constructor( pictrue_url: string, pictrue_p: number) {
         this.pictrue_url = pictrue_url;
         this.pictrue_p = pictrue_p;
-        console.log(this.pictrue_url,"test url");
-        console.log( this.pictrue_p,"old point");
+
     
     }
    

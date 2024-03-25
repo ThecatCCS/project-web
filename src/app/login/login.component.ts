@@ -28,14 +28,13 @@ export class LoginComponent {
         const foundUser = users.find(user => user.user_email === email && user.user_pass === password);
 
         if (foundUser) {
+            
             if(foundUser.user_type == 1 ){
                 sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
-
-                
                 this.navigateToAddmin();
             }
             else {
-                console.log("User found:", foundUser);
+            
                 sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
                 
                 this.navigateToMain();

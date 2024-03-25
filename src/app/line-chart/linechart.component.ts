@@ -29,7 +29,7 @@ export class LineChartComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.pt_id = this.activeatedRoute.snapshot.paramMap.get('pt_id') || '';
-    console.log(this.pt_id, 'ไม่ออกหรือป่าว');
+
     this.getpoint();
     this.createChart();
   }
@@ -40,7 +40,7 @@ export class LineChartComponent implements OnInit {
     const url = this.constants.API_ENDPOINT + `/pictrue/all/${this.pt_id}`;
     const datom = await lastValueFrom(this.http.get(url));
     const pointGets: any[] = datom as pointget[];
-    console.log(pointGets[0]);
+
     const numberValue2 = Number(pointGets[0].initial_score);
     return numberValue2;
   }
@@ -63,7 +63,7 @@ export class LineChartComponent implements OnInit {
         day < 10 ? '0' + day : day
       }`;
       labels.push(dateString);
-      console.log(labels);
+
     }
     labels.reverse();
     scores[0] = pointValue;
@@ -80,24 +80,23 @@ export class LineChartComponent implements OnInit {
 
           formattedDates.push(formattedDate);
         }
-        console.log(formattedDates);
+    
         let i = 0;
-        console.log(labels.length);
+      
 
         for (let index = 0; index < labels.length; index++) {
-          console.log(scores);
+  
           if (labels[index] == formattedDates[i]) {
             scores.push(scores[index] + data[i].total_score);
-            console.log();
+       
 
-            console.log(formattedDates[i]);
-            console.log(labels[index]);
+         
             i = i + 1;
           } else {
             scores.push(scores[index]);
           }
 
-          console.log(index);
+       
         }
       } else {
         for (let index = 0; index < labels.length; index++) {
@@ -106,8 +105,7 @@ export class LineChartComponent implements OnInit {
       }
 
       const newArray = scores.slice(1);
-      console.log(newArray);
-      console.log(scores);
+    
 
       this.chart = new Chart('MyChart', {
         type: 'line',

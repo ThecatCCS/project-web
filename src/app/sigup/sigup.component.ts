@@ -55,7 +55,7 @@ addNew() {
     };
     const url = this.constants.API_ENDPOINT + '/user';
     this.http.post(url, body).subscribe((response) => {
-      console.log(response);
+ 
       this.navigateToLogin();
     });
   }

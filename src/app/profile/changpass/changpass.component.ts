@@ -47,7 +47,7 @@ export class ChangpassComponent implements OnInit {
       .then((user_data) => {
         const userDataResponse = user_data as UserGetResponse;
         this.ownpass = userDataResponse.user_pass;
-        console.log("d",this.ownpass);
+      
         
       })
       .catch((error) => {
@@ -65,20 +65,14 @@ export class ChangpassComponent implements OnInit {
         const body = {
           user_pass: this.newpassword,
         };
-        console.log('sdsfdfdf', this.newpassword);
 
         const url =
           this.constants.API_ENDPOINT + `/userpass/${ this.currentUser?.user_id}`;
 
         this.http.put(url, body).subscribe((response) => {
-          console.log(response);
         });
-      } else {
-        console.log('รหัสไม่ตรงกัน');
+      } 
       }
-    } else {
-      console.log('รหัสไม่ถูกต้อง');
-    }
     window.location.reload()
   }
 }
