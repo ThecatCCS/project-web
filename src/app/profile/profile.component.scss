@@ -189,20 +189,21 @@
 }
 
 .picvote1 {
+  
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .image-wrapper {
-  width: calc(33.33% - 10px);
+  width: calc(33.33% - 10px);  
   height: auto;
   overflow: hidden;
+    object-fit: cover;
   margin: 5px;
 }
 
 .image-wrapper img {
-  
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -215,7 +216,14 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  justify-content:center;
   padding-top: 7px;
+ 
+.ranking{
+  display: flex;
+  margin-top: 5%;
+  // margin-left: 100%;
+}
 
 }
 
@@ -238,10 +246,6 @@
   background-color: white;
 }
 
-.ranking{
-  display: flex;
-  margin-left: 150%;
-}
 .material-icons5{
   margin-bottom: 50%;
   width: 30px;
@@ -254,11 +258,9 @@
    font-size: 1.2em;
    margin: 0; 
    position: relative; 
-   top: -22px;
+   top: -25px;
  }
- .rank0{
-  margin-top: 15%;
-}
+
 .dropdown {
   width: 20px;
   margin-top: -5%;

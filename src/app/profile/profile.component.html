@@ -107,7 +107,7 @@
               <div class="material-icons5"  *ngIf="picture.rank_difference != 0" >
                 <p>{{ picture.rank_difference  }}</p>
               </div>
-              <div class="rank">
+              <div class="rank" >
                 <div class="dropdown">
                   <ng-container *ngIf="picture.rank_difference <= -1">
                     <img
@@ -116,9 +116,6 @@
                     />
                   </ng-container>
                   <ng-container *ngIf="picture.rank_difference == 0"> 
-                  <div class="rank0">
-                      <!-- <p >no rank chang</p> -->
-                  </div>
                   </ng-container>
                   <ng-container *ngIf="picture.rank_difference >= 1">
                     <img
