@@ -216,17 +216,14 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content:center;
   padding-top: 7px;
- 
+margin-left: 10px;
+
+}
 .ranking{
   display: flex;
-  margin-top: 5%;
-  // margin-left: 100%;
+ margin-left: 10%;
 }
-
-}
-
 .material-icons,.material-symbols-outlined{
   color: white;
   cursor: pointer;
@@ -264,6 +261,7 @@
 .dropdown {
   width: 20px;
   margin-top: -5%;
+  margin-left: -10px;
 }
 .hidden {
   display: none;
