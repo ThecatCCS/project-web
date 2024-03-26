@@ -113,7 +113,6 @@ item: any;
     this.http.get(url).toPromise()
       .then((data) => {
         this.pictures = data as  ToprankGetResponse [];
-        console.log(this.pictures);
         
         this.filterPicturesByUserId();
       })
