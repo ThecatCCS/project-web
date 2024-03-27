@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../../config/constants';
 import { UserGetResponse } from '../../model/user_get';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-update-profile-dialog',
   standalone: true,
@@ -39,7 +40,11 @@ export class UpdateProfileDialogComponent implements OnInit {
     { value: 1, name: 'female' },
     { value: 2, name: 'Male' },
   ];
-  constructor(private http: HttpClient, private constants: Constants) {}
+  constructor(
+    private http: HttpClient,
+    private constants: Constants,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -71,7 +76,11 @@ export class UpdateProfileDialogComponent implements OnInit {
       });
   }
   onFileSelected(event: any): void {
-    if (event && event.target && event.target.files && event.target.files.length > 0
+    if (
+      event &&
+      event.target &&
+      event.target.files &&
+      event.target.files.length > 0
     ) {
       this.selectedFile = event.target.files[0];
     }
@@ -102,12 +111,24 @@ export class UpdateProfileDialogComponent implements OnInit {
       this.addupdate();
       console.error('No file selected.');
     }
-    
+    const dialogRef = this.dialog.open(DownloadDialogComponent, {
+      width: '250px', // Adjust width as needed
+      data: {
+        name: this.name,
+        age: this.age,
+        // Pass more data as needed
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The download dialog was closed');
+      // Handle any actions after the dialog is closed
+    });
   }
 
   addupdate() {
-    console.log("test",this.gender);
-    
+    console.log('test', this.gender);
+
     const body = {
       user_name: this.name,
       user_gender: this.gender,
@@ -118,11 +139,39 @@ export class UpdateProfileDialogComponent implements OnInit {
       this.constants.API_ENDPOINT +
       `/upload/userprofile/${this.currentUser?.user_id}`;
     this.http.put(url, body).subscribe((response) => {
-      window.location.reload();});
-    
+      window.location.reload();
+    });
   }
 }
 interface Gender {
   value: number;
   name: string;
+}
+
+@Component({
+  selector: 'download-dialog',
+  template: `
+    <div
+      class="load"
+      style="background-image: url(https://i.pinimg.com/736x/ec/b8/1b/ecb81bce76f838ff41df121347b4444e.jpg);"
+    >
+      <h2
+        style=" 
+      
+      color: rgb(235, 97, 171);
+      font-family: 'Noto Sans Thai', sans-serif;
+      text-align: center;
+      text-shadow: 3px 2px rgb(234, 220, 228);
+   "
+      >
+        กรุณารอซักครู่...˃ᴗ˂    
+      </h2>
+    </div>
+  `,
+})
+export class DownloadDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  download() {
+    // Logic to trigger download (e.g., downloading data as a file)
+  }
 }
