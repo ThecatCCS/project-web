@@ -48,11 +48,12 @@
 }
 
 * {
-  --mdc-outlined-text-field-outline-color: #ef81b4 !important;
-  --mdc-outlined-text-field-hover-outline-color: #ef81b4 !important;
-  --mdc-outlined-text-field-focus-outline-color: #ef81b4 !important;
-  font-family: "DM Serif Display", serif;
+  --mdc-outlined-text-field-outline-color:#ef81b4 !important;
+  --mdc-outlined-text-field-hover-outline-color:#ef81b4!important;
+  --mdc-outlined-text-field-focus-outline-color:#ef81b4 !important;
+  font-family: "DM Serif Display", serif !important;
 }
+
 .overlay {
   position: fixed;
   top: 0;
