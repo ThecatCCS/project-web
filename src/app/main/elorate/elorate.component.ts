@@ -17,6 +17,8 @@ export class ElorateComponent {
   winner : number = ImageVotingSystem.expectedScoreWinner;
   loser : number = ImageVotingSystem.expectedScoreLoser;
 
+  oldwin : number = ImageVotingSystem.newEloRatingoldWinner;
+  oldloser : number = ImageVotingSystem.newEloRatingoldloser;
 
   winnerelo : number = ImageVotingSystem.newEloRatingWinner;
   loserelo : number = ImageVotingSystem.newEloRatingLoser;

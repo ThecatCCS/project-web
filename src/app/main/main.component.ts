@@ -26,7 +26,7 @@ export class MainComponent {
   Picture: PictureGetResponse[] | undefined;
   user1: UserGetResponse | undefined;
   user2: UserGetResponse | undefined;
-
+  
   constructor(
     protected shared: UserService,
     private http: HttpClient,
@@ -84,6 +84,7 @@ export class MainComponent {
   }
 
   async getPicture(): Promise<void> {
+
     const url =
       this.constants.API_ENDPOINT + `/pictrue/duo/${this.currentUser?.user_id}`;
     const data = await lastValueFrom(this.http.get(url));

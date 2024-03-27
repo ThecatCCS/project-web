@@ -56,11 +56,13 @@
     </div>
     <div class="picvote2">
       <div class="image-wrapper" *ngIf="Picture && Picture.length > 1">
+        
         <img
           [src]="Picture[1].pictrue_url"
           alt="รูปภาพ"
           (click)="check(Picture[1].pictrue_id)"
         />
+       
       </div>
     </div>
   </div>
