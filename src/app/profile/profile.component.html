@@ -35,13 +35,12 @@
           <span class="Username">{{ userName }}</span>
         </div>
         <div class="user-info">
-          <img
+          <!-- <img
             class="icon_img"
             src="https://i.pinimg.com/564x/3d/cb/80/3dcb80f6eae47eb1cc138440f60d7f49.jpg"
-          />
-          <span class="pic_count">All Photo</span>
+          /> -->
+          <span class="pic_count">Age : {{this.userage}} <br> Gender : {{this.usergender}} <br>   Preference : {{this.userpre}}</span>
         </div>
-        <!-- <span class="follow">Follow Us : </span> -->
       </div>
       <div class="buttons">
         
@@ -95,7 +94,7 @@
               >monitoring</i
             >
             <i class="material-symbols-outlined" (click)="fileInput.click()"
-              >enable</i
+              >cached</i
             >
             <input
               type="file"

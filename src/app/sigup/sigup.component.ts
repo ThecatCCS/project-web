@@ -28,7 +28,7 @@ export class SigupComponent {
   constructor(private http: HttpClient,private rout: Router,private constants: Constants) {}
 
   genders: Gender[] = [
-    { value: 1, name: 'female' },
+    { value: 1, name: 'Female' },
     { value: 2, name: 'Male' }
   ];
 

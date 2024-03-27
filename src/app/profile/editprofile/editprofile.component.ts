@@ -37,7 +37,7 @@ export class UpdateProfileDialogComponent implements OnInit {
   currentUser: UserGetResponse | undefined;
   selectedFile: File | undefined;
   genders: Gender[] = [
-    { value: 1, name: 'female' },
+    { value: 1, name: 'Female' },
     { value: 2, name: 'Male' },
   ];
   constructor(

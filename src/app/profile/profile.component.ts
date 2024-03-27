@@ -33,7 +33,9 @@ export class ProfileComponent {
   age: number = 0;
   pefer: any;
   user: UserGetResponse[] =[];
-  
+  userage: any;
+  usergender: any;
+  userpre: any;
 item: any;
   constructor(
     private shared: UserService,
@@ -99,8 +101,13 @@ item: any;
         const userDataResponse = user_data as UserGetResponse;
 
         this.userpic = userDataResponse.user_pictrue;
-    
-        
+        this.userage = userDataResponse.user_age;
+        if (userDataResponse.user_gender == 2) {
+          this.usergender = 'Female';
+        } else {
+          this.usergender = 'Male';
+        }
+        this.userpre = userDataResponse. user_preference;
         this.userName = userDataResponse.user_name;
       })
       .catch(error => {
