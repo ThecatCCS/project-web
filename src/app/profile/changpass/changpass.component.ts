@@ -70,9 +70,10 @@ export class ChangpassComponent implements OnInit {
           this.constants.API_ENDPOINT + `/userpass/${ this.currentUser?.user_id}`;
 
         this.http.put(url, body).subscribe((response) => {
+          window.location.reload()
         });
       } 
       }
-    window.location.reload()
+    
   }
 }
