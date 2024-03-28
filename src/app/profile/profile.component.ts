@@ -145,6 +145,14 @@ item: any;
       );
  
     }
+    const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+      data: {},
+    });
+    setTimeout(() => {
+      console.log('เปิดไดอล็อกดาวน์โหลด');
+
+      downloadDialogRef.close();
+    }, 1000); 
   }
 
 
@@ -173,6 +181,14 @@ item: any;
         console.error('Error uploading file:', error);
       }
     );
+    const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+      data: {},
+    });
+    setTimeout(() => {
+      console.log('เปิดไดอล็อกดาวน์โหลด');
+
+      downloadDialogRef.close();
+    }, 1000); 
   }
 
   onFileSelected2(event: any, pt_id: number) {
