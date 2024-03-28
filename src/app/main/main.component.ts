@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { NavComponent } from '../nav/nav.component';
 import { UserService } from '../services/api/user.service';
 import { CommonModule } from '@angular/common';
@@ -11,9 +11,11 @@ import { UserGetResponse } from '../model/user_get';
 import { ImageVotingSystem } from '../services/eloRating';
 import { Image } from '../services/eloRating';
 import { Router } from '@angular/router';
+
 import { Constants } from '../config/constants';
 import { MatDialog } from '@angular/material/dialog';
 import { ElorateComponent } from './elorate/elorate.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -26,7 +28,7 @@ export class MainComponent {
   Picture: PictureGetResponse[] | undefined;
   user1: UserGetResponse | undefined;
   user2: UserGetResponse | undefined;
-  
+
   constructor(
     protected shared: UserService,
     private http: HttpClient,
@@ -84,7 +86,6 @@ export class MainComponent {
   }
 
   async getPicture(): Promise<void> {
-
     const url =
       this.constants.API_ENDPOINT + `/pictrue/duo/${this.currentUser?.user_id}`;
     const data = await lastValueFrom(this.http.get(url));
@@ -128,7 +129,6 @@ export class MainComponent {
 
         votingSystem.updateEloRating(image1, image2);
 
- 
         const body1 = {
           vote_timestamp: voteTimestamp,
           vote_point: image1.pictrue_p - this.Picture[0].pictrue_p,
@@ -170,7 +170,7 @@ export class MainComponent {
         );
         const votingSystem = new ImageVotingSystem(image1, image2);
         votingSystem.updateEloRating(image1, image2);
- 
+
         const body1 = {
           vote_timestamp: voteTimestamp,
           vote_point: image1.pictrue_p - this.Picture[1].pictrue_p,
@@ -178,9 +178,7 @@ export class MainComponent {
           u_id: this.currentUser.user_id,
         };
         const url1 = this.constants.API_ENDPOINT + '/vote/vote';
-        this.http.post(url1, body1).subscribe((response) => {
-     
-        });
+        this.http.post(url1, body1).subscribe((response) => {});
         const body2 = {
           vote_timestamp: voteTimestamp,
           vote_point: image2.pictrue_p - this.Picture[0].pictrue_p,
@@ -188,9 +186,7 @@ export class MainComponent {
           u_id: this.currentUser.user_id,
         };
         const url2 = this.constants.API_ENDPOINT + '/vote/vote';
-        this.http.post(url2, body2).subscribe((response) => {
-        
-        });
+        this.http.post(url2, body2).subscribe((response) => {});
         const body3 = {
           pictrue_p: image1.pictrue_p,
         };
@@ -200,15 +196,11 @@ export class MainComponent {
         const url3 =
           this.constants.API_ENDPOINT +
           `/pictrue/${this.Picture[1].pictrue_id}`;
-        this.http.put(url3, body3).subscribe((response) => {
-         
-        });
+        this.http.put(url3, body3).subscribe((response) => {});
         const url4 =
           this.constants.API_ENDPOINT +
           `/pictrue/${this.Picture[0].pictrue_id}`;
-        this.http.put(url4, body4).subscribe((response) => {
-   
-        });
+        this.http.put(url4, body4).subscribe((response) => {});
       }
     }
     const dialogRef = this.dialog.open(ElorateComponent, {
@@ -216,8 +208,50 @@ export class MainComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // เมื่อ dialog ปิด
+      console.log('รอซักครู่');
+      const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+        maxWidth: '100px',
+
+        maxHeight: '100px',
+        data: {},
+      });
+      setTimeout(() => {
+        console.log('เปิดไดอล็อกดาวน์โหลด');
+
+        downloadDialogRef.close();
+      }, 2000);
       this.getPicture();
     });
+  }
+  }
+  
+@Component({
+  selector: 'download-dialog',
+  template: `
+   <div class="loader"></div>
+   <style>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  color: #000;
+  border: 2px solid;
+  box-sizing: border-box;
+  --c:radial-gradient(farthest-side,#0000 calc(100% - 3px),currentColor calc(100% - 2px) 98%,#0000);
+  background: var(--c),var(--c);
+  background-size: 23px 23px;
+  background-position: 0 0,12px 12px;
+  animation: l4 1s infinite;
+}
+@keyframes l4{
+  100% {background-position: -23px 0px,12px 35px}
+}
+   </style>
+  `,
+})
+export class DownloadDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  download() {
+    // Logic to trigger download (e.g., downloading data as a file)
   }
 }

@@ -86,7 +86,9 @@ export class UpdateProfileDialogComponent implements OnInit {
     }
   }
   onFormSubmit(event: any): void {
-    window.confirm('do you want to edit');
+    if (!window.confirm('do you want to edit')) {
+      return; // ยกเลิกการทำงานของฟังก์ชันถ้าผู้ใช้กด "Cancel"
+    }
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
@@ -112,11 +114,8 @@ export class UpdateProfileDialogComponent implements OnInit {
       console.error('No file selected.');
     }
     const dialogRef = this.dialog.open(DownloadDialogComponent, {
-      width: '250px', // Adjust width as needed
       data: {
-        name: this.name,
-        age: this.age,
-        // Pass more data as needed
+        
       },
     });
 
@@ -147,26 +146,43 @@ interface Gender {
   value: number;
   name: string;
 }
-
+ 
 @Component({
   selector: 'download-dialog',
   template: `
-    <div
-      class="load"
-      style="background-image: url(https://i.pinimg.com/736x/ec/b8/1b/ecb81bce76f838ff41df121347b4444e.jpg);"
-    >
-      <h2
-        style=" 
-      
-      color: rgb(235, 97, 171);
-      font-family: 'Noto Sans Thai', sans-serif;
-      text-align: center;
-      text-shadow: 3px 2px rgb(234, 220, 228);
-   "
-      >
-        กรุณารอซักครู่...˃ᴗ˂    
-      </h2>
-    </div>
+   <div class="loader"></div>
+   <style>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 70px;
+  height: 50px;
+  box-sizing: border-box;
+  background:
+    conic-gradient(from 135deg at top,#0000, #fff 1deg 90deg,#0000 91deg) right -20px bottom 8px/18px 9px,
+    linear-gradient(#fff 0 0) bottom/100% 8px,
+    #000;
+  background-repeat: no-repeat;
+  border-bottom: 8px solid #000;
+  position: relative;
+  animation: l7-0 2s infinite linear;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: lightblue;
+  left: 10px;
+  animation: l7-1 2s infinite cubic-bezier(0,200,1,200);
+}
+@keyframes l7-0{
+  100% { background-position: left -20px bottom 8px,bottom}
+}
+@keyframes l7-1{
+  0%,50%   {bottom: 8px}
+  90%,100% {bottom: 8.1px}
+}
+   </style>
   `,
 })
 export class DownloadDialogComponent {

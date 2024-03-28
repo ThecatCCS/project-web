@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { UserService } from '../services/api/user.service';
 import { HttpClient } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserGetResponse } from '../model/user_get';
 import { CommonModule } from '@angular/common';
 import { PictureGetResponse } from '../model/picture_get';
@@ -25,18 +26,18 @@ import { ToprankGetResponse } from '../model/toprank_get';
 export class ProfileComponent {
   currentUser: UserGetResponse | undefined;
   userName: string | undefined;
-  pictures:  ToprankGetResponse [] = []
+  pictures: ToprankGetResponse[] = [];
   userpic: string | undefined;
   name: string = '';
   password: any;
   gender: string = '';
   age: number = 0;
   pefer: any;
-  user: UserGetResponse[] =[];
+  user: UserGetResponse[] = [];
   userage: any;
   usergender: any;
   userpre: any;
-item: any;
+  item: any;
   constructor(
     private shared: UserService,
     private http: HttpClient,
@@ -44,30 +45,34 @@ item: any;
     private constants: Constants,
     private dialog: MatDialog
   ) {}
-     
- 
- async ngOnInit() {
+
+  async ngOnInit() {
     this.getUsernew();
     this.getUser();
     this.getPicture();
     this.getUser();
-   
   }
-  
+
   async onDelete(pt_id: number) {
     const userConfirmed = window.confirm('Do you want to delete this image?');
-  
     if (userConfirmed) {
       const status =
-        (await this.constants.API_ENDPOINT) + `/pictrue/delete/${pt_id}`;
+        (await this.constants.API_ENDPOINT) + /pictrue/delete/${pt_id};
       const data = await lastValueFrom(this.http.delete(status));
-   
     } else {
       console.log('Canceled image deletion');
     }
+    const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+      data: {},
+    });
+    setTimeout(() => {
+      console.log('เปิดไดอล็อกดาวน์โหลด');
+
+      downloadDialogRef.close();
+    }, 1000); 
     this.getPicture();
   }
-  getUsernew(){
+  getUsernew() {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
@@ -83,7 +88,6 @@ item: any;
       );
 
       if (foundUser) {
-      
         sessionStorage.setItem('currentUser', JSON.stringify(foundUser));
       } else {
         alert('User not found or incorrect credentials.');
@@ -93,10 +97,11 @@ item: any;
     }
   }
 
-
   getUser() {
-    const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
-    this.http.get(url).toPromise()
+    const url = this.constants.API_ENDPOINT + /${this.currentUser?.user_id};
+    this.http
+      .get(url)
+      .toPromise()
       .then((user_data) => {
         const userDataResponse = user_data as UserGetResponse;
 
@@ -107,51 +112,62 @@ item: any;
         } else {
           this.usergender = 'Male';
         }
-        this.userpre = userDataResponse. user_preference;
+        this.userpre = userDataResponse.user_preference;
         this.userName = userDataResponse.user_name;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching user data:', error);
       });
   }
-  
+
   getPicture() {
     const url = this.constants.API_ENDPOINT + '/pictrue/alls';
-    this.http.get(url).toPromise()
+    this.http
+      .get(url)
+      .toPromise()
       .then((data) => {
-        this.pictures = data as  ToprankGetResponse [];
-        
+        this.pictures = data as ToprankGetResponse[];
+
         this.filterPicturesByUserId();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching picture data:', error);
       });
   }
-  
 
   filterPicturesByUserId() {
     if (this.currentUser) {
       this.pictures = this.pictures.filter(
         (picture) => picture.u_id === this.currentUser?.user_id
       );
- 
     }
+    
   }
-
 
   onClick(pt_id: number) {
     this.router.navigate(['/linechart', pt_id]);
- 
   }
-  
+
   uploadFile(file: File) {
     const url =
-      this.constants.API_ENDPOINT + `/upload/${this.currentUser?.user_id}`;
+      this.constants.API_ENDPOINT + /upload/${this.currentUser?.user_id};
     const formData = new FormData();
     formData.append('filename', file, file.name);
 
     return this.http.post(url, formData);
+    
   }
+<<<<<<< Updated upstream
+=======
+  updateFile(file: File, pt_id: number) {
+    const url = ${this.constants.API_ENDPOINT}/update/${pt_id};
+    const formData = new FormData();
+    formData.append('file', file); // แก้ 'filename' เป็น 'file' ตาม API ที่ต้องการ
+
+    return this.http.put(url, formData);
+    
+  }
+>>>>>>> Stashed changes
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -163,15 +179,15 @@ item: any;
       (error) => {
         console.error('Error uploading file:', error);
       }
+      
     );
   }
 
   onFileSelected2(event: any, pt_id: number) {
     const file = event.target.files[0];
-    const url = this.constants.API_ENDPOINT + `/upload/update/${pt_id}`;
+    const url = this.constants.API_ENDPOINT + /upload/update/${pt_id};
     const formData = new FormData();
     formData.append('filename', file, file.name);
-
 
     this.http.put(url, formData).subscribe(
       (response) => {
@@ -182,6 +198,7 @@ item: any;
         console.error('Error uploading file:', error);
       }
     );
+    
   }
   changPass() {
     const dialogRef = this.dialog.open(ChangpassComponent, {
@@ -193,5 +210,53 @@ item: any;
       width: '500px',
     });
   }
+}
 
+@Component({
+  selector: 'download-dialog',
+  template: `
+    <div class="loader"></div>
+    <style>
+      /* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 90px;
+  height: 24px;
+  padding: 2px 0;
+  box-sizing: border-box;
+  display: flex;
+  animation: l5-0 3s infinite steps(6);
+  background:
+    linear-gradient(#000 0 0) 0 0/0% 100% no-repeat,
+    radial-gradient(circle 3px,#eeee89 90%,#0000) 0 0/20% 100%
+    #000;
+  overflow: hidden;
+}
+.loader::before {
+  content: "";
+  width: 20px;
+  transform: translate(-100%);
+  border-radius: 50%;
+  background: #ffff2d;
+  animation: 
+    l5-1 .25s .153s infinite steps(5) alternate,
+    l5-2  3s        infinite linear;
+}
+@keyframes l5-1{ 
+    0% {clip-path: polygon(50% 50%,100%   0,100% 0,0 0,0 100%,100% 100%,100% 100%)}
+  100% {clip-path: polygon(50% 50%,100% 65%,100% 0,0 0,0 100%,100% 100%,100%  35%)}
+}
+@keyframes l5-2{ 
+  100% {transform: translate(90px)}
+}
+@keyframes l5-0{ 
+  100% {background-size:120% 100%,20% 100%}
+} </style>
+  `,
+})
+export class DownloadDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  download() {
+    // Logic to trigger download (e.g., downloading data as a file)
+  }
 }
