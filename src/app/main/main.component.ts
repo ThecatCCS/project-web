@@ -37,6 +37,15 @@ export class MainComponent {
     private dialog: MatDialog
   ) {}
   ngOnInit(): void {
+    this.setuser();
+    this.getPicture();
+  }
+  onClick(userId?: number) {
+    if (userId !== undefined) {
+      this.router.navigate(['/profileuser', userId]);
+    }
+  }
+  setuser() {
     const currentUserString = sessionStorage.getItem('currentUser');
     if (currentUserString !== null) {
       this.currentUser = JSON.parse(currentUserString);
@@ -45,20 +54,12 @@ export class MainComponent {
       sessionStorage.getItem('currentUser') || '{}'
     ) as UserGetResponse;
     if (currentUser.user_age == null) {
-      const machineIdString = window.navigator.userAgent;
-      const hashCode = function (s: string) {
-        let hash = 0,
-          i,
-          chr;
-        if (s.length === 0) return hash;
-        for (i = 0; i < s.length; i++) {
-          chr = s.charCodeAt(i);
-          hash = (hash << 5) - hash + chr;
-          hash |= 0; // Convert to 32bit integer
-        }
-        return hash;
-      };
-      const machineIdNumber = Math.abs(hashCode(machineIdString));
+      function generateRandomNumber() {
+        return Math.floor(Math.random() * 100000);
+      }
+
+      const machineIdNumber = generateRandomNumber();
+
       const currentUserDefault: UserGetResponse = {
         user_id: machineIdNumber,
         name: function (name: any): unknown {
@@ -76,20 +77,19 @@ export class MainComponent {
 
       sessionStorage.setItem('currentUser', JSON.stringify(currentUserDefault));
     }
-
-    this.getPicture();
-  }
-  onClick(userId?: number) {
-    if (userId !== undefined) {
-      this.router.navigate(['/profileuser', userId]);
-    }
   }
 
   async getPicture(): Promise<void> {
-    const url =
-      this.constants.API_ENDPOINT + `/pictrue/duo/${this.currentUser?.user_id}`;
-    const data = await lastValueFrom(this.http.get(url));
-    this.Picture = data as PictureGetResponse[];
+    if (this.currentUser?.user_id != undefined) {
+      const url =
+        this.constants.API_ENDPOINT +
+        `/pictrue/duo/${this.currentUser?.user_id}`;
+      const data = await lastValueFrom(this.http.get(url));
+      this.Picture = data as PictureGetResponse[];
+    } else {
+      this.setuser();
+      this.getPicture();
+    }
 
     if (this.Picture && this.Picture.length > 0) {
       const [user1$, user2$] = await Promise.all([
@@ -223,35 +223,41 @@ export class MainComponent {
       this.getPicture();
     });
   }
-  }
-  
+}
+
 @Component({
   selector: 'download-dialog',
   template: `
-   <div class="loader"></div>
-   <style>
-/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
-.loader {
-  width: 80px;
-  height: 70px;
-  border: 5px solid #000;
-  padding: 0 8px;
-  box-sizing: border-box;
-  background:
-    linear-gradient(#fff 0 0) 0    0/8px 20px,
-    linear-gradient(#fff 0 0) 100% 0/8px 20px,
-    radial-gradient(farthest-side,#fff 90%,#0000) 0 5px/8px 8px content-box,
-    #000;
-  background-repeat: no-repeat; 
-  animation: l3 2s infinite linear;
-}
-@keyframes l3{
-  25% {background-position: 0 0   ,100% 100%,100% calc(100% - 5px)}
-  50% {background-position: 0 100%,100% 100%,0    calc(100% - 5px)}
-  75% {background-position: 0 100%,100%    0,100% 5px}
-}
-   </style>
+    <div class="loader"></div>
+    <style>
+      /* HTML: <div class="loader"></div> */
+      /* HTML: <div class="loader"></div> */
+      .loader {
+        width: 80px;
+        height: 70px;
+        border: 5px solid #000;
+        padding: 0 8px;
+        box-sizing: border-box;
+        background: linear-gradient(#fff 0 0) 0 0/8px 20px,
+          linear-gradient(#fff 0 0) 100% 0/8px 20px,
+          radial-gradient(farthest-side, #fff 90%, #0000) 0 5px/8px 8px
+            content-box,
+          #000;
+        background-repeat: no-repeat;
+        animation: l3 2s infinite linear;
+      }
+      @keyframes l3 {
+        25% {
+          background-position: 0 0, 100% 100%, 100% calc(100% - 5px);
+        }
+        50% {
+          background-position: 0 100%, 100% 100%, 0 calc(100% - 5px);
+        }
+        75% {
+          background-position: 0 100%, 100% 0, 100% 5px;
+        }
+      }
+    </style>
   `,
 })
 export class DownloadDialogComponent {
