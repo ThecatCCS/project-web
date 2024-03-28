@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { UserService } from '../services/api/user.service';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Constants } from '../config/constants';
 import { forkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UpdateProfileDialogComponent } from './editprofile/editprofile.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangpassComponent } from './changpass/changpass.component';
@@ -65,6 +66,14 @@ item: any;
     } else {
       console.log('Canceled image deletion');
     }
+    const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+      data: {},
+    });
+    setTimeout(() => {
+      console.log('เปิดไดอล็อกดาวน์โหลด');
+
+      downloadDialogRef.close();
+    }, 1000); 
     this.getPicture();
   }
   getUsernew(){
@@ -195,3 +204,50 @@ item: any;
   }
 
 }
+
+@Component({
+  selector: 'download-dialog',
+  template: `
+   <div class="loader"></div>
+   <style>
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 70px;
+  height: 50px;
+  box-sizing: border-box;
+  background:
+    conic-gradient(from 135deg at top,#0000, #fff 1deg 90deg,#0000 91deg) right -20px bottom 8px/18px 9px,
+    linear-gradient(#fff 0 0) bottom/100% 8px,
+    #000;
+  background-repeat: no-repeat;
+  border-bottom: 8px solid #000;
+  position: relative;
+  animation: l7-0 2s infinite linear;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: lightblue;
+  left: 10px;
+  animation: l7-1 2s infinite cubic-bezier(0,200,1,200);
+}
+@keyframes l7-0{
+  100% { background-position: left -20px bottom 8px,bottom}
+}
+@keyframes l7-1{
+  0%,50%   {bottom: 8px}
+  90%,100% {bottom: 8.1px}
+}
+   </style>
+  `,
+})
+export class DownloadDialogComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  download() {
+    // Logic to trigger download (e.g., downloading data as a file)
+  }
+}
+
+
