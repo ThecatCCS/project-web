@@ -231,20 +231,25 @@ export class MainComponent {
    <div class="loader"></div>
    <style>
 /* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
 .loader {
-  width: 50px;
-  aspect-ratio: 1;
-  color: #000;
-  border: 2px solid;
+  width: 80px;
+  height: 70px;
+  border: 5px solid #000;
+  padding: 0 8px;
   box-sizing: border-box;
-  --c:radial-gradient(farthest-side,#0000 calc(100% - 3px),currentColor calc(100% - 2px) 98%,#0000);
-  background: var(--c),var(--c);
-  background-size: 23px 23px;
-  background-position: 0 0,12px 12px;
-  animation: l4 1s infinite;
+  background:
+    linear-gradient(#fff 0 0) 0    0/8px 20px,
+    linear-gradient(#fff 0 0) 100% 0/8px 20px,
+    radial-gradient(farthest-side,#fff 90%,#0000) 0 5px/8px 8px content-box,
+    #000;
+  background-repeat: no-repeat; 
+  animation: l3 2s infinite linear;
 }
-@keyframes l4{
-  100% {background-position: -23px 0px,12px 35px}
+@keyframes l3{
+  25% {background-position: 0 0   ,100% 100%,100% calc(100% - 5px)}
+  50% {background-position: 0 100%,100% 100%,0    calc(100% - 5px)}
+  75% {background-position: 0 100%,100%    0,100% 5px}
 }
    </style>
   `,
