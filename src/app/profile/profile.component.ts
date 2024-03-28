@@ -212,33 +212,37 @@ item: any;
    <style>
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 70px;
-  height: 50px;
+  width: 90px;
+  height: 24px;
+  padding: 2px 0;
   box-sizing: border-box;
+  display: flex;
+  animation: l5-0 3s infinite steps(6);
   background:
-    conic-gradient(from 135deg at top,#0000, #fff 1deg 90deg,#0000 91deg) right -20px bottom 8px/18px 9px,
-    linear-gradient(#fff 0 0) bottom/100% 8px,
+    linear-gradient(#000 0 0) 0 0/0% 100% no-repeat,
+    radial-gradient(circle 3px,#eeee89 90%,#0000) 0 0/20% 100%
     #000;
-  background-repeat: no-repeat;
-  border-bottom: 8px solid #000;
-  position: relative;
-  animation: l7-0 2s infinite linear;
+  overflow: hidden;
 }
 .loader::before {
   content: "";
-  position: absolute;
-  width: 10px;
-  height: 14px;
-  background: lightblue;
-  left: 10px;
-  animation: l7-1 2s infinite cubic-bezier(0,200,1,200);
+  width: 20px;
+  transform: translate(-100%);
+  border-radius: 50%;
+  background: #ffff2d;
+  animation: 
+    l5-1 .25s .153s infinite steps(5) alternate,
+    l5-2  3s        infinite linear;
 }
-@keyframes l7-0{
-  100% { background-position: left -20px bottom 8px,bottom}
+@keyframes l5-1{ 
+    0% {clip-path: polygon(50% 50%,100%   0,100% 0,0 0,0 100%,100% 100%,100% 100%)}
+  100% {clip-path: polygon(50% 50%,100% 65%,100% 0,0 0,0 100%,100% 100%,100%  35%)}
 }
-@keyframes l7-1{
-  0%,50%   {bottom: 8px}
-  90%,100% {bottom: 8.1px}
+@keyframes l5-2{ 
+  100% {transform: translate(90px)}
+}
+@keyframes l5-0{ 
+  100% {background-size:120% 100%,20% 100%}
 }
    </style>
   `,
