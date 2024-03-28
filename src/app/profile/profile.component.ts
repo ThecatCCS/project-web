@@ -152,20 +152,13 @@ item: any;
 
     return this.http.post(url, formData);
   }
-  updateFile(file: File, pt_id: number) {
-    const url = `${this.constants.API_ENDPOINT}/update/${pt_id}`;
-    const formData = new FormData();
-    formData.append('file', file); // แก้ 'filename' เป็น 'file' ตาม API ที่ต้องการ
-
-
-    return this.http.put(url, formData);
-  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.uploadFile(file).subscribe(
       (response) => {
         console.log('File uploaded successfully:', response);
+        window.location.reload();
       },
       (error) => {
         console.error('Error uploading file:', error);
@@ -183,6 +176,7 @@ item: any;
     this.http.put(url, formData).subscribe(
       (response) => {
         console.log('File uploaded successfully:', response);
+        window.location.reload();
       },
       (error) => {
         console.error('Error uploading file:', error);

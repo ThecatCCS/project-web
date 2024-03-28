@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navtop10.component.scss',
 })
 export class Navtop10Component implements OnInit {
-  pic : UserGetResponse [] = [];
+  pic : string | undefined;
   currentUser: any;
 
   constructor(private router: Router, private constants : Constants , private http : HttpClient) {}
@@ -23,18 +23,26 @@ export class Navtop10Component implements OnInit {
     this.getpic();
   }
 
- async getpic(){
+  getpic(){
     const currentUserString = sessionStorage.getItem('currentUser');
     this.currentUser = currentUserString ? JSON.parse(currentUserString) : null;
    
-    
+    const url = this.constants.API_ENDPOINT + `/${this.currentUser?.user_id}`;
+    this.http.get(url).toPromise()
+      .then((user_data) => {
+        const userDataResponse = user_data as UserGetResponse;
+
+        this.pic = userDataResponse.user_pictrue;
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  }
     // const url =
     // this.constants.API_ENDPOINT + `/${this.currentUser.user_id}`;
     // const data = await lastValueFrom(this.http.get(url));
     // this.pic = data as UserGetResponse[];
     // console.log("55459898",this.pic);
-  
-  }
 
   logout() {
     sessionStorage.removeItem('currentUser');
