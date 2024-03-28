@@ -207,6 +207,14 @@ item: any;
         console.error('Error uploading file:', error);
       }
     );
+    const downloadDialogRef = this.dialog.open(DownloadDialogComponent, {
+      data: {},
+    });
+    setTimeout(() => {
+      console.log('เปิดไดอล็อกดาวน์โหลด');
+
+      downloadDialogRef.close();
+    }, 1000); 
   }
   changPass() {
     const dialogRef = this.dialog.open(ChangpassComponent, {
